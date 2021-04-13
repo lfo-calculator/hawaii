@@ -1,25 +1,60 @@
 {
     "regulation": "Reckless driving of vehicle or riding of animals; penalty",
     "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-2/",
-    "ocama-url": "291-2.catala"
+    "catala-url": "291-2.catala"
 },
 {
     "regulation": "Consuming or possessing intoxicating liquor while a passenger in a motor vehicle",
     "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_2/",
-    "ocama-url": "291-3-2.catala"
+    "catala-url": "291-3-2.catala"
 },
 {
     "regulation": "Storage of opened container containing intoxicating liquor or consumption at scenic lookout",
     "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_3/",
-    "ocama-url": "291-3-3.catala"
+    "catala-url": "291-3-3.catala"
 },
 {
     "regulation": "Driving after license suspended or denied for noncompliance with an order of support; penalties",
     "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-4_6/",
-    "ocama-url": "291-4-6.catala"
+    "catala-url": "291-4-6.catala"
 },
 {
     "regulation": "Freight on motor cars; projection of, prohibited",
     "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-8/",
-    "ocama-url": "291-8.catala"
+    "catala-url": "291-8.catala"
+},
+{
+    "regulation": "Freight; on running board",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-9/",
+    "catala-url": "291-9.catala"
+},
+{
+    "regulation": "Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11/",
+    "catala-url": "291-11.catala"
+},
+{
+    "regulation": "Child passenger restraints",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_5/",
+    "catala-url": "291-11-5.catala"
+},
+{
+    "regulation": "Mandatory use of seat belts",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_6/",
+    "catala-url": "291-11-6.catala"
+},
+{
+    "regulation": "Inattention to driving",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-12/",
+    "catala-url": "291-12.catala"
+},
+{
+    "regulation": "Traffic laws apply to persons driving mopeds",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-13/",
+    "catala-url": "291-13.catala"
+},
+{
+    "regulation": "Pickup trucks; passenger restrictions",
+    "reg-url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-14/",
+    "catala-url": "291-14.catala"
 }
