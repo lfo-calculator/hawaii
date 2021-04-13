@@ -1,6 +1,6 @@
-# Readme for Section 291 "Catala Regs"
+# Readme for &#167; 291 "Catala Regs"
 
-This directory contains a set of Catala files that map subsection by subsection to [Section 291 of the Hawaii Revised Statutes](https://sammade.github.io/aloha-io/). It is intended to provide the translation layer between the regulations themselves and the Catala-based "back end" that powers this version of the LFO Calculator being built for the State of Hawaii.
+This directory contains a set of Catala files that map subsection by subsection to [&#167; 291 of the Hawaii Revised Statutes](https://sammade.github.io/aloha-io/). It is intended to provide the translation layer between the regulations themselves and the Catala-based "back end" that powers this version of the LFO Calculator being built for the State of Hawaii.
 
 The interaction dynamic between the regulations and the calculator is via these Catala language input files. It is assumed that if one can parse the regulations in a real-world context, and understand the interplay between and across the regulations for sentencing, fees, and fines, one can readily interpret the logical calculation structure of the corresponding Catala input file as well. (It is imperative that *someone*, ideally *multiple people*, verify the outcome produced by the calculator is consistent with real-world expectations.)
 
@@ -25,3 +25,8 @@ foo
 ## Notes and Errata for Reviewers
 
 Given the override- and exception-based nature of legal text, and its practice to fix previous problems or provide subsequent clarifications by generating additional unreferenced or otherwise independent pieces of legislation, there are often very important linkages across regulations not specifically addressed or referenced in the original text itself. This section of the readme is intended to call attention to the major cross-sectional considerations or otherwise unreferenced factors nonetheless critical to an accurate LFO assessment.
+
+### Additional Fee Statutes
+
+* [Driver Education Fee Statute &#167; 286G-3](https://sammade.github.io/aloha-io/title-17/chapter-286g/section-286g-3/)
+* [Neurotrauma Surcharge](https://sammade.github.io/aloha-io/title-19/chapter-321h/section-321h-4/)
