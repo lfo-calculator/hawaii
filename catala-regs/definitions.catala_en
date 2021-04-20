@@ -1,0 +1,41 @@
+## Definitions shared across all statutes
+
+> Begin metadata
+
+```catala
+declaration enumeration Violation:
+  -- Section286_102   # Licensing
+  -- Section291_2     # Reckless driving of vehicle or riding of animals; penalty
+  -- Section291_3_1   # Consuming or possessing intoxicating liquor while operating motor vehicle or moped
+  -- Section291_3_2   # Consuming or possessing intoxicating liquor while a passenger in a motor vehicle
+  -- Section291_3_3   # Storage of opened container containing intoxicating liquor or consumption at scenic lookout
+  -- Section291_4_6   # Driving after license suspended or denied for noncompliance with an order of support
+  -- Section291_8     # Freight on motor cars; projection of, prohibited
+  -- Section291_9     # Freight; on running board
+  -- Section291_11_5  # Child passenger restraints
+  -- Section291_11_6  # Mandatory use of seat belts, when, penalty
+  -- Section291_11    # Riders and passengers under seven years of age on motorcycles and motor scooters prohibited
+  -- Section291_12    # Inattention to driving
+  -- Section291_13    # Traffic laws apply to persons driving mopeds
+  -- Section291_14    # Pickup trucks; passenger restrictions
+
+declaration structure Offense:
+  data date_of content date
+  data violation content Violation_83_135
+
+declaration structure Defendant:
+  data priors content collection Offense
+  # A number of years
+  data age content integer
+
+declaration structure PenaltyTimeAndDays:
+  data min_fine content money
+  data max_fine content money
+  data min_days content duration
+  data max_days content duration
+
+declaration enumeration Penalty:
+  -- TimeAndDays content PenaltyTimeAndDays
+  -- LoseRightToDriveUntil18
+  -- Either content collection Penalty
+```
