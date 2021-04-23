@@ -93,21 +93,21 @@ of up to $10 which shall be deposited into the trauma system special fund.
 ```catala
 scope S_291_11_6:
 
-  fees.offense = Section291_11_6
+  definition fees.violation equals Section291_11_6
 
-  penalties = [
+  definition penalties equals [
     (Fine content (Fine {
       -- min_fine: $ 45
       -- max_fine: $ 45
     }));
-    (Fine content (Fee {
-      -- min_fine: $ 10
-      -- max_fine: $ 10
+    (Fee content (Fee {
+      -- min_fee: $ 10
+      -- max_fee: $ 10
       -- fund: NeuroTrauma
     }));
-    (Fine content (Fee {
-      -- min_fine: $ 0
-      -- max_fine: $ 10
+    (Fee content (Fee {
+      -- min_fee: $ 0
+      -- max_fee: $ 10
       -- fund: TraumaSystem
     }));
     fees.penalty

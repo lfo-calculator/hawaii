@@ -12,7 +12,7 @@ declaration enumeration FeeCategory:
 
 declaration scope S_607_4:
   # Input:
-  context offense content Offense
+  context violation content Violation
 
   # Internal:
   context category content FeeCategory
@@ -80,15 +80,19 @@ such fine is suspended
 ```catala
 scope S_607_4:
 
-  exception definition category under condition
-    match offense with pattern
-    -- Section291_11_6: true
+  definition category under condition
+    violation = Section291_11_6
   consequence equals Paragraph9
 
   # NB: this intentionally errors out if we haven't yet classified the `offense`
   # in this section
-  exception definition penalty under condition category = Paragraph9
-  consequence equals Fee content (Fee { -- fee: $30 -- fund: Clerk })
+  definition penalty under condition category = Paragraph9
+  consequence equals
+    Fee content (Fee {
+      -- min_fee: $30
+      -- max_fee: $30
+      -- fund: Clerk
+    })
 ```
 
 (10) Administrative costs associated with the processing of all civil filings

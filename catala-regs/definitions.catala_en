@@ -28,7 +28,7 @@ declaration enumeration Violation:
 
 declaration structure Offense:
   data date_of content date
-  data violation content Violation_83_135
+  data violation content Violation
 
 declaration structure Defendant:
   data priors content collection Offense
@@ -45,7 +45,8 @@ declaration structure Fine:
   data max_fine content money
 
 declaration structure Fee:
-  data fee content money
+  data min_fee content money
+  data max_fee content money
   data fund content Fund
 
 declaration structure Days:
@@ -56,8 +57,10 @@ declaration enumeration Penalty:
   -- Days content Days
   -- Fine content Fine
   -- Fee content Fee
-  -- LoseRightToDriveUntil18
-  -- Either content collection Penalty
+  -- Fine500OrLoseRightToDriveUntil18
+  # TODO: need recursive types here
+  # -- LoseRightToDriveUntil18
+  # -- Either content collection Penalty
 ```
 
 > End metadata
