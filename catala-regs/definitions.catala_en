@@ -38,17 +38,24 @@ declaration structure Defendant:
 declaration enumeration Fund:
   -- NeuroTrauma
   -- TraumaSystem
-  -- Unspecified
+  -- Clerk
 
-declaration structure PenaltyTimeAndDays:
+declaration structure Fine:
   data min_fine content money
   data max_fine content money
+
+declaration structure Fee:
+  data fee content money
   data fund content Fund
+
+declaration structure Days:
   data min_days content duration
   data max_days content duration
 
 declaration enumeration Penalty:
-  -- TimeAndDays content PenaltyTimeAndDays
+  -- Days content Days
+  -- Fine content Fine
+  -- Fee content Fee
   -- LoseRightToDriveUntil18
   -- Either content collection Penalty
 ```

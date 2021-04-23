@@ -25,7 +25,7 @@ declaration scope S_286_136:
 
   # Outcomes:
 
-  context penalty content Penalty
+  context penalties content collection Penalty
 ```
 
 > End metadata
@@ -45,14 +45,17 @@ scope S_286_136:
   definition max_fine equals $1000
   definition max_days equals 0 day
 
-  definition penalty equals
-    TimeAndDays content (PenaltyTimeAndDays {
-      -- min_fine: min_fine
-      -- max_fine: max_fine
+  definition penalties equals [
+    Days content (Days {
       -- max_days: max_days
       -- min_days: 0 day
+    });
+    Fine content (Fine {
+      -- min_fine: min_fine
+      -- max_fine: max_fine
       -- fund: Unspecified
     })
+  ]
 
   label max_days_paragraph_a
   exception definition max_days under condition
@@ -117,15 +120,14 @@ scope S_286_136:
     defendant.age < 18 # and minor and under the jurisdiction etc.
   consequence fulfilled
 
-  exception definition penalty under condition paragraph_c_applies
-  consequence equals (Either
+  exception definition penalties under condition paragraph_c_applies
+  consequence equals [ Either
     LoseRightToDriveUntil18
-    (TimeAndDays content (PenaltyTimeAndDays {
+    (Fine content (Fine {
       -- min_fine: $ 500
       -- max_fine: $ 500
-      -- max_days: 0 day
-      -- min_days: 0 day
       -- fund: Unspecified
     }))
+  ]
 ```
 
