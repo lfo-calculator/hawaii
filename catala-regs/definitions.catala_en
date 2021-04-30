@@ -49,18 +49,20 @@ declaration structure Fee:
   data max_fee content money
   data fund content Fund
 
-declaration structure Days:
+declaration structure Imprisonment:
   data min_days content duration
   data max_days content duration
 
-declaration enumeration Penalty:
-  -- Days content Days
+declaration enumeration Penalty_:
+  -- Imprisonment content Imprisonment
   -- Fine content Fine
   -- Fee content Fee
-  -- Fine500OrLoseRightToDriveUntil18
-  # TODO: need recursive types here
-  # -- LoseRightToDriveUntil18
-  # -- Either content collection Penalty
+  -- LoseRightToDriveUntil18
+
+
+declaration enumeration Penalty:
+  -- One content Penalty_
+  -- Either content collection Penalty_
 ```
 
 > End metadata

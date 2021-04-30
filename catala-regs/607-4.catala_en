@@ -1,7 +1,5 @@
 ## 607-4 District court costs
 
-> Include: definitions.catala_en
-
 > Begin metadata
 
 ```catala
@@ -88,11 +86,11 @@ scope S_607_4:
   # in this section
   definition penalty under condition category = Paragraph9
   consequence equals
-    Fee content (Fee {
+    One content (Fee content (Fee {
       -- min_fee: $30
       -- max_fee: $30
       -- fund: Clerk
-    })
+    }))
 ```
 
 (10) Administrative costs associated with the processing of all civil filings

@@ -1,15 +1,9 @@
 ## 291-11.6 Mandatory use of seat belts, when, penalty
 
-> Include: definitions.catala_en
-> Include: 607-4.catala_en
-
 > Begin metadata
 
 ```catala
 declaration scope S_291_11_6:
-
-  # Internal:
-  context fees scope S_607_4
 
   # Output:
   context penalties content collection Penalty
@@ -93,23 +87,20 @@ of up to $10 which shall be deposited into the trauma system special fund.
 ```catala
 scope S_291_11_6:
 
-  definition fees.violation equals Section291_11_6
-
   definition penalties equals [
-    (Fine content (Fine {
+    (One content (Fine content (Fine {
       -- min_fine: $ 45
       -- max_fine: $ 45
-    }));
-    (Fee content (Fee {
+    })));
+    (One content (Fee content (Fee {
       -- min_fee: $ 10
       -- max_fee: $ 10
       -- fund: NeuroTrauma
-    }));
-    (Fee content (Fee {
+    })));
+    (One content (Fee content (Fee {
       -- min_fee: $ 0
       -- max_fee: $ 10
       -- fund: TraumaSystem
-    }));
-    fees.penalty
+    })))
   ]
 ```

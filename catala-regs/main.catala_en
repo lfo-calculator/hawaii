@@ -1,0 +1,8 @@
+# Master file
+
+This is all of the Catala files that are ready and used so far in the bindings.
+
+> Include: definitions.catala_en
+> Include: 286-136.catala_en
+> Include: 291-11-6.catala_en
+> Include: 607-4.catala_en

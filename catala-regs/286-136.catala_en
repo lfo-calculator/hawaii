@@ -1,7 +1,5 @@
 ## 286-136 Penalty
 
-> Include: definitions.catala_en
-
 > Begin metadata
 
 ```catala
@@ -46,15 +44,14 @@ scope S_286_136:
   definition max_days equals 0 day
 
   definition penalties equals [
-    Days content (Days {
+    One content (Imprisonment content (Imprisonment {
       -- max_days: max_days
       -- min_days: 0 day
-    });
-    Fine content (Fine {
+    }));
+    One content (Fine content (Fine {
       -- min_fine: min_fine
       -- max_fine: max_fine
-      -- fund: Unspecified
-    })
+    }))
   ]
 
   label max_days_paragraph_a
@@ -91,7 +88,14 @@ scope S_286_136:
     )
 
   rule paragraph_b_applies under condition
-    (not (offense.violation with pattern Other_83_135)) and
+    (offense.violation with pattern Section286_102 or
+      offense.violation with pattern Section286_122 or
+      offense.violation with pattern Section286_130 or
+      offense.violation with pattern Section286_131 or
+      offense.violation with pattern Section286_132 or
+      offense.violation with pattern Section286_133 or
+      offense.violation with pattern Section286_134
+    ) and
     priors_same_offense >= 2 and
     not paragraph_c_applies
   consequence fulfilled
@@ -121,13 +125,12 @@ scope S_286_136:
   consequence fulfilled
 
   exception definition penalties under condition paragraph_c_applies
-  consequence equals [ Either
-    LoseRightToDriveUntil18
+  consequence equals [ Either content ([
+    LoseRightToDriveUntil18;
     (Fine content (Fine {
       -- min_fine: $ 500
       -- max_fine: $ 500
-      -- fund: Unspecified
     }))
-  ]
+  ])]
 ```
 
