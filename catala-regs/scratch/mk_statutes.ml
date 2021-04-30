@@ -16,7 +16,7 @@ let source = Sys.argv.(1)
 let _ =
   let regs = Yojson.Safe.from_channel (open_in source) in
   let assert_string = function `String s -> s | _ -> failwith "not a string" in
-  Printf.printf {|## List of known infractions, auto-generated from %s
+  Printf.printf {|## List of known statutes, auto-generated from %s
 
 > Begin metadata
 

@@ -9,8 +9,8 @@ all: $(JS)
 config.ml:
 	echo "let base = \"$(shell pwd)\";;" > $@
 
-../infractions.catala_en: ../../data/hawaii-regulations.json
-	ocaml ../scratch/mk_infractions.ml $< > $@
+../statutes.catala_en: ../../data/hawaii-regulations.json
+	ocaml ../scratch/mk_statutes.ml $< > $@
 
 main.ml: $(wildcard ../*.catala_en)
 	$(CATALA) OCaml ../main.catala_en -o $@
