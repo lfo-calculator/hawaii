@@ -11,18 +11,51 @@
 #require "yojson"
 #require "batteries"
 
-let source = Sys.argv.(1)
+let source = ref ""
+let destination = ref ""
+type lang = OCaml | Catala
+let format = ref OCaml
 
 let _ =
-  let regs = Yojson.Safe.from_channel (open_in source) in
-  let assert_string = function `String s -> s | _ -> failwith "not a string" in
-  Printf.printf {|## List of known statutes, auto-generated from %s
+  let usage = Printf.sprintf "%s [-ocaml|-catala] <file>" Sys.argv.(1) in
+  Arg.parse [
+    "-o", Arg.Set_string destination, " Set output file";
+    "-ocaml", Arg.Unit (fun () -> format := OCaml), " Output OCaml string_of_*";
+    "-catala", Arg.Unit (fun () -> format := Catala), " Output Catala enumeration";
+  ] (fun f -> if !source = "" then source := f else failwith "Only one input file thanks") usage
+
+let print_prologue dst =
+  match !format with
+  | Catala ->
+      Printf.fprintf dst {|## List of known statutes, auto-generated from %s
 
 > Begin metadata
 
 ```catala
 declaration enumeration Violation:
-|} source;
+|} !source
+  | OCaml ->
+      Printf.fprintf dst "open Main\n\nlet string_of_statute = function\n"
+
+let print_one dst as_string as_catala comment =
+  match !format with
+  | Catala ->
+      Printf.fprintf dst "  -- Section%s	# %s\n" as_catala comment
+  | OCaml ->
+      Printf.fprintf dst "  | Section%s -> \"%s\" (* %s *)\n" as_catala as_string comment
+
+let print_epilogue dst =
+  match !format with
+  | Catala ->
+      Printf.fprintf dst "```\n"
+  | OCaml ->
+      ()
+
+let _ =
+  let regs = Yojson.Safe.from_channel (open_in !source) in
+  let dst = open_out !destination in
+  let assert_string = function `String s -> s | _ -> failwith "not a string" in
+  print_prologue dst;
   let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
   List.iter (function
     | `Assoc l ->
@@ -37,9 +70,9 @@ declaration enumeration Violation:
             false
         in
         if not is_generic then
-          let sec = BatString.replace_chars (function '.' -> "_" | '-' -> "_" | x -> String.make 1 x) sec in
-          Printf.printf "  -- Section%s	# %s\n" sec reg
+          let constr = BatString.replace_chars (function '.' -> "_" | '-' -> "_" | x -> String.make 1 x) sec in
+          print_one dst sec constr reg
     | _ ->
         failwith "not an assoc"
   ) regs;
-  Printf.printf "```\n"
+  print_epilogue dst
