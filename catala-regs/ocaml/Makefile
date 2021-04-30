@@ -19,10 +19,10 @@ config.ml:
 	echo "|}" >> $@
 
 ../infractions.catala_en: $(JSON) $(SCRIPT)
-	ocaml $(SCRIPT) -catala $< -o $@
+	ocamlfind ocaml $(SCRIPT) -catala $< -o $@
 
 ../conversions.ml: $(JSON) $(SCRIPT)
-	ocaml $(SCRIPT) -ocaml $< -o $@
+	ocamlfind ocaml $(SCRIPT) -ocaml $< -o $@
 
 main.ml: $(wildcard ../*.catala_en)
 	$(CATALA) OCaml ../main.catala_en -o $@
