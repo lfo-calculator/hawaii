@@ -26,6 +26,7 @@ end
 
 module H = Helpers
 
+
 (**********************
  * All known statutes *
  **********************)
@@ -101,23 +102,23 @@ let applies: string -> string -> bool =
         (* Lexicographic comparison *)
         lower <= infraction && infraction <= upper
 
+
 (***********************
  * Computing penalties *
  ***********************)
 let outcome = (penalty * violation) list
-let table =
-  let (/) = Filename.concat in
-  Yojson.from_channel (Config.base / ".." / ".." / "data" / "hawaii-regulations.json")
 
 
 (* Most likely coming in from JS *)
-type statute = string
+type infraction = string
 
-let applies (s: statute) (v: violation) =
-
-
-let compute (offenses: offense list) (defendant: defendant): outcome =
+let compute ((infraction * date option) list) (age: int option) (priors: int option): outcome =
   _
+
+
+(*******************
+ * Interop with JS *
+ *******************)
 
 (* Describing input types that the JavaScript API is expected to provide *)
 type js_violation = Js.js_string
