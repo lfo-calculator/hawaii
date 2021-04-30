@@ -127,10 +127,10 @@ scope S_286_136:
   exception definition penalties under condition paragraph_c_applies
   consequence equals [ Either content ([
     LoseRightToDriveUntil18;
-    (Fine content (Fine {
+    Fine content (Fine {
       -- min_fine: $ 500
       -- max_fine: $ 500
-    }))
+    })
   ])]
 ```
 

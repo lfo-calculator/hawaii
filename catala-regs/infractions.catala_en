@@ -1,0 +1,68 @@
+## List of known infractions, auto-generated from ../../data/hawaii-regulations.json
+
+> Begin metadata
+
+```catala
+declaration enumeration Violation:
+  -- Section286_83	# Sales of motor vehicle equipment; approval and identification required; prohibitions on use
+  -- Section286_84	# Revocation of approval
+  -- Section286_85	# Reconstructed vehicles, approval required
+  -- Section286_101	# Designation of examiner of drivers
+  -- Section286_101_5	# Reciprocal licensing privileges
+  -- Section286_102	# Licensing
+  -- Section286_102_3	# Commercial drivers under the age of twenty-one
+  -- Section286_102_5	# Military Selective Service Act; Selective Service System registration
+  -- Section286_102_6	# Provisional license for persons under the age of eighteen
+  -- Section286_103	# Restrictions on driver's license; rules and regulations
+  -- Section286_104	# Which persons shall not be licensed
+  -- Section286_104_5	# Limited purpose driver's license, limited purpose provisional driver's license, and limited purpose instruction permits
+  -- Section286_105	# What persons are exempt from license
+  -- Section286_106	# Expiration of licenses
+  -- Section286_106_5	# Expiration of licenses; out-of-country active duty military personnel and dependents
+  -- Section286_107	# License renewals; procedures and requirements
+  -- Section286_107_5	# Reactivation of expired license; fees; road test waived
+  -- Section286_108	# Examination of applicants
+  -- Section286_108_4	# Driver education and behind-the-wheel driver training program
+  -- Section286_109	# General provision governing the issuance of licenses
+  -- Section286_109_4	# Designation of advance health-care directive
+  -- Section286_109_5	# Designation of anatomical gift
+  -- Section286_109_6	# Limited access to driver's license anatomical gift data
+  -- Section286_109_7	# Organ and tissue education fee
+  -- Section286_110	# Instruction permits
+  -- Section286_111	# Application for license, provisional license, instruction permit, limited purpose driver's license, limited purpose provisional driver's license, or limited purpose instruction permit; fees
+  -- Section286_112	# Application of minors; liability of parents or guardian
+  -- Section286_113	# Release from liability
+  -- Section286_114	# Revocation of license, provisional license, or instruction permit upon death of person signing minor's application
+  -- Section286_116	# License, insurance identification card, possession, exhibition
+  -- Section286_116_5	# Notice of change of address or name; penalty
+  -- Section286_117	# Duplicate permits, provisional licenses, and licenses
+  -- Section286_118	# Records to be kept by the examiner of drivers
+  -- Section286_118_5	# License revoked for operating a vehicle under the influence of an intoxicant; eligibility for license renewal
+  -- Section286_119	# Authority of examiner of drivers to suspend or revoke licenses
+  -- Section286_120	# Authority of examiner of drivers to cancel licenses
+  -- Section286_121	# Suspending or revoking privileges of nonresident and reporting convictions, suspensions, and revocations
+  -- Section286_122	# Suspension of a license; surrender
+  -- Section286_123	# Record of conviction forwarded to examiner of drivers
+  -- Section286_124	# Mandatory revocation of license by a court
+  -- Section286_125	# Discretionary revocation or suspension of license by a court
+  -- Section286_126	# Period of suspension or revocation
+  -- Section286_128	# Evaluation of nonresident driving privileges; reports of outside convictions; reports of convictions by courts-martial or United States commissioners
+  -- Section286_129	# Appeal to circuit court
+  -- Section286_130	# No operation under foreign license during revocation or suspension in this State
+  -- Section286_131	# Unlawful use of license
+  -- Section286_132	# Driving while license suspended or revoked
+  -- Section286_133	# Unlawful to permit unauthorized person to drive
+  -- Section286_134	# Employing unlicensed driver
+  -- Section291_2	# Reckless driving of vehicle or riding of animals; penalty
+  -- Section291_3_2	# Consuming or possessing intoxicating liquor while a passenger in a motor vehicle
+  -- Section291_3_3	# Storage of opened container containing intoxicating liquor or consumption at scenic lookout
+  -- Section291_4_6	# Driving after license suspended or denied for noncompliance with an order of support; penalties
+  -- Section291_8	# Freight on motor cars; projection of, prohibited
+  -- Section291_9	# Freight; on running board
+  -- Section291_11	# Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty
+  -- Section291_11_5	# Child passenger restraints
+  -- Section291_11_6	# Mandatory use of seat belts
+  -- Section291_12	# Inattention to driving
+  -- Section291_13	# Traffic laws apply to persons driving mopeds
+  -- Section291_14	# Pickup trucks; passenger restrictions
+```

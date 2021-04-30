@@ -13,6 +13,7 @@
    the License. *)
 
 open Runtime
+open Main
 open Js_of_ocaml
 
 (* TODO: move into a separate library *)
@@ -20,36 +21,97 @@ module Helpers = struct
   let no_input () = raise EmptyError
   let catala_date_of_js_date (d: Js.date Js.t) =
     date_of_numbers d##getFullYear d##getMonth d##getDay
+  let thunk x = fun () -> x
 end
 
 module H = Helpers
+
+(**********************
+ * All known statutes *
+ **********************)
+type priors = offense array
+type penalties = penalties array
+
+(* N: none
+ * V: violation
+ * OP: offense + defendant (priors + age) *)
+type statute_typ =
+  | N of unit -> penalties
+  | V of violation -> penalties
+  | OD of offense -> defendant -> penalties
+
+let all_statutes = [
+  Section291_11_6 (), N (fun () ->
+    let out = s_291_11_6 {
+      penalties_in = H.no_input
+    } in
+    out.penalties_out ());
+  Section286_136 (), OD (fun o d ->
+    let out = s_286_136 {
+      offense_in = H.thunk o;
+      defendant_in = H.thunk d;
+      max_fine_in = H.no_input;
+      min_fine_in = H.no_input;
+      max_days_in = H.no_input;
+      priors_same_offense_in = H.no_input;
+      paragraph_b_applies_in = H.no_input;
+      paragraph_c_applies_in = H.no_input;
+      penalties_in = H.no_input
+    } in
+    out.penalties_out ());
+  Section607_4 (), O (fun v ->
+    let out = s_607_4 {
+      violation_in = H.thunk v;
+      category_in = H.no_input;
+      penalty_in = H.no_input
+    } in
+    out.penalties_out ());
+]
+
+(***********************
+ * Computing penalties *
+ ***********************)
+let outcome = (penalty * violation) list
+let table =
+  let (/) = Filename.concat in
+  Yojson.from_channel (Config.base / ".." / ".." / "data" / "hawaii-regulations.json")
+
+
+(* Most likely coming in from JS *)
+type statute = string
+
+let applies (s: statute) (v: violation) =
+
+
+let compute (offenses: offense list) (defendant: defendant): outcome =
+  List.map 
 
 (* Describing input types that the JavaScript API is expected to provide *)
 type js_violation = Js.js_string
 
 let catala_violation_of_js (v: js_violation Js.t): Title17.violation_83_135 =
   match Js.to_string v with
-  | "Section286_102" -> Section286_102
-  | "Section286_122" -> Section286_122
-  | "Section286_130" -> Section286_130
-  | "Section286_131" -> Section286_131
-  | "Section286_132" -> Section286_132
-  | "Section286_133" -> Section286_133
-  | "Section286_134" -> Section286_134
-  | "Section286_83_135" -> Section286_83_135
-  | "Section291_2" -> Section291_2
-  | "Section291_3_1" -> Section291_3_1
-  | "Section291_3_2" -> Section291_3_2
-  | "Section291_3_3" -> Section291_3_3
-  | "Section291_4_6" -> Section291_4_6
-  | "Section291_8" -> Section291_8
-  | "Section291_9" -> Section291_9
-  | "Section291_11_5" -> Section291_11_5
-  | "Section291_11_6" -> Section291_11_6
-  | "Section291_11" -> Section291_11
-  | "Section291_12" -> Section291_12
-  | "Section291_13" -> Section291_13
-  | "Section291_14" -> Section291_14
+  | "Section286_102" -> Section286_102 ()
+  | "Section286_122" -> Section286_122 ()
+  | "Section286_130" -> Section286_130 ()
+  | "Section286_131" -> Section286_131 ()
+  | "Section286_132" -> Section286_132 ()
+  | "Section286_133" -> Section286_133 ()
+  | "Section286_134" -> Section286_134 ()
+  | "Section286_83_135" -> Section286_83_135 ()
+  | "Section291_2" -> Section291_2 ()
+  | "Section291_3_1" -> Section291_3_1 ()
+  | "Section291_3_2" -> Section291_3_2 ()
+  | "Section291_3_3" -> Section291_3_3 ()
+  | "Section291_4_6" -> Section291_4_6 ()
+  | "Section291_8" -> Section291_8 ()
+  | "Section291_9" -> Section291_9 ()
+  | "Section291_11_5" -> Section291_11_5 ()
+  | "Section291_11_6" -> Section291_11_6 ()
+  | "Section291_11" -> Section291_11 ()
+  | "Section291_12" -> Section291_12 ()
+  | "Section291_13" -> Section291_13 ()
+  | "Section291_14" -> Section291_14 ()
   | v -> failwith (v ^ " is not a valid violation")
 
 class type js_offense = object
