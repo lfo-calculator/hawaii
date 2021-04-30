@@ -3,6 +3,8 @@
 ML	= main.ml config.ml conversions.ml
 CATALA	?= catala --language=en
 JS	= _build/default/wrapper.bc.js
+JSON	= ../../data/hawaii-regulations.json
+SCRIPT	= ../scratch/mk_statutes.ml
 
 all: $(JS)
 
@@ -11,11 +13,16 @@ all: $(JS)
 config.ml:
 	echo "let base = \"$(shell pwd)\";;" > $@
 
-../statutes.catala_en: ../../data/hawaii-regulations.json ../scratch/mk_statutes.ml
-	ocaml ../scratch/mk_statutes.ml -catala $< -o $@
+../json.ml: $(JSON)
+	echo -e "let data = {|\n" > $@
+	cat $(JSON) >> $@
+	echo "|}" >> $@
 
-../conversions.ml: ../../data/hawaii-regulations.json ../scratch/mk_statutes.ml
-	ocaml ../scratch/mk_statutes.ml -ocaml $< -o $@
+../infractions.catala_en: $(JSON) $(SCRIPT)
+	ocaml $(SCRIPT) -catala $< -o $@
+
+../conversions.ml: $(JSON) $(SCRIPT)
+	ocaml $(SCRIPT) -ocaml $< -o $@
 
 main.ml: $(wildcard ../*.catala_en)
 	$(CATALA) OCaml ../main.catala_en -o $@

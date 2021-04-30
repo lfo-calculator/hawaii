@@ -41,12 +41,12 @@ type statute_typ =
   | OD of offense -> defendant -> penalties
 
 let all_statutes = [
-  Section291_11_6 (), N (fun () ->
+  "291-11.6", N (fun () ->
     let out = s_291_11_6 {
       penalties_in = H.no_input
     } in
     out.penalties_out ());
-  Section286_136 (), OD (fun o d ->
+  "286-136", OD (fun o d ->
     let out = s_286_136 {
       offense_in = H.thunk o;
       defendant_in = H.thunk d;
@@ -59,7 +59,7 @@ let all_statutes = [
       penalties_in = H.no_input
     } in
     out.penalties_out ());
-  Section607_4 (), O (fun v ->
+  "607-4", O (fun v ->
     let out = s_607_4 {
       violation_in = H.thunk v;
       category_in = H.no_input;
@@ -67,6 +67,39 @@ let all_statutes = [
     } in
     out.penalties_out ());
 ]
+
+let applies: string -> string -> bool =
+  let t = Hashtbl.create 41 in
+  let statutes = Yojson.from_string Json.data in
+  let assert_string = function `String s -> s | _ -> failwith "not a string" in
+  let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
+  List.iter (function
+    | `Assoc l ->
+        let reg = assert_string (List.assoc "regulation" l) in
+        let sec = Filename.chop_suffix (assert_string (List.assoc "catala_url" l)) ".catala_en" in
+        try
+          Hashtbl.add t sec (assert_string (List.assoc "applies" l))
+        with Not_found ->
+          ()
+    | _ ->
+        failwith "not an assoc"
+  ) regs;
+  fun reg infraction ->
+    match Hashtbl.find_opt t reg with
+    | None ->
+        (* See README.md: we assume the penalty for the infraction is in the
+           relevant section *)
+        reg = infraction
+    | Some "-" ->
+        false
+    | Some "*" ->
+        true
+    | Some s ->
+        let i = BatString.find s ".." in
+        let lower = String.sub s 0 i in
+        let upper = String.sub s (i + 2) (String.length s) in
+        (* Lexicographic comparison *)
+        lower <= infraction && infraction <= upper
 
 (***********************
  * Computing penalties *
@@ -84,7 +117,7 @@ let applies (s: statute) (v: violation) =
 
 
 let compute (offenses: offense list) (defendant: defendant): outcome =
-  List.map 
+  _
 
 (* Describing input types that the JavaScript API is expected to provide *)
 type js_violation = Js.js_string

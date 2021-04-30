@@ -33,5 +33,8 @@ use "infraction" and "regular statute" interchangeably.
 
 With those notions set, using the JSON file, we derive:
 - the set of infractions (regular statutes) that can be recorded in the user interface;
-- the Catala enumeration for all possible statutes, currently under version control in
+- the Catala enumeration for all possible infractions, currently under version control in
   [../catala-regs/statutes.catala]
+- the OCaml conversion function from a string (defined as `catala_url` stripped of its file
+  extension) to the corresponding data type (as extracted by Catala), currently under version
+  control in [../catala-regs/conversions.ml]
