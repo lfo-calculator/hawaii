@@ -83,7 +83,6 @@ let applies: string -> string -> bool =
   let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
   List.iter (function
     | `Assoc l ->
-        let reg = assert_string (List.assoc "regulation" l) in
         let sec = Filename.chop_suffix (assert_string (List.assoc "catala_url" l)) ".catala_en" in
         begin try
           Hashtbl.add t sec (assert_string (List.assoc "applies" l))
@@ -171,70 +170,40 @@ end
 let get_input (o: js_input Js.t) =
   List.map get_offense (Array.to_list (Js.to_array o##.violations)),
   Option.map (fun priors ->
-    List.map (fun p ->
+    Array.map (fun p ->
       let v, d = get_offense p in
       if d = None then
         failwith (Printf.sprintf "For prior violation %s, no date provided!" v);
-      Conversions.statute_of_string v, Option.get d
-    ) (Array.to_list (Js.to_array priors))
+      { violation = Conversions.statute_of_string v; date_of = Option.get d }
+    ) (Js.to_array priors)
   ) (Js.Optdef.to_option o##.priors),
   Js.Optdef.to_option o##.age
 
 (* The [mk_*] functions go in the other direction and embed the result of
    [compute] into suitable JS types *)
-class type js_duration = object
-  method days: int Js.t Js.readonly_prop
-  method months: int Js.t Js.readonly_prop
-  method years: int Js.t Js.readonly_prop
-end
-
-let mk_duration (d: duration): js_duration =
+let mk_duration (d: duration) =
   let days, months, years = duration_to_days_months_years d in object%js
     method days = days
     method months = months
     method years = years
   end
 
-class type js_imprisonment = object
-  method min_days: js_duration Js.t Js.readonly_prop
-  method max_days: js_duration Js.t Js.readonly_prop
-end
-
-let mk_imprisonment (i: imprisonment): js_imprisonment = object
+let mk_imprisonment (i: imprisonment) = object%js
   method min_days = mk_duration i.min_days
   method max_days = mk_duration i.max_days
 end
 
-class type js_fine = object
-  method min_fine: int Js.t Js.readonly_prop
-  method max_fine: int Js.t Js.readonly_prop
-end
-
-let mk_fine (i: fine): js_fine = object
+let mk_fine (i: fine) = object%js
   method min_fine = i.min_fine
   method max_fine = i.max_fine
 end
 
-class type js_fee = object
-  method min_fee: int Js.t Js.readonly_prop
-  method max_fee: int Js.t Js.readonly_prop
-  method fund: Js.js_string Js.t Js.readonly_prop
-end
-
-let mk_fee (i: fee): js_fee = object
+let mk_fee (i: fee) = object%js
   method min_fee = i.min_fee
   method max_fee = i.max_fee
 end
 
-class type js_penalty = object
-  method kind: Js.js_string Js.t Js.readonly_prop
-  method fine: js_fine Js.optdef Js.readonly_prop
-  method fee: js_fee Js.optdef Js.readonly_prop
-  method imprisonment: js_imprisonment Js.optdef Js.readonly_prop
-  method either: js_penalty Js.js_array Js.optdef Js.readonly_prop
-end
-
-let rec mk_penalty (p: penalty): js_penalty = object
+let rec mk_penalty (p: penalty) = object%js
   method kind = Js.string (match p with
     | Either _ -> "either"
     | One (Imprisonment _) -> "imprisonment"
@@ -259,37 +228,32 @@ let rec mk_penalty (p: penalty): js_penalty = object
 
   method either =
     match p with
-    | Either ps -> Js.Optdef.return (Js.array (Array.map mk_penalty ps))
+    | Either ps -> Js.Optdef.return (Js.array (Array.map (fun p -> mk_penalty (One p)) ps))
     | _ -> Js.undefined
 end
 
-class type js_annotated_penalty = object
-  method regulation: Js.js_string Js.t Js.readonly_prop
-  method penalty: js_penalty
-end
-
-let mk_annotated_penalty (r: string) (p: penalty): js_annotated_penalty = object
+let mk_annotated_penalty (r: string) (ps: penalties) = object%js
   method regulation = Js.string r
-  method penalty = mk_penalty p
+  method penalties = Js.array (Array.map mk_penalty ps)
 end
 
-class type js_one_output = object
-  method violation: Js.js_string Js.t Js.readonly_prop
-  method penalties: js_annotated_penalty Js.js_array Js.t Js.readonly_prop
+let mk_one_outcome (v: violation) (ps: (regulation * penalties) list) = object%js
+  method violation = Js.string (Conversions.string_of_statute v)
+  method penalties =
+    Js.array (Array.of_list (List.map (fun (r, p) ->
+      mk_annotated_penalty r p
+    ) ps))
 end
 
-let mk_one_output (v: string) (ps: (regulation * penalties) list) = object
-  method violation = Js.string v
-  method penalties = Js.array (Array.from_list (List.map mk_annotated_penalty ps))
-end
-
-let mk_output (o: output) =
-  Js.array (Array.from_list (List.map (fun (v, ps) -> mk_one_output v ps) o))
+let mk_outcome (o: outcome) =
+  Js.array (Array.of_list (List.map (fun (v, ps) -> mk_one_outcome v ps) o))
 
 let _ =
   Js.export_all (object%js
     method computePenalties (input: js_input Js.t): _ Js.t =
-      mk_output (compute (get_input input))
+      let violations, priors, age = get_input input in
+      let outcome = compute violations age priors in
+      mk_outcome outcome
   end)
 
 let _ =
