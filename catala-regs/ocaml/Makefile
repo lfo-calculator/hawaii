@@ -1,6 +1,5 @@
-# Add here the set of statutes that are ready and working in Catala
-# TODO: once all of them in the directory are done, replace with a wildcard
-ML	= main.ml config.ml conversions.ml
+# All of these ML files are produced by the build
+ML	= main.ml config.ml conversions.ml data.ml
 CATALA	?= catala --language=en
 JS	= _build/default/wrapper.bc.js
 JSON	= ../../data/hawaii-regulations.json
@@ -13,16 +12,16 @@ all: $(JS)
 config.ml:
 	echo "let base = \"$(shell pwd)\";;" > $@
 
-../json.ml: $(JSON)
-	echo -e "let data = {|\n" > $@
+data.ml: $(JSON)
+	echo "let json = {|" > $@
 	cat $(JSON) >> $@
 	echo "|}" >> $@
 
 ../infractions.catala_en: $(JSON) $(SCRIPT)
-	ocamlfind ocaml $(SCRIPT) -catala $< -o $@
+	ocaml $(SCRIPT) -catala $< -o $@
 
-../conversions.ml: $(JSON) $(SCRIPT)
-	ocamlfind ocaml $(SCRIPT) -ocaml $< -o $@
+conversions.ml: $(JSON) $(SCRIPT)
+	ocaml $(SCRIPT) -ocaml $< -o $@
 
 main.ml: $(wildcard ../*.catala_en)
 	$(CATALA) OCaml ../main.catala_en -o $@

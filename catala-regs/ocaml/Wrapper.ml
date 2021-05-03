@@ -19,9 +19,10 @@ open Js_of_ocaml
 (* TODO: move into a separate library *)
 module Helpers = struct
   let no_input () = raise EmptyError
+  let thunk x = fun () -> x
+
   let catala_date_of_js_date (d: Js.date Js.t) =
     date_of_numbers d##getFullYear d##getMonth d##getDay
-  let thunk x = fun () -> x
 end
 
 module H = Helpers
@@ -30,23 +31,28 @@ module H = Helpers
 (**********************
  * All known statutes *
  **********************)
+
+(* Here, we build a table that maps string representations (consistent with
+   Catala file names) of regulations to their corresponding Catala function. *)
 type priors = offense array
-type penalties = penalties array
+type penalties = penalty array
+type regulation = string
+type infraction = violation
 
 (* N: none
  * V: violation
  * OP: offense + defendant (priors + age) *)
-type statute_typ =
-  | N of unit -> penalties
-  | V of violation -> penalties
-  | OD of offense -> defendant -> penalties
+type catala_regulation =
+  | N of (unit -> penalties)
+  | V of (violation -> penalties)
+  | OD of (offense -> defendant -> penalties)
 
-let all_statutes = [
+let all_regulations: (regulation * catala_regulation) list = [
   "291-11.6", N (fun () ->
     let out = s_291_11_6 {
       penalties_in = H.no_input
     } in
-    out.penalties_out ());
+    out.penalties_out);
   "286-136", OD (fun o d ->
     let out = s_286_136 {
       offense_in = H.thunk o;
@@ -59,36 +65,38 @@ let all_statutes = [
       paragraph_c_applies_in = H.no_input;
       penalties_in = H.no_input
     } in
-    out.penalties_out ());
-  "607-4", O (fun v ->
+    out.penalties_out);
+  "607-4", V (fun v ->
     let out = s_607_4 {
       violation_in = H.thunk v;
       category_in = H.no_input;
-      penalty_in = H.no_input
+      penalties_in = H.no_input
     } in
-    out.penalties_out ());
+    out.penalties_out);
 ]
 
+(* [applies r1 r2] determines whether regulation [r1] applies to the infraction [r2] *)
 let applies: string -> string -> bool =
   let t = Hashtbl.create 41 in
-  let statutes = Yojson.from_string Json.data in
+  let regs = Yojson.Safe.from_string Data.json in
   let assert_string = function `String s -> s | _ -> failwith "not a string" in
   let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
   List.iter (function
     | `Assoc l ->
         let reg = assert_string (List.assoc "regulation" l) in
         let sec = Filename.chop_suffix (assert_string (List.assoc "catala_url" l)) ".catala_en" in
-        try
+        begin try
           Hashtbl.add t sec (assert_string (List.assoc "applies" l))
         with Not_found ->
           ()
+        end
     | _ ->
         failwith "not an assoc"
   ) regs;
   fun reg infraction ->
     match Hashtbl.find_opt t reg with
     | None ->
-        (* See README.md: we assume the penalty for the infraction is in the
+        (* See ../../data/README.md: we assume the penalty for the infraction is in the
            relevant section *)
         reg = infraction
     | Some "-" ->
@@ -99,139 +107,189 @@ let applies: string -> string -> bool =
         let i = BatString.find s ".." in
         let lower = String.sub s 0 i in
         let upper = String.sub s (i + 2) (String.length s) in
-        (* Lexicographic comparison *)
+        (* Lexicographic comparison; TODO this is bad, do better... *)
         lower <= infraction && infraction <= upper
 
 
 (***********************
  * Computing penalties *
  ***********************)
-let outcome = (penalty * violation) list
 
+(* We annotate each penalty with the regulation that justifies it. *)
+type outcome = (violation * (regulation * penalties) list) list
 
-(* Most likely coming in from JS *)
-type infraction = string
+let call f infraction date age priors =
+  let must = function
+    | Some x -> x
+    | None -> failwith (Printf.sprintf "For %s -- got an empty option" infraction)
+  in
+  let infraction = Conversions.statute_of_string infraction in
+  match f with
+  | N f -> f ()
+  | V f -> f infraction
+  | OD f ->
+      let offense = { violation = infraction; date_of = must date } in
+      let defendant = { age = integer_of_int (must age); priors = must priors } in
+      f offense defendant
 
-let compute ((infraction * date option) list) (age: int option) (priors: int option): outcome =
-  _
-
+(* After the data has been converted from JS types to Catala representations,
+   [compute] captures the main logic: for each infraction, find the set of
+   regulations that apply, feed the data into Catala, then collect the results.
+   *)
+let compute (infractions: (string * date option) list) (age: int option) (priors: priors option): outcome =
+  List.map (fun (infraction, date) ->
+    Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
+      if applies regulation infraction then
+        let p = call f infraction date age priors in
+        Some (regulation, p)
+      else
+        None
+    ) all_regulations
+  ) infractions
 
 (*******************
  * Interop with JS *
  *******************)
 
-(* Describing input types that the JavaScript API is expected to provide *)
-type js_violation = Js.js_string
-
-let catala_violation_of_js (v: js_violation Js.t): Title17.violation_83_135 =
-  match Js.to_string v with
-  | "Section286_102" -> Section286_102 ()
-  | "Section286_122" -> Section286_122 ()
-  | "Section286_130" -> Section286_130 ()
-  | "Section286_131" -> Section286_131 ()
-  | "Section286_132" -> Section286_132 ()
-  | "Section286_133" -> Section286_133 ()
-  | "Section286_134" -> Section286_134 ()
-  | "Section286_83_135" -> Section286_83_135 ()
-  | "Section291_2" -> Section291_2 ()
-  | "Section291_3_1" -> Section291_3_1 ()
-  | "Section291_3_2" -> Section291_3_2 ()
-  | "Section291_3_3" -> Section291_3_3 ()
-  | "Section291_4_6" -> Section291_4_6 ()
-  | "Section291_8" -> Section291_8 ()
-  | "Section291_9" -> Section291_9 ()
-  | "Section291_11_5" -> Section291_11_5 ()
-  | "Section291_11_6" -> Section291_11_6 ()
-  | "Section291_11" -> Section291_11 ()
-  | "Section291_12" -> Section291_12 ()
-  | "Section291_13" -> Section291_13 ()
-  | "Section291_14" -> Section291_14 ()
-  | v -> failwith (v ^ " is not a valid violation")
-
+(* The [get_*] functions convert JS types to option-based types suitable for
+   [compute], above *)
 class type js_offense = object
-  method dateOf: Js.date Js.t Js.readonly_prop
-  method violation: js_violation Js.t Js.readonly_prop
+  method dateOf: Js.date Js.t Js.optdef Js.readonly_prop
+  method violation: Js.js_string Js.t Js.readonly_prop
 end
 
-let catala_offense_of_js (o: js_offense Js.t): Title17.offense = {
-  date_of = H.catala_date_of_js_date o##.dateOf;
-  violation = catala_violation_of_js o##.violation
-}
+let get_offense (o: js_offense Js.t) =
+  Js.to_string o##.violation,
+  Option.map H.catala_date_of_js_date (Js.Optdef.to_option o##.dateOf)
 
-class type js_defendant = object
-  method priors: js_offense Js.t Js.js_array Js.t Js.readonly_prop
-  method age: int Js.readonly_prop
-end
-
-let catala_defendant_of_js (o: js_defendant Js.t): Title17.defendant = {
-  priors = Array.map catala_offense_of_js (Js.to_array o##.priors);
-  age = integer_of_int o##.age
-}
-
-(* We receive a list of offenses, as well as the defendent's history *)
 class type js_input = object
-  method offense: js_offense Js.t Js.js_array Js.t Js.readonly_prop
-  method defendant: js_defendant Js.t Js.readonly_prop
+  method violations: js_offense Js.t Js.js_array Js.t Js.readonly_prop
+  method priors: js_offense Js.t Js.js_array Js.t Js.optdef Js.readonly_prop
+  method age: int Js.optdef Js.readonly_prop
 end
 
-let catala_input_of_js (i: js_input Js.t): Title17.penalty286_83_135_in = {
-  offense_in = (fun () -> catala_offense_of_js i##.offense);
-  defendant_in = (fun () -> catala_defendant_of_js i##.defendant);
-  max_fine_in = H.no_input;
-  min_fine_in = H.no_input;
-  max_days_in = H.no_input;
-  priors_same_offense_in = H.no_input;
-  paragraph_b_applies_in = H.no_input;
-  paragraph_c_applies_in = H.no_input;
-  penalty_in = H.no_input
-}
+let get_input (o: js_input Js.t) =
+  List.map get_offense (Array.to_list (Js.to_array o##.violations)),
+  Option.map (fun priors ->
+    List.map (fun p ->
+      let v, d = get_offense p in
+      if d = None then
+        failwith (Printf.sprintf "For prior violation %s, no date provided!" v);
+      Conversions.statute_of_string v, Option.get d
+    ) (Array.to_list (Js.to_array priors))
+  ) (Js.Optdef.to_option o##.priors),
+  Js.Optdef.to_option o##.age
 
-(* What we return to the JavaScript code, using inheritance to encode tagged
-   unions. *)
-(* class type js_penalty = object *)
-(* end *)
+(* The [mk_*] functions go in the other direction and embed the result of
+   [compute] into suitable JS types *)
+class type js_duration = object
+  method days: int Js.t Js.readonly_prop
+  method months: int Js.t Js.readonly_prop
+  method years: int Js.t Js.readonly_prop
+end
 
-(* class type js_time_and_days = object *)
-(*   inherit js_penalty *)
-(*   method minFine: float Js.t Js.readonly_prop *)
-(*   method maxFine: float Js.t Js.readonly_prop *)
-(*   method maxDays: int Js.t Js.readonly_prop *)
-(* end *)
-
-let js_time_and_days_of_catala (p: Title17.penalty_time_and_days):
-  (* js_time_and_days Js.t *)
-  _ Js.t
-=
-  object%js
-    method minFine = money_to_float p.Title17.min_fine
-    method maxFine = money_to_float p.Title17.max_fine
-    method maxDays = p.Title17.max_days
+let mk_duration (d: duration): js_duration =
+  let days, months, years = duration_to_days_months_years d in object%js
+    method days = days
+    method months = months
+    method years = years
   end
 
-(* class type js_fine500_or_lose_right_to_drive_until18 = object *)
-(*   inherit js_penalty *)
-(* end *)
+class type js_imprisonment = object
+  method min_days: js_duration Js.t Js.readonly_prop
+  method max_days: js_duration Js.t Js.readonly_prop
+end
 
-(* let js_fine500_or_lose_right_to_drive_until18_of_catala (): *)
-(*   js_fine500_or_lose_right_to_drive_until18 Js.t *)
-(* = *)
-(*   object *)
-(*   end *)
+let mk_imprisonment (i: imprisonment): js_imprisonment = object
+  method min_days = mk_duration i.min_days
+  method max_days = mk_duration i.max_days
+end
+
+class type js_fine = object
+  method min_fine: int Js.t Js.readonly_prop
+  method max_fine: int Js.t Js.readonly_prop
+end
+
+let mk_fine (i: fine): js_fine = object
+  method min_fine = i.min_fine
+  method max_fine = i.max_fine
+end
+
+class type js_fee = object
+  method min_fee: int Js.t Js.readonly_prop
+  method max_fee: int Js.t Js.readonly_prop
+  method fund: Js.js_string Js.t Js.readonly_prop
+end
+
+let mk_fee (i: fee): js_fee = object
+  method min_fee = i.min_fee
+  method max_fee = i.max_fee
+end
+
+class type js_penalty = object
+  method kind: Js.js_string Js.t Js.readonly_prop
+  method fine: js_fine Js.optdef Js.readonly_prop
+  method fee: js_fee Js.optdef Js.readonly_prop
+  method imprisonment: js_imprisonment Js.optdef Js.readonly_prop
+  method either: js_penalty Js.js_array Js.optdef Js.readonly_prop
+end
+
+let rec mk_penalty (p: penalty): js_penalty = object
+  method kind = Js.string (match p with
+    | Either _ -> "either"
+    | One (Imprisonment _) -> "imprisonment"
+    | One (Fine _) -> "fine"
+    | One (Fee _) -> "fee"
+    | One (LoseRightToDriveUntil18 _) -> "lose_right_to_drive_until_18")
+
+  method fine =
+    match p with
+    | One (Fine f) -> Js.Optdef.return (mk_fine f)
+    | _ -> Js.undefined
+
+  method fee =
+    match p with
+    | One (Fee f) -> Js.Optdef.return (mk_fee f)
+    | _ -> Js.undefined
+
+  method imprisonment =
+    match p with
+    | One (Imprisonment f) -> Js.Optdef.return (mk_imprisonment f)
+    | _ -> Js.undefined
+
+  method either =
+    match p with
+    | Either ps -> Js.Optdef.return (Js.array (Array.map mk_penalty ps))
+    | _ -> Js.undefined
+end
+
+class type js_annotated_penalty = object
+  method regulation: Js.js_string Js.t Js.readonly_prop
+  method penalty: js_penalty
+end
+
+let mk_annotated_penalty (r: string) (p: penalty): js_annotated_penalty = object
+  method regulation = Js.string r
+  method penalty = mk_penalty p
+end
+
+class type js_one_output = object
+  method violation: Js.js_string Js.t Js.readonly_prop
+  method penalties: js_annotated_penalty Js.js_array Js.t Js.readonly_prop
+end
+
+let mk_one_output (v: string) (ps: (regulation * penalties) list) = object
+  method violation = Js.string v
+  method penalties = Js.array (Array.from_list (List.map mk_annotated_penalty ps))
+end
+
+let mk_output (o: output) =
+  Js.array (Array.from_list (List.map (fun (v, ps) -> mk_one_output v ps) o))
 
 let _ =
   Js.export_all (object%js
     method computePenalties (input: js_input Js.t): _ Js.t =
-      match Title17.((penalty286_83_135 (catala_input_of_js input)).penalty_out) with
-      | Title17.TimeAndDays td ->
-          let o = js_time_and_days_of_catala td in
-          let o = Js.Unsafe.coerce o in
-          o##.kind := Js.string "TimeAndDays";
-          o
-      | Title17.Fine500OrLoseRightToDriveUntil18 () ->
-          let o = object%js end in
-          let o = Js.Unsafe.coerce o in
-          o##.kind := Js.string "Fine500OrLoseRightToDriveUntil18";
-          o
+      mk_output (compute (get_input input))
   end)
 
 let _ =

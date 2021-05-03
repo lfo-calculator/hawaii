@@ -27,7 +27,8 @@ declaration enumeration Violation:
   List.iter (fun (as_string, as_catala, comment) ->
     Printf.fprintf dst "  -- Section%s	# %s\n" as_catala comment
   ) data;
-  Printf.fprintf dst "```\n"
+  Printf.fprintf dst "```\n";
+  Printf.fprintf dst "> End metadata\n"
 
 let print_ocaml dst data =
   Printf.fprintf dst "open Main\n\nlet string_of_statute = function\n";
@@ -37,7 +38,8 @@ let print_ocaml dst data =
   Printf.fprintf dst "open Main\n\nlet statute_of_string = function\n";
   List.iter (fun (as_string, as_catala, comment) ->
     Printf.fprintf dst "  | \"%s\"	-> Section%s ()	(* %s *)\n" as_string as_catala comment
-  ) data
+  ) data;
+  Printf.fprintf dst "  | x	-> failwith (Printf.sprintf \"Unknown statute: %%s\" x)\n"
 
 let mk_data () =
   let regs = Yojson.Safe.from_channel (open_in !source) in
