@@ -75,6 +75,10 @@ let all_regulations: (regulation * catala_regulation) list = [
     out.penalties_out);
 ]
 
+let find haystack needle =
+  let r = Str.regexp (Str.quote needle) in
+  Str.search_forward r haystack 0
+
 (* [applies r1 r2] determines whether regulation [r1] applies to the infraction [r2] *)
 let applies: string -> string -> bool =
   let t = Hashtbl.create 41 in
@@ -83,7 +87,7 @@ let applies: string -> string -> bool =
   let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
   List.iter (function
     | `Assoc l ->
-        let sec = Filename.chop_suffix (assert_string (List.assoc "catala_url" l)) ".catala_en" in
+        let sec = assert_string (List.assoc "section" l) in
         begin try
           Hashtbl.add t sec (assert_string (List.assoc "applies" l))
         with Not_found ->
@@ -93,19 +97,19 @@ let applies: string -> string -> bool =
         failwith "not an assoc"
   ) regs;
   fun reg infraction ->
-    match Hashtbl.find_opt t reg with
-    | None ->
+    match Hashtbl.find t reg with
+    | "0" ->
+        false
+    | "1" ->
         (* See ../../data/README.md: we assume the penalty for the infraction is in the
            relevant section *)
         reg = infraction
-    | Some "-" ->
-        false
-    | Some "*" ->
+    | "*" ->
         true
-    | Some s ->
-        let i = BatString.find s ".." in
+    | s ->
+        let i = find s ".." in
         let lower = String.sub s 0 i in
-        let upper = String.sub s (i + 2) (String.length s) in
+        let upper = String.sub s (i + 2) (String.length s - i - 2) in
         (* Lexicographic comparison; TODO this is bad, do better... *)
         lower <= infraction && infraction <= upper
 

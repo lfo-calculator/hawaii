@@ -48,7 +48,7 @@ let mk_data () =
   List.filter_map (function
     | `Assoc l ->
         let reg = assert_string (List.assoc "regulation" l) in
-        let sec = Filename.chop_suffix (assert_string (List.assoc "catala_url" l)) ".catala_en" in
+        let sec = assert_string (List.assoc "section" l) in
         let is_generic =
           try
             let applies = assert_string (List.assoc "applies" l) in

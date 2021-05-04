@@ -23,7 +23,7 @@ data.ml: $(JSON)
 conversions.ml: $(JSON) $(SCRIPT)
 	ocaml $(SCRIPT) -ocaml $< -o $@
 
-main.ml: $(wildcard ../*.catala_en)
+main.ml: $(wildcard ../*.catala_en) ../infractions.catala_en
 	$(CATALA) OCaml ../main.catala_en -o $@
 
 %.run: ../%.catala_en

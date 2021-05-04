@@ -6,12 +6,10 @@ Open up the JavaScript console, then:
 objs = [];
 for (let i = 7230; i < 7283; ++i) {
   let l = document.querySelectorAll(".sidebar-item")[i];
-  if (l.textContent.indexOf("Repealed") >= 0)
-    continue;
   let s = l.textContent.indexOf(" ");
   let section = l.textContent.substring(0, s);
   let title = l.textContent.substring(s+1);
-  objs.push({ regulation: title, reg_url: l.querySelector("a").href, catala_url: section + ".catala_en" })
+  objs.push({ regulation: title, reg_url: l.querySelector("a").href, catala_url: section + ".catala_en", applies: "-" })
 }
 console.log(JSON.stringify(objs))
 ```

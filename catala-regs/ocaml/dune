@@ -5,4 +5,4 @@
  (public_name hawaii_lfo_web)
  (preprocess
   (pps js_of_ocaml-ppx))
- (libraries batteries catala.runtime yojson js_of_ocaml))
+ (libraries str catala.runtime yojson js_of_ocaml))
