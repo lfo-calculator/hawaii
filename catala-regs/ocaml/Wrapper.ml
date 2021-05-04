@@ -27,6 +27,14 @@ end
 
 module H = Helpers
 
+let has_debug = true
+
+let debug fmt =
+  if has_debug then
+    Printf.printf (fmt ^^ format_of_string "\n")
+  else
+    Printf.ifprintf stdout fmt
+
 
 (**********************
  * All known statutes *
@@ -142,10 +150,11 @@ let call f infraction date age priors =
 let compute (infractions: (string * date option) list) (age: int option) (priors: priors option): outcome =
   List.map (fun (infraction, date) ->
     Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
-      if applies regulation infraction then
+      if applies regulation infraction then begin
+        debug "%s applies to %s" regulation infraction;
         let p = call f infraction date age priors in
         Some (regulation, p)
-      else
+      end else
         None
     ) all_regulations
   ) infractions
@@ -187,63 +196,63 @@ let get_input (o: js_input Js.t) =
    [compute] into suitable JS types *)
 let mk_duration (d: duration) =
   let days, months, years = duration_to_days_months_years d in object%js
-    method days = days
-    method months = months
-    method years = years
+    val days = days
+    val months = months
+    val years = years
   end
 
 let mk_imprisonment (i: imprisonment) = object%js
-  method min_days = mk_duration i.min_days
-  method max_days = mk_duration i.max_days
+  val min_days = mk_duration i.min_days
+  val max_days = mk_duration i.max_days
 end
 
 let mk_fine (i: fine) = object%js
-  method min_fine = i.min_fine
-  method max_fine = i.max_fine
+  val min_fine = i.min_fine
+  val max_fine = i.max_fine
 end
 
 let mk_fee (i: fee) = object%js
-  method min_fee = i.min_fee
-  method max_fee = i.max_fee
+  val min_fee = i.min_fee
+  val max_fee = i.max_fee
 end
 
 let rec mk_penalty (p: penalty) = object%js
-  method kind = Js.string (match p with
+  val kind = Js.string (match p with
     | Either _ -> "either"
     | One (Imprisonment _) -> "imprisonment"
     | One (Fine _) -> "fine"
     | One (Fee _) -> "fee"
     | One (LoseRightToDriveUntil18 _) -> "lose_right_to_drive_until_18")
 
-  method fine =
+  val fine =
     match p with
     | One (Fine f) -> Js.Optdef.return (mk_fine f)
     | _ -> Js.undefined
 
-  method fee =
+  val fee =
     match p with
     | One (Fee f) -> Js.Optdef.return (mk_fee f)
     | _ -> Js.undefined
 
-  method imprisonment =
+  val imprisonment =
     match p with
     | One (Imprisonment f) -> Js.Optdef.return (mk_imprisonment f)
     | _ -> Js.undefined
 
-  method either =
+  val either =
     match p with
     | Either ps -> Js.Optdef.return (Js.array (Array.map (fun p -> mk_penalty (One p)) ps))
     | _ -> Js.undefined
 end
 
 let mk_annotated_penalty (r: string) (ps: penalties) = object%js
-  method regulation = Js.string r
-  method penalties = Js.array (Array.map mk_penalty ps)
+  val regulation = Js.string r
+  val penalties = Js.array (Array.map mk_penalty ps)
 end
 
 let mk_one_outcome (v: violation) (ps: (regulation * penalties) list) = object%js
-  method violation = Js.string (Conversions.string_of_statute v)
-  method penalties =
+  val violation = Js.string (Conversions.string_of_statute v)
+  val penalties =
     Js.array (Array.of_list (List.map (fun (r, p) ->
       mk_annotated_penalty r p
     ) ps))
@@ -255,7 +264,9 @@ let mk_outcome (o: outcome) =
 let _ =
   Js.export_all (object%js
     method computePenalties (input: js_input Js.t): _ Js.t =
+      debug "[Wrapper.ml] computing penalties";
       let violations, priors, age = get_input input in
+      debug "[Wrapper.ml] input translated";
       let outcome = compute violations age priors in
       mk_outcome outcome
   end)
