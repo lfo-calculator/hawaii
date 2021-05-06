@@ -56,6 +56,11 @@ type catala_regulation =
   | OD of (offense -> defendant -> penalties)
 
 let all_regulations: (regulation * catala_regulation) list = [
+  "291-10", N (fun () ->
+    let out = s_291_10 {
+      penalties_in = H.no_input
+    } in
+    out.penalties_out);
   "291-11.6", N (fun () ->
     let out = s_291_11_6 {
       penalties_in = H.no_input

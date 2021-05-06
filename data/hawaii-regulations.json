@@ -351,13 +351,19 @@
       "regulation": "Freight on motor cars; projection of, prohibited",
       "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-8/",
       "section": "291-8",
-      "applies": "1"
+      "applies": "0"
   },
   {
       "regulation": "Freight; on running board",
       "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-9/",
       "section": "291-9",
-      "applies": "1"
+      "applies": "0"
+  },
+  {
+      "regulation": "Penalty",
+      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-10/",
+      "section": "291-10",
+      "applies": "291-8..291-9"
   },
   {
       "regulation": "Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty",
