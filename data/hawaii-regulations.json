@@ -5,42 +5,42 @@
     "section": "286-1",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "Definitions",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-2/",
     "section": "286-2",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "Powers and duties of the governor",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-3/",
     "section": "286-3",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "Medical advisory board",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-4_1/",
     "section": "286-4.1",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "State highway safety council",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-5/",
     "section": "286-5",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "County traffic or highway safety councils",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-6/",
     "section": "286-6",
     "range": "0",
     "violation":"false"
-  },  
+  },
   {
     "regulation": "County highway safety programs",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-7/",
@@ -115,43 +115,50 @@
     "regulation": "Sales of motor vehicle equipment; approval and identification required; prohibitions on use",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-83/",
     "section": "286-83",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Revocation of approval",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-84/",
     "section": "286-84",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Reconstructed vehicles, approval required",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-85/",
     "section": "286-85",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "to 97 Repealed",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-91/",
     "section": "286-91",
-    "applies": "x"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Designation of examiner of drivers",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-101/",
     "section": "286-101",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Reciprocal licensing privileges",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-101_5/",
     "section": "286-101.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Licensing",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-102/",
     "section": "286-102",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Commercial drivers under the age of twenty-one",

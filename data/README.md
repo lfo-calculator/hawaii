@@ -11,42 +11,53 @@ Each entry contains at the following keys:
    -- if it exists, the corresponding Catala source file will be found in
    `../catala-regs/<section>.md`.
 - `regulation`: human-readable title for the regulation,
-- `reg_url`: a web-based readable version, and
-- `applies`.
+- `reg_url`: a web-based readable version,
+- `applies`, and
+- `violation`.
 
-The `applies` field allows separating regulations into different categories,
-depending on its value:
+The `applies` field allows separating regulations into different categories.
+Intuitively, it answer the question "which violations does this regulation apply
+to".
 
-- `x` (strike-out): this is a "useless" regulation for our purposes and will be
-  ignored both by the UI and the backend. Typically, the section is either
-  repealed, or describes neither a violation or a penalty. Example: 286-108,
-  "Examination of applicants", which merely describes how driving tests should
-  be conducted.
-- `0`: this is a "violation-only" regulation, and describes a violation without
-  stating the penalties associated to it. Typically, the penalties for this
-  particular violation are specified in another regulation. Example: 286-106,
-  "expired license", is violation whose penalty is determined by by 286-136.
-- `1` (self): this is a "self-contained" regulation, and describes both a
-  violation and the accompanying penalty. Example: 291-11.6 "mandatory use of
-  seat belts".
-- `X..Y`: this is a "range" regulation, which describes no infraction, but
-  establishes penalties for violation `X` (included) to violation `Y`
-  (included). Example: 286-136, "Penalties", applies to `286-83..286-135`.
+- `0`: this regulation doesn't contain any penalties
+- `self`: this regulation contains within itself the associated penalty
+- `(X..Y)`: this is a "range" regulation but establishes penalties for violation
+  `X` (included) to violation `Y` (included).
 - `*`: this is a "wildcard" regulation, which describes no infraction, but
-  establishes penalties for all violations *within* a specific statute. Example: 607-4, which sets court
-  fees and applies to every violation.
+  establishes penalties for all violations *within* a specific statute.
 
-Equipped with these distinctions, the following invariants obtain:
+The `violation` field is a boolean that indicates whether the regulation
+describes an enforceable violation; a regulation appears in the user interface
+if and only if it is also a violation.
 
-- the [../catala-regs] directory contains Catala files for all regulations,
-  except types `x` and `0`, which hold no computation content since neither of
-  those establish penalties
-- violations are defined to be regulations that have types `0` and `1`; these
-  are chargeable offenses that appear in the user interface
+Some examples:
+- 286-108, "Examination of applicants", merely describes how driving tests should
+  be conducted. It does not contain penalties (`applies = "0"`); and it does not
+  describe an infraction either (`violation = false`). It will therefore be
+  ignored both by the frontend and the backend. This is an irrelevant regulation
+  for our purposes, but we keep it in the JSON file to indicate we have
+  suitably reviewed it. Repealed regulations behave the same way.
+- 291-11.6, "Mandatory use of seat belts", is a chargeable offense, therefore
+  `violation = true`. Furthermore, the regulation also contains the
+  corresponding fines and fees for the violation, therefore `applies = "self"`.
+- 286-136, "Penalties", describes the penalties for violations 286-83 to
+  286-135. Therefore, `applies = "(286-83..286-135)"`. However, regulation
+  286-136 is not a violation in itself; in other words, someone cannot be
+  charged for having violated 286-136. Therefore, `violation = false`.
+- 607-4, which sets court fees, applies to every violation. Therefore, `applies
+  = "*"`; but here, too, 607-4 is not an infraction in itself, so `violation =
+  false`.
 
-Using the JSON file, the following is derived:
+The [../catala-regs] directory therefore contains Catala files for all
+regulations, except those for which `applies = "0"`, which contain no semantic
+content.
 
-- the set of violations for the user interface to present tot he user ( ```applies``` of type ```0``` or ```1```);
+Using the JSON file, we derive:
+
+- the set of violations for the user interface to present to the user,
+  i.e. those for which `violation = true`
 - the Catala enumeration for all possible violations, produced by the build as
   [../catala-regs/infractions.catala]
-- the OCaml conversion function from a string (defined as a `catala_url` stripped of its file extension) to the corresponding data type (as extracted by Catala), currently under version control in [../catala-regs/ocaml/conversions.ml]
+- the OCaml conversion function from a string (the `section` field) to the
+  corresponding data type (as extracted by Catala), currently under version
+  control in [../catala-regs/ocaml/conversions.ml]
