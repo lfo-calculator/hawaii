@@ -27,3 +27,9 @@ setup.log
 
 # Local OPAM switch
 _opam/
+
+# Vue front-end
+node_modules/
+
+# Apple stuff
+.DS_Store
