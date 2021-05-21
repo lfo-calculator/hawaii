@@ -99,6 +99,7 @@ let computation_of_reg: (section * computation) list = [
 type regulation = {
   applies: applies;
   needs: needs;
+  section: string;
 }
 
 and applies =
@@ -129,7 +130,7 @@ let parse_need (need: Yojson.Safe.t) =
   let need = assert_string need in
   match need with
   | "age" -> Age
-  | "priors" -> Prior
+  | "priors" -> Priors
   | "is_construction" -> IsConstruction
   | _ -> failwith ("Unknown value in the need field: " ^ need)
 
@@ -138,39 +139,37 @@ let parse_needs (needs: Yojson.Safe.t) =
   List.map parse_need needs
 
 let parse_applies (applies: Yojson.Safe.t) =
-  let applies = assert_list applies in
+  let applies = assert_string applies in
   match applies with
   | "0" -> None
-  | "self" -> Self
-  | "*" -> All
+  | "self" -> Some Self
+  | "*" -> Some All
   | applies ->
       (* TODO: fixme here for a list and possibly singleton ranges *)
       let i = find applies ".." in
       let lower = String.sub applies 0 i in
       let upper = String.sub applies (i + 2) (String.length applies - i - 2) in
-      [ lower, upper ]
+      Some (Ranges [ lower, upper ])
 
-let parse_regulation r =
+let parse_regulation (r: Yojson.Safe.t) =
   let r = assert_assoc r in
-  let sec = assert_string (List.assoc "section" r) in
-  let needs = assert_string (List.assoc "needs" r) in
-  let needs = parse_needs needs in
-  let applies = assert_string (List.assoc "applies" r) in
-  let applies = parse_applies applies in
+  let section = assert_string (List.assoc "section" r) in
+  let needs = parse_needs (List.assoc "needs" r) in
+  let applies = parse_applies (List.assoc "applies" r) in
   match applies with
   | None -> section, None
-  | Some applies -> section, Some { applies; needs }
+  | Some applies -> section, Some { applies; needs; section }
 
 let parse_json (json: Yojson.Safe.t) =
   let regs = Yojson.Safe.from_string Data.json in
   let regs = assert_assoc regs in
   let regs = List.assoc "regulations" regs in
   let regs = assert_list regs in
-  List.map parse_reg regs;
+  List.map parse_regulation regs
 
 (* This contains only regulations that have computational content, i.e. those
    for which [applies] is not "0". *)
-let regulation_of_section =
+let regulation_of_section: (string, regulation) Hashtbl.t =
   Hashtbl.create 41
 
 let sections_of_violation =
@@ -179,14 +178,14 @@ let sections_of_violation =
 
 (* [applies s1 s2] determines whether regulation [s1] applies to the infraction [s2] *)
 let applies reg infraction =
-  match Hashtbl.find regulation_of_section reg with
+  match reg.applies with
   | Self ->
       (* See ../../data/README.md: we assume the penalty for the infraction is in the
          relevant section *)
-      reg = infraction
+      reg.section = infraction
   | All ->
       true
-  | Range rs ->
+  | Ranges rs ->
       let applies (lower, upper) =
         (* Lexicographic comparison; TODO this is bad, do better... *)
         lower <= infraction && infraction <= upper
@@ -200,7 +199,7 @@ let init (json: Yojson.Safe.t) =
     match r with
     | Some r ->
         Hashtbl.add regulation_of_section s r;
-        begin match List.assoc_opt computation_of_reg s with
+        begin match List.assoc_opt s computation_of_reg with
         | None ->
             debug "[init] %s has no entry in the Catala computation table" s
         | Some _ -> ()
@@ -209,7 +208,7 @@ let init (json: Yojson.Safe.t) =
         ()
   ) json;
   (* Fill the violation (e.g. "286-135") --> sections (e.g. "286-136"; "607-4") mapping. *)
-  List.iter (fun (violation, _) ->
+  List.iter (fun (violation, r) ->
     match r with
     | None ->
         let relevant = Hashtbl.fold (fun section reg acc ->
@@ -222,11 +221,11 @@ let init (json: Yojson.Safe.t) =
     | Some _ -> ()
   ) json
 
-let lookup section =
+let lookup =
   Hashtbl.find regulation_of_section
 
 module NS = Set.Make(struct
-  type t = needs
+  type t = need
   let compare = compare
 end)
 
@@ -245,7 +244,7 @@ let relevant violation =
  ***********************)
 
 (* We annotate each penalty with the regulation that justifies it. *)
-type outcome = (violation * (regulation * penalties) list) list
+type outcome = (violation * (section * penalties) list) list
 
 let call f infraction date age priors =
   let must = function
@@ -268,13 +267,13 @@ let call f infraction date age priors =
 let compute (infractions: (string * date option) list) (age: int option) (priors: priors option): outcome =
   List.map (fun (infraction, date) ->
     Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
-      if applies regulation infraction then begin
+      if applies (lookup regulation) infraction then begin
         debug "%s applies to %s" regulation infraction;
         let p = call f infraction date age priors in
         Some (regulation, p)
       end else
         None
-    ) all_regulations
+    ) computation_of_reg
   ) infractions
 
 (*******************
@@ -368,7 +367,7 @@ let mk_annotated_penalty (r: string) (ps: penalties) = object%js
   val penalties = Js.array (Array.map mk_penalty ps)
 end
 
-let mk_one_outcome (v: violation) (ps: (regulation * penalties) list) = object%js
+let mk_one_outcome (v: violation) (ps: (section * penalties) list) = object%js
   val violation = Js.string (Conversions.string_of_statute v)
   val penalties =
     Js.array (Array.of_list (List.map (fun (r, p) ->
@@ -378,6 +377,19 @@ end
 
 let mk_outcome (o: outcome) =
   Js.array (Array.of_list (List.map (fun (v, ps) -> mk_one_outcome v ps) o))
+
+let mk_need n =
+  Js.string (match n with
+  | Age -> "age"
+  | Priors -> "priors"
+  | IsConstruction -> "is_construction"
+  )
+
+let mk_relevant (r: string list * needs) =
+  object%js
+    val sections = Js.array (Array.of_list (List.map Js.string (fst r)))
+    val needs = Js.array (Array.of_list (List.map mk_need (snd r)))
+  end
 
 let _ =
   Js.export_all (object%js
@@ -389,7 +401,7 @@ let _ =
       mk_outcome outcome
 
     method relevant (input: Js.js_string Js.t): _ Js.t =
-
+      mk_relevant (relevant (Js.to_string input))
   end)
 
 let _ =
