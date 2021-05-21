@@ -33,57 +33,65 @@
      </v-col>
     </v-row>
     <v-row>
+      <v-form ref="form">
+        <v-spacer></v-spacer>
+        <v-col cols="10">
+            <v-autocomplete
+                v-model="charges"
+                :disabled="isUpdating"
+                :items="regulations"
+                filled
+                chips
+                clearable
+                deletable-chips
+                multiple
+                color="blue-grey lighten-2"
+                label="Select one or more charges to evaluate"
+                item-text="regulation"
+                item-value="section"
+              >
+                <template v-slot:selection="data">
+                  <v-chip
+                    v-bind="data.attrs"
+                    :input-value="data.selected"
+                    close
+                    @click="data.select"
+                    @click:close="remove(data.item)"
+                  >
+                    {{ data.item.regulation }}
+                  </v-chip>
+                </template>
+                <template v-slot:item="data">
+                  <template 
+                    v-if="typeof data.item !== 'object'"
+                  >
+                    <v-list-item-content v-text="data.item"></v-list-item-content>
+                  </template>
+                  <template v-else>
+                    <v-list-item-content>
+                      <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
+                      <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </template>
+                </template>
+              </v-autocomplete>
+            </v-col>
+            <v-spacer></v-spacer>
+      </v-form>
+    </v-row>
+    <v-row>
       <v-spacer></v-spacer>
-      <v-col cols="10">
-          <v-autocomplete
-              v-model="charges"
-              :disabled="isUpdating"
-              :items="regulations"
-              filled
-              chips
-              color="blue-grey lighten-2"
-              label="Select one or more charges to evaluate"
-              item-text="regulation"
-              item-value="section"
-              multiple
-            >
-              <template v-slot:selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item.regulation }}
-                </v-chip>
-              </template>
-              <template v-slot:item="data">
-                <template v-if="typeof data.item !== 'object'">
-                  <v-list-item-content v-text="data.item"></v-list-item-content>
-                </template>
-                <template v-else>
-                  <v-list-item-content>
-                    <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
-                    <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
-                  </v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
-          </v-col>
-         <v-spacer></v-spacer>
-
-        </v-row>
-
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-col cols="4">
-            <v-btn type="submit" color="primary">
-              Submit
-            </v-btn>
-          </v-col>
-          <v-spacer></v-spacer>
-      </v-row>
+      <v-col cols="4">
+        <v-btn 
+          type="submit" 
+          color="primary" 
+          @submit.prevent="onSubmit"
+        >
+          Submit
+        </v-btn>
+      </v-col>
+      <v-spacer></v-spacer>
+  </v-row>
   </v-container>
 </v-main>
   </v-app>
@@ -120,10 +128,12 @@ export default {
     },
 
     methods: {
-        remove (item) {
-        const index = this.charges.indexOf(item.regulation)
-        if (index >= 0) this.charges.splice(index, 1)
+      remove (item) {
+        const index = this.regulations.indexOf(item.regulation)
+        if (index >= 0) this.regulations.splice(index, 1)
       },
-},
+      onSubmit() {
+        console.log( this.charges );
+      },},
 }
 </script>

@@ -1,4 +1,4 @@
-[
+{ "regulations": [
   {
     "regulation": "Short title",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-1/",
@@ -595,3 +595,4 @@
     "applies": "*"
   }
 ]
+}
