@@ -44,6 +44,8 @@ let print_ocaml dst data =
 let mk_data () =
   let regs = Yojson.Safe.from_channel (open_in !source) in
   let assert_string = function `String s -> s | _ -> failwith "not a string" in
+  let regs = match regs with `Assoc regs -> regs | _ -> failwith "not an assoc" in
+  let regs = List.assoc "regulations" regs in
   let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
   List.filter_map (function
     | `Assoc l ->

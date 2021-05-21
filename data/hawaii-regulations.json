@@ -52,7 +52,7 @@
     "regulation": "Rules and regulations",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-8/",
     "section": "286-8",
-    "range": "(291C-31..291C-36)",
+    "range": "291C-31..291C-36",
     "violation":"false",
     "needs": [ "is_construction" ]
   },
@@ -494,7 +494,7 @@
     "regulation": "Penalties",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-136/",
     "section": "286-136",
-    "applies": "(286-83..286-135)",
+    "applies": "286-83..286-135",
     "violation": false,
     "needs": [ "age", "priors" ]
   },
@@ -544,7 +544,7 @@
     "regulation": "Penalty",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-10/",
     "section": "291-10",
-    "applies": "(291-8..291-9)"
+    "applies": "291-8..291-9"
   },
   {
     "regulation": "Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty",

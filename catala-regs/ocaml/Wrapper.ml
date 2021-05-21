@@ -1,6 +1,5 @@
-(* This file is part of the French law library, a collection of functions for computing French taxes
-   and benefits derived from Catala programs. Copyright (C) 2021 Microsoft,
-   Jonathan Protzenko <protz@microsoft.com>
+(* Hawaii LFO regulations.
+   Copyright (C) 2021 Microsoft, Jonathan Protzenko <protz@microsoft.com>
 
    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
    in compliance with the License. You may obtain a copy of the License at
@@ -40,22 +39,30 @@ let debug fmt =
  * All known statutes *
  **********************)
 
-(* Here, we build a table that maps string representations (consistent with
-   Catala file names) of regulations to their corresponding Catala function. *)
+(* Some terminology:
+  - section: string representation (e.g. "286-136")
+  - computation: an OCaml function extracted from Catala
+  - regulation: internal representation built from the JSON data
+*)
+
+(* Here, we build a table that maps sections to their corresponding Catala
+   function. *)
 type priors = offense array
 type penalties = penalty array
-type regulation = string
+type section = string
 type infraction = violation
 
 (* N: none
  * V: violation
  * OP: offense + defendant (priors + age) *)
-type catala_regulation =
+type computation =
   | N of (unit -> penalties)
   | V of (violation -> penalties)
   | OD of (offense -> defendant -> penalties)
 
-let all_regulations: (regulation * catala_regulation) list = [
+(* Associative list that, given a section (whose [applies] field is not [0]),
+   returns the corresponding computation. *)
+let computation_of_reg: (section * computation) list = [
   "291-10", N (fun () ->
     let out = s_291_10 {
       penalties_in = H.no_input
@@ -88,43 +95,149 @@ let all_regulations: (regulation * catala_regulation) list = [
     out.penalties_out);
 ]
 
+(* Our structured representation of a regulation. *)
+type regulation = {
+  applies: applies;
+  needs: needs;
+}
+
+and applies =
+  | Self
+  | All
+  | Ranges of range list
+
+and range =
+  section * section
+
+and needs =
+  need list
+
+and need =
+  | Age
+  | Priors
+  | IsConstruction
+
+let assert_string = function `String s -> s | _ -> failwith "not a string"
+let assert_list = function `List s -> s | _ -> failwith "not a list"
+let assert_assoc = function `Assoc s -> s | _ -> failwith "not an assoc"
+
 let find haystack needle =
   let r = Str.regexp (Str.quote needle) in
   Str.search_forward r haystack 0
 
-(* [applies r1 r2] determines whether regulation [r1] applies to the infraction [r2] *)
-let applies: string -> string -> bool =
-  let t = Hashtbl.create 41 in
+let parse_need (need: Yojson.Safe.t) =
+  let need = assert_string need in
+  match need with
+  | "age" -> Age
+  | "priors" -> Prior
+  | "is_construction" -> IsConstruction
+  | _ -> failwith ("Unknown value in the need field: " ^ need)
+
+let parse_needs (needs: Yojson.Safe.t) =
+  let needs = assert_list needs in
+  List.map parse_need needs
+
+let parse_applies (applies: Yojson.Safe.t) =
+  let applies = assert_list applies in
+  match applies with
+  | "0" -> None
+  | "self" -> Self
+  | "*" -> All
+  | applies ->
+      (* TODO: fixme here for a list and possibly singleton ranges *)
+      let i = find applies ".." in
+      let lower = String.sub applies 0 i in
+      let upper = String.sub applies (i + 2) (String.length applies - i - 2) in
+      [ lower, upper ]
+
+let parse_regulation r =
+  let r = assert_assoc r in
+  let sec = assert_string (List.assoc "section" r) in
+  let needs = assert_string (List.assoc "needs" r) in
+  let needs = parse_needs needs in
+  let applies = assert_string (List.assoc "applies" r) in
+  let applies = parse_applies applies in
+  match applies with
+  | None -> section, None
+  | Some applies -> section, Some { applies; needs }
+
+let parse_json (json: Yojson.Safe.t) =
   let regs = Yojson.Safe.from_string Data.json in
-  let assert_string = function `String s -> s | _ -> failwith "not a string" in
-  let regs = match regs with `List regs -> regs | _ -> failwith "not a list" in
-  List.iter (function
-    | `Assoc l ->
-        let sec = assert_string (List.assoc "section" l) in
-        begin try
-          Hashtbl.add t sec (assert_string (List.assoc "applies" l))
-        with Not_found ->
-          ()
-        end
-    | _ ->
-        failwith "not an assoc"
-  ) regs;
-  fun reg infraction ->
-    match Hashtbl.find t reg with
-    | "0" ->
-        false
-    | "1" ->
-        (* See ../../data/README.md: we assume the penalty for the infraction is in the
-           relevant section *)
-        reg = infraction
-    | "*" ->
-        true
-    | s ->
-        let i = find s ".." in
-        let lower = String.sub s 0 i in
-        let upper = String.sub s (i + 2) (String.length s - i - 2) in
+  let regs = assert_assoc regs in
+  let regs = List.assoc "regulations" regs in
+  let regs = assert_list regs in
+  List.map parse_reg regs;
+
+(* This contains only regulations that have computational content, i.e. those
+   for which [applies] is not "0". *)
+let regulation_of_section =
+  Hashtbl.create 41
+
+let sections_of_violation =
+  Hashtbl.create 41
+
+
+(* [applies s1 s2] determines whether regulation [s1] applies to the infraction [s2] *)
+let applies reg infraction =
+  match Hashtbl.find regulation_of_section reg with
+  | Self ->
+      (* See ../../data/README.md: we assume the penalty for the infraction is in the
+         relevant section *)
+      reg = infraction
+  | All ->
+      true
+  | Range rs ->
+      let applies (lower, upper) =
         (* Lexicographic comparison; TODO this is bad, do better... *)
         lower <= infraction && infraction <= upper
+      in
+      List.exists applies rs
+
+let init (json: Yojson.Safe.t) =
+  let json = parse_json json in
+  (* Fill the section (e.g. "286-136") --> regulation (e.g. { applies = "..." }) mapping. *)
+  List.iter (fun (s, r) ->
+    match r with
+    | Some r ->
+        Hashtbl.add regulation_of_section s r;
+        begin match List.assoc_opt computation_of_reg s with
+        | None ->
+            debug "[init] %s has no entry in the Catala computation table" s
+        | Some _ -> ()
+        end
+    | None ->
+        ()
+  ) json;
+  (* Fill the violation (e.g. "286-135") --> sections (e.g. "286-136"; "607-4") mapping. *)
+  List.iter (fun (violation, _) ->
+    match r with
+    | None ->
+        let relevant = Hashtbl.fold (fun section reg acc ->
+          if applies reg violation then
+            section :: acc
+          else
+            acc
+        ) regulation_of_section [] in
+        Hashtbl.add sections_of_violation violation relevant
+    | Some _ -> ()
+  ) json
+
+let lookup section =
+  Hashtbl.find regulation_of_section
+
+module NS = Set.Make(struct
+  type t = needs
+  let compare = compare
+end)
+
+(* [relevant r1] returns the set of regulations [rs], such that for each [r] in
+   [rs], we have [applies r r1] *)
+let relevant violation =
+  let sections = Hashtbl.find sections_of_violation violation in
+  let needs = List.fold_left (fun acc section ->
+    NS.union acc (NS.of_list (lookup section).needs)
+  ) NS.empty sections in
+  sections, (List.of_seq (NS.to_seq needs))
 
 
 (***********************
@@ -274,6 +387,9 @@ let _ =
       debug "[Wrapper.ml] input translated";
       let outcome = compute violations age priors in
       mk_outcome outcome
+
+    method relevant (input: Js.js_string Js.t): _ Js.t =
+
   end)
 
 let _ =
