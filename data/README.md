@@ -5,7 +5,7 @@ Statutes) regulations reviewed to date. The JSON file is partially
 auto-generated; see [../catala-regs/scratch/SCRAPING.md]. It constitutes a
 "central" reference for this project and should be edited with care.
 
-Each entry contains at the following keys:
+Each entry contains the following keys:
 
 - `section`: the name of the section (i.e. the §), generally of the form `XX-YY[.ZZ]`
    -- if it exists, the corresponding Catala source file will be found in
@@ -15,20 +15,30 @@ Each entry contains at the following keys:
 - `applies`, and
 - `violation`.
 
-The `applies` field allows separating regulations into different categories.
-Intuitively, it answer the question "which violations does this regulation apply
-to".
+Additionally, each entry may contain the following *optional* fields:
+- `needs`.
 
-- `0`: this regulation doesn't contain any penalties
-- `self`: this regulation contains within itself the associated penalty
-- `(X..Y)`: this is a "range" regulation but establishes penalties for violation
-  `X` (included) to violation `Y` (included).
-- `*`: this is a "wildcard" regulation, which describes no infraction, but
-  establishes penalties for all violations *within* a specific statute.
+The `applies` field answers the question "which violations does this regulation
+apply to".
+
+- `0`: this regulation doesn't establish any penalties for any violation
+- `self`: this regulation describes a violation *and* the associated penalty
+- `(X..Y)`: this is a "range" regulation, and establishes penalties for
+  violation `X` (included) to violation `Y` (included).
+- `*`: this is a "wildcard" regulation, and establishes penalties for all
+  violations *within* a specific statute.
 
 The `violation` field is a boolean that indicates whether the regulation
 describes an enforceable violation; a regulation appears in the user interface
 if and only if it is also a violation.
+
+The `needs` field describes additional contextual information required by the
+regulation to compute suitable penalties. If present, `needs` is an array
+containing one or more of the following strings:
+- `age`: the age of the defendant
+- `prior`: the list of prior infractions of the defendant
+- `is_construction`: was the defendant a construction worker at the time of the
+  violation.
 
 Some examples:
 - 286-108, "Examination of applicants", merely describes how driving tests should
@@ -44,6 +54,9 @@ Some examples:
   286-135. Therefore, `applies = "(286-83..286-135)"`. However, regulation
   286-136 is not a violation in itself; in other words, someone cannot be
   charged for having violated 286-136. Therefore, `violation = false`.
+  Furthermore, this regulation contains subtle logic that takes into account the
+  age and the prior violations of the defendant; therefore, `needs = [ "age",
+  "priors" ]`.
 - 607-4, which sets court fees, applies to every violation. Therefore, `applies
   = "*"`; but here, too, 607-4 is not an infraction in itself, so `violation =
   false`.

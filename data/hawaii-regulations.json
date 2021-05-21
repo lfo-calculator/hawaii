@@ -53,7 +53,8 @@
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-8/",
     "section": "286-8",
     "range": "(291C-31..291C-36)",
-    "violation":"false"
+    "violation":"false",
+    "needs": [ "is_construction" ]
   },
   {
     "regulation": "Facilities for physically handicapped persons",
@@ -164,366 +165,433 @@
     "regulation": "Commercial drivers under the age of twenty-one",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-102_3/",
     "section": "286-102.3",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Military Selective Service Act; Selective Service System registration",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-102_5/",
     "section": "286-102.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Provisional license for persons under the age of eighteen",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-102_6/",
     "section": "286-102.6",
-    "applies": "0"
+    "applies": "self",
+    "violation": true
   },
   {
     "regulation": "Restrictions on driver's license; rules and regulations",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-103/",
     "section": "286-103",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Which persons shall not be licensed",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-104/",
     "section": "286-104",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Limited purpose driver's license, limited purpose provisional driver's license, and limited purpose instruction permits",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-104_5/",
     "section": "286-104.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "What persons are exempt from license",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-105/",
     "section": "286-105",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Expiration of licenses",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-106/",
     "section": "286-106",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Expiration of licenses; out-of-country active duty military personnel and dependents",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-106_5/",
     "section": "286-106.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "License renewals; procedures and requirements",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-107/",
     "section": "286-107",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Reactivation of expired license; fees; road test waived",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-107_5/",
     "section": "286-107.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Examination of applicants",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-108/",
     "section": "286-108",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Driver education and behind-the-wheel driver training program",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-108_4/",
     "section": "286-108.4",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Repealed",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-108_5/",
     "section": "286-108.5",
-    "applies": "x"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "General provision governing the issuance of licenses",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-109/",
     "section": "286-109",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Designation of advance health-care directive",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-109_4/",
     "section": "286-109.4",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Designation of anatomical gift",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-109_5/",
     "section": "286-109.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Limited access to driver's license anatomical gift data",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-109_6/",
     "section": "286-109.6",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Organ and tissue education fee",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-109_7/",
     "section": "286-109.7",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Instruction permits",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-110/",
     "section": "286-110",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Application for license, provisional license, instruction permit, limited purpose driver's license, limited purpose provisional driver's license, or limited purpose instruction permit; fees",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-111/",
     "section": "286-111",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Application of minors; liability of parents or guardian",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-112/",
     "section": "286-112",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Release from liability",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-113/",
     "section": "286-113",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Revocation of license, provisional license, or instruction permit upon death of person signing minor's application",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-114/",
     "section": "286-114",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Repealed",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-115/",
     "section": "286-115",
-    "applies": "x"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "License, insurance identification card, possession, exhibition",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-116/",
     "section": "286-116",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Notice of change of address or name; penalty",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-116_5/",
     "section": "286-116.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Duplicate permits, provisional licenses, and licenses",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-117/",
     "section": "286-117",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Records to be kept by the examiner of drivers",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-118/",
     "section": "286-118",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "License revoked for operating a vehicle under the influence of an intoxicant; eligibility for license renewal",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-118_5/",
     "section": "286-118.5",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Authority of examiner of drivers to suspend or revoke licenses",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-119/",
     "section": "286-119",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Authority of examiner of drivers to cancel licenses",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-120/",
     "section": "286-120",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Suspending or revoking privileges of nonresident and reporting convictions, suspensions, and revocations",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-121/",
     "section": "286-121",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Suspension of a license; surrender",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-122/",
     "section": "286-122",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Record of conviction forwarded to examiner of drivers",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-123/",
     "section": "286-123",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Mandatory revocation of license by a court",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-124/",
     "section": "286-124",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Discretionary revocation or suspension of license by a court",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-125/",
     "section": "286-125",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Period of suspension or revocation",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-126/",
     "section": "286-126",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Repealed",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-127/",
     "section": "286-127",
-    "applies": "x"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Evaluation of nonresident driving privileges; reports of outside convictions; reports of convictions by courts-martial or United States commissioners",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-128/",
     "section": "286-128",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "Appeal to circuit court",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-129/",
     "section": "286-129",
-    "applies": "0"
+    "applies": "0",
+    "violation": false
   },
   {
     "regulation": "No operation under foreign license during revocation or suspension in this State",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-130/",
     "section": "286-130",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Unlawful use of license",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-131/",
     "section": "286-131",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Driving while license suspended or revoked",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-132/",
     "section": "286-132",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Unlawful to permit unauthorized person to drive",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-133/",
     "section": "286-133",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
     "regulation": "Employing unlicensed driver",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-134/",
     "section": "286-134",
-    "applies": "0"
+    "applies": "0",
+    "violation": true
   },
   {
-      "regulation": "Penalties",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-136/",
-      "section": "286-136",
-      "applies": "286-83..286-135"
+    "regulation": "Renting motor vehicle to another",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-135/",
+    "section": "286-135",
+    "applies": "0",
+    "violation": true
   },
   {
-      "regulation": "Reckless driving of vehicle or riding of animals; penalty",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-2/",
-      "section": "291-2",
-      "applies": "1"
+    "regulation": "Penalties",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-136/",
+    "section": "286-136",
+    "applies": "(286-83..286-135)",
+    "violation": false,
+    "needs": [ "age", "priors" ]
   },
   {
-      "regulation": "Consuming or possessing intoxicating liquor while a passenger in a motor vehicle",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_2/",
-      "section": "291-3.2",
-      "applies": "1"
+    "regulation": "Reckless driving of vehicle or riding of animals; penalty",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-2/",
+    "section": "291-2",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Storage of opened container containing intoxicating liquor or consumption at scenic lookout",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_3/",
-      "section": "291-3.3",
-      "applies": "1"
+    "regulation": "Consuming or possessing intoxicating liquor while a passenger in a motor vehicle",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_2/",
+    "section": "291-3.2",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Driving after license suspended or denied for noncompliance with an order of support; penalties",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-4_6/",
-      "section": "291-4.6",
-      "applies": "1"
+    "regulation": "Storage of opened container containing intoxicating liquor or consumption at scenic lookout",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-3_3/",
+    "section": "291-3.3",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Freight on motor cars; projection of, prohibited",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-8/",
-      "section": "291-8",
-      "applies": "0"
+    "regulation": "Driving after license suspended or denied for noncompliance with an order of support; penalties",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-4_6/",
+    "section": "291-4.6",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Freight; on running board",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-9/",
-      "section": "291-9",
-      "applies": "0"
+    "regulation": "Freight on motor cars; projection of, prohibited",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-8/",
+    "section": "291-8",
+    "applies": "0",
+    "violation": true
   },
   {
-      "regulation": "Penalty",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-10/",
-      "section": "291-10",
-      "applies": "291-8..291-9"
+    "regulation": "Freight; on running board",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-9/",
+    "section": "291-9",
+    "applies": "0",
+    "violation": true
   },
   {
-      "regulation": "Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11/",
-      "section": "291-11",
-      "applies": "1"
+    "regulation": "Penalty",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-10/",
+    "section": "291-10",
+    "applies": "(291-8..291-9)"
   },
   {
-      "regulation": "Child passenger restraints",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_5/",
-      "section": "291-11.5",
-      "applies": "1"
+    "regulation": "Riders and passengers under seven years of age on motorcycles and motor scooters prohibited; penalty",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11/",
+    "section": "291-11",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Mandatory use of seat belts",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_6/",
-      "section": "291-11.6",
-      "applies": "1"
+    "regulation": "Child passenger restraints",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_5/",
+    "section": "291-11.5",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Inattention to driving",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-12/",
-      "section": "291-12",
-      "applies": "1"
+    "regulation": "Mandatory use of seat belts",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-11_6/",
+    "section": "291-11.6",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Traffic laws apply to persons driving mopeds",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-13/",
-      "section": "291-13",
-      "applies": "1"
+    "regulation": "Inattention to driving",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-12/",
+    "section": "291-12",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "Pickup trucks; passenger restrictions",
-      "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-14/",
-      "section": "291-14",
-      "applies": "1"
+    "regulation": "Traffic laws apply to persons driving mopeds",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-13/",
+    "section": "291-13",
+    "applies": "self",
+    "violation": true
   },
   {
-      "regulation": "District court costs",
-      "reg_url": "https://sammade.github.io/aloha-io/title-32/chapter-607/section-607-4/",
-      "section": "607-4",
-      "applies": "*"
+    "regulation": "Pickup trucks; passenger restrictions",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-291/section-291-14/",
+    "section": "291-14",
+    "applies": "self",
+    "violation": true
+  },
+  {
+    "regulation": "District court costs",
+    "reg_url": "https://sammade.github.io/aloha-io/title-32/chapter-607/section-607-4/",
+    "section": "607-4",
+    "applies": "*"
   }
 ]
