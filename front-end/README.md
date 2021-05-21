@@ -76,9 +76,31 @@ You should see the following output
 
   Home
   http://localhost:3000
-  ```
+```
 
-  If you encounter port conflicts you can specify a known-open port via the following:
+If you navigate to ```http://localhost:3000/regulations``` with your browser you should see the following:
+
+```
+[
+  {
+    "regulation": "Short title",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-1/",
+    "section": "286-1",
+    "range": "0",
+    "violation": "false"
+  },
+  {
+    "regulation": "Definitions",
+    "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-2/",
+    "section": "286-2",
+    "range": "0",
+    "violation": "false"
+  },
+  [snip]
+]
+```
+
+If you encounter port conflicts you can specify a known-open port via the following:
 
   ```
   $ json-server --watch db.json --port 3004
