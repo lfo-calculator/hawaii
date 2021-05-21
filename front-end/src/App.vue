@@ -6,10 +6,10 @@
       dark
     >
       <v-avatar :tile="true">
-    <img :src="require('@/assets/HI_seal.png')" alt="Hawaii State Seal">
-  </v-avatar>
+        <img :src="require('@/assets/HI_seal.png')" alt="Hawaii State Seal">
+      </v-avatar>
       <div class="d-flex align-center">
-      <v-toolbar-title>Hawaii LFO Calculator</v-toolbar-title>
+        <v-toolbar-title>Hawaii LFO Calculator</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
@@ -23,77 +23,82 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-<v-main>
- <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <h1 class="display-1 font-weight-bold mb-3">
-          Welcome to the Hawaii LFO Calculator
-        </h1>
-     </v-col>
-    </v-row>
-    <v-row>
-      <v-form ref="form">
-        <v-spacer></v-spacer>
-        <v-col cols="10">
-            <v-autocomplete
-                v-model="charges"
-                :disabled="isUpdating"
-                :items="regulations"
-                filled
-                chips
-                clearable
-                deletable-chips
-                multiple
-                color="blue-grey lighten-2"
-                label="Select one or more charges to evaluate"
-                item-text="regulation"
-                item-value="section"
-              >
-                <template v-slot:selection="data">
-                  <v-chip
-                    v-bind="data.attrs"
-                    :input-value="data.selected"
-                    close
-                    @click="data.select"
-                    @click:close="remove(data.item)"
-                  >
-                    {{ data.item.regulation }}
-                  </v-chip>
-                </template>
-                <template v-slot:item="data">
-                  <template 
-                    v-if="typeof data.item !== 'object'"
-                  >
-                    <v-list-item-content v-text="data.item"></v-list-item-content>
-                  </template>
-                  <template v-else>
-                    <v-list-item-content>
-                      <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
-                      <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
-                    </v-list-item-content>
-                  </template>
-                </template>
-              </v-autocomplete>
-            </v-col>
+    <v-main>
+     <v-container>
+        <v-row class="text-center">
+          <v-col cols="12">
+            <h1 class="display-1 font-weight-bold mb-3">
+              Welcome to the Hawaii LFO Calculator
+            </h1>
+         </v-col>
+        </v-row>
+        <v-row>
+          <v-form ref="form">
             <v-spacer></v-spacer>
-      </v-form>
-    </v-row>
-    <v-row>
-      <v-spacer></v-spacer>
-      <v-col cols="4">
-        <v-btn 
-          type="submit" 
-          color="primary" 
-          @submit.prevent="onSubmit"
-        >
-          Submit
-        </v-btn>
-      </v-col>
-      <v-spacer></v-spacer>
-  </v-row>
-  </v-container>
-</v-main>
+            <v-col cols="10">
+                <v-autocomplete
+                    v-model="charges"
+                    :disabled="isUpdating"
+                    :items="regulations"
+                    filled
+                    chips
+                    clearable
+                    deletable-chips
+                    multiple
+                    color="blue-grey lighten-2"
+                    label="Select one or more charges to evaluate"
+                    item-text="regulation"
+                    item-value="section"
+                >
+                  <template v-slot:selection="data">
+                    <v-chip
+                      v-bind="data.attrs"
+                      :input-value="data.selected"
+                      close
+                      @click="data.select"
+                      @click:close="remove(data.item)"
+                    >
+                      {{ data.item.regulation }}
+                    </v-chip>
+                  </template>
+                  <template v-slot:item="data">
+                    <template
+                      v-if="typeof data.item !== 'object'"
+                    >
+                      <v-list-item-content v-text="data.item"></v-list-item-content>
+                    </template>
+                    <template v-else>
+                      <v-list-item-content>
+                        <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
+                        <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
+                  </template>
+                </v-autocomplete>
+              </v-col>
+              <v-spacer></v-spacer>
+          </v-form>
+        </v-row>
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-col cols="4">
+            <v-btn
+              type="submit"
+              color="primary"
+              v-on:click="computeNeeds"
+            >
+              Submit
+            </v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+        <v-row>
+          <v-col v-if="relevant.length > 0">
+          Regulations relevant for these violations:
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -107,7 +112,9 @@ export default {
       autoUpdate: true,
       charges: [],
       isUpdating: false,
-      regulations: []
+      regulations: [],
+      relevant: [],
+      needs: []
     }
   },
   async created() {
@@ -133,7 +140,7 @@ export default {
       if (index >= 0)
         this.regulations.splice(index, 1)
     },
-    onSubmit() {
+    computeNeeds() {
       console.log(this.charges);
     },
   },
