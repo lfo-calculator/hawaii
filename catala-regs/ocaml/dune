@@ -6,3 +6,18 @@
  (preprocess
   (pps js_of_ocaml-ppx))
  (libraries str catala.runtime yojson js_of_ocaml))
+
+
+(env
+  (dev (flags
+    :standard
+    -safe-string
+    -g
+    -w @1..68-42-41-4
+  ))
+  (release (flags
+    :standard
+    -safe-string
+    -g
+    -w @1..68-42-41-4
+  )))

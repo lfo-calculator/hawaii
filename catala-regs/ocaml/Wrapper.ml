@@ -118,6 +118,38 @@ and need =
   | Priors
   | IsConstruction
 
+(* TODO: rollout actual parsers *)
+let section_leq s1 s2 =
+  (* 291C-11.3 *)
+  let parse_section s =
+    let i = String.index s '-' in
+    let l = String.sub s 0 i in
+    let r = String.sub s (i + 1) (String.length s - i - 1) in
+    let l1, l2 =
+      let maybe_letter = String.get l (String.length l - 1) in
+      if 'A' <= maybe_letter && maybe_letter <= 'Z' then
+        int_of_string (String.sub l 0 (String.length l - 1)), maybe_letter
+      else
+        int_of_string l, '0'
+    in
+    let r1, r2 =
+      try
+        let i = String.index r '.' in
+        int_of_string (String.sub r 0 i), int_of_string (String.sub r (i + 1) (String.length r - i - 1))
+      with Not_found ->
+        int_of_string r, 0
+    in
+    l1, l2, r1, r2
+  in
+  parse_section s1 <= parse_section s2
+
+
+let string_of_applies = function
+  | Self -> "self"
+  | All -> "*"
+  | Ranges rs ->
+      String.concat "," (List.map (fun (lower, upper) -> Printf.sprintf "%s..%s" lower upper) rs)
+
 let assert_string = function `String s -> s | _ -> failwith "not a string"
 let assert_list = function `List s -> s | _ -> failwith "not a list"
 let assert_assoc = function `Assoc s -> s | _ -> failwith "not an assoc"
@@ -154,18 +186,25 @@ let parse_applies (applies: Yojson.Safe.t) =
 let parse_regulation (r: Yojson.Safe.t) =
   let r = assert_assoc r in
   let section = assert_string (List.assoc "section" r) in
-  let needs = parse_needs (List.assoc "needs" r) in
-  let applies = parse_applies (List.assoc "applies" r) in
-  match applies with
-  | None -> section, None
-  | Some applies -> section, Some { applies; needs; section }
+  try
+    let needs = match List.assoc_opt "needs" r with
+      | Some needs -> parse_needs needs
+      | None -> []
+    in
+    let applies = parse_applies (List.assoc "applies" r) in
+    match applies with
+    | None -> Some (section, None)
+    | Some applies -> Some (section, Some { applies; needs; section })
+  with e ->
+    debug "Cannot parse regulation %s: %s" section (Printexc.to_string e);
+    None
 
 let parse_json (json: Yojson.Safe.t) =
-  let regs = Yojson.Safe.from_string Data.json in
+  let regs = json in
   let regs = assert_assoc regs in
   let regs = List.assoc "regulations" regs in
   let regs = assert_list regs in
-  List.map parse_regulation regs
+  List.filter_map parse_regulation regs
 
 (* This contains only regulations that have computational content, i.e. those
    for which [applies] is not "0". *)
@@ -187,14 +226,15 @@ let applies reg infraction =
       true
   | Ranges rs ->
       let applies (lower, upper) =
-        (* Lexicographic comparison; TODO this is bad, do better... *)
-        lower <= infraction && infraction <= upper
+        section_leq lower infraction && section_leq infraction upper
       in
       List.exists applies rs
 
 let init (json: Yojson.Safe.t) =
+  debug "[init] parsing JSON object";
   let json = parse_json json in
   (* Fill the section (e.g. "286-136") --> regulation (e.g. { applies = "..." }) mapping. *)
+  debug "[init] initializing mapping from sections to regulation objects";
   List.iter (fun (s, r) ->
     match r with
     | Some r ->
@@ -208,13 +248,16 @@ let init (json: Yojson.Safe.t) =
         ()
   ) json;
   (* Fill the violation (e.g. "286-135") --> sections (e.g. "286-136"; "607-4") mapping. *)
+  debug "[init] initializing mapping from violations to relevant sections";
   List.iter (fun (violation, r) ->
     match r with
     | None ->
         let relevant = Hashtbl.fold (fun section reg acc ->
           if applies reg violation then
+            let _ = debug "%s (%s) applies to %s" section reg.section violation in
             section :: acc
           else
+            let _ = debug "%s (%s, %s) DOES NOT apply to %s" section (string_of_applies reg.applies) reg.section violation in
             acc
         ) regulation_of_section [] in
         Hashtbl.add sections_of_violation violation relevant
@@ -405,4 +448,5 @@ let _ =
   end)
 
 let _ =
+  init (Yojson.Safe.from_string Data.json);
   print_endline "[Wrapper.ml] loaded"
