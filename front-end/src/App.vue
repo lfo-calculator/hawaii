@@ -119,21 +119,23 @@ export default {
       console.error(e)
     }
   },
-      watch: {
-      isUpdating (val) {
-        if (val) {
-          setTimeout(() => (this.isUpdating = false), 3000)
-        }
-      },
+  watch: {
+    isUpdating (val) {
+      if (val) {
+        setTimeout(() => (this.isUpdating = false), 3000)
+      }
     },
+  },
 
-    methods: {
-      remove (item) {
-        const index = this.regulations.indexOf(item.regulation)
-        if (index >= 0) this.regulations.splice(index, 1)
-      },
-      onSubmit() {
-        console.log( this.charges );
-      },},
+  methods: {
+    remove (item) {
+      const index = this.regulations.indexOf(item.regulation)
+      if (index >= 0)
+        this.regulations.splice(index, 1)
+    },
+    onSubmit() {
+      console.log(this.charges);
+    },
+  },
 }
 </script>
