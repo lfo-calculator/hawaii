@@ -32,20 +32,22 @@
             </h1>
          </v-col>
         </v-row>
+        <v-form @submit.prevent="computeNeeds">
         <v-row>
-          <v-form ref="form">
             <v-spacer></v-spacer>
             <v-col cols="10">
                 <v-autocomplete
                     v-model="charges"
                     :disabled="isUpdating"
                     :items="regulations"
+                    :rules="chargeSelectorRules"
+                    required
                     filled
                     chips
                     clearable
                     deletable-chips
                     multiple
-                    color="blue-grey lighten-2"
+                    color="primary"
                     label="Select one or more charges to evaluate"
                     item-text="regulation"
                     item-value="section"
@@ -77,21 +79,22 @@
                 </v-autocomplete>
               </v-col>
               <v-spacer></v-spacer>
-          </v-form>
         </v-row>
         <v-row>
           <v-spacer></v-spacer>
-          <v-col cols="4">
+          <v-col cols="10">
+            <v-spacer></v-spacer>
             <v-btn
               type="submit"
               color="primary"
-              v-on:click="computeNeeds"
             >
               Submit
             </v-btn>
+            <v-spacer></v-spacer>
           </v-col>
           <v-spacer></v-spacer>
         </v-row>
+        </v-form>
         <v-row>
           <v-col v-if="relevant.length > 0">
           Regulations relevant for these violations:
@@ -114,6 +117,9 @@ export default {
       isUpdating: false,
       regulations: [],
       relevant: [],
+      chargeSelectorRules: [
+        value => !!value || 'Please select at least one regulation'
+      ],
       needs: []
     }
   },
