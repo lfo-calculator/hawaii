@@ -95,17 +95,27 @@
           <v-spacer></v-spacer>
         </v-row>
         </v-form>
-        <v-row>
-          <v-row v-if="relevant.length > 0">
-          Regulations relevant for these violations:
-          </v-row>
-          <v-row v-for="r in relevant" v-bind:key="r.charge">
-            For {{ r.charge }}:
-            <span v-for="s in r.sections" v-bind:key="s">
-              {{ s }}
-            </span>
-          </v-row>
-        </v-row>
+        <v-card
+          class="mx-auto"
+          max-width="600"
+          tile
+          v-if="relevant.length > 0"
+        >
+          <v-card-title>
+            Regulations relevant for these violations:
+          </v-card-title>
+          <v-list-item two-line v-for="r in relevant" v-bind:key="r.charge">
+            <v-list-item-content>
+              <v-list-item-title>{{ r.charge }} <a :href="r.url">({{ r.title }})</a></v-list-item-title>
+              <v-list-item-subtitle>
+                <span v-for="(s, i) in r.sections" v-bind:key="s.charge">
+                  <span v-if="i != 0">, </span>
+                  {{ s.charge }} <a :href="s.url">({{ s.title }})</a>
+                </span>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
       </v-container>
     </v-main>
   </v-app>
@@ -123,8 +133,9 @@ export default {
       charges: [],
       isUpdating: false,
       regulations: [],
-      relevant: [{ charge: "test-charge", sections: [ "test-section1",
-      "test-section2" ]}],
+      relevant: [
+        // { charge: "test-charge", sections: [ "test-section1", "test-section2" ]}
+      ],
       needs: {
         age: false,
         priors: false,
@@ -159,14 +170,11 @@ export default {
         this.regulations.splice(index, 1)
     },
     computeNeeds() {
+      let this_ = this;
       this.relevant = [];
       this.charges.forEach(c => {
-        let { sections, needs } = lfo.relevant(c);
-        this.relevant.push({
-          charge: c,
-          sections: sections
-        });
-        needs.forEach(x => (needs[x] = true));
+        this.relevant.push(lfo.relevant(c));
+        c.needs.forEach(x => (this.needs[x] = true));
       });
     },
   },

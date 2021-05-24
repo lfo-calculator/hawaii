@@ -1,11 +1,15 @@
 # All of these ML files are produced by the build
+SHELL	= /bin/bash
 ML	= main.ml config.ml conversions.ml data.ml
 CATALA	?= catala --language=en
 JS	= _build/default/wrapper.bc.js
 JSON	= ../../data/hawaii-regulations.json
 SCRIPT	= ../scratch/mk_statutes.ml
+SED	= $(shell which gsed &>/dev/null && echo "gsed" || echo "sed")
+DATE	= $(shell which gdate &>/dev/null && echo "gdate" || echo "date")
 
 all: $(JS)
+	$(SED) -i "s/.*version.*$$/  \"version\": \"0.0.$(shell $(DATE) +'%4Y%m%d%H%M')\",/g" package.json
 
 .PRECIOUS: $(ML)
 

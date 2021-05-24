@@ -100,6 +100,8 @@ type regulation = {
   applies: applies;
   needs: needs;
   section: string;
+  title: string;
+  url: string;
 }
 
 and applies =
@@ -186,6 +188,8 @@ let parse_applies (applies: Yojson.Safe.t) =
 let parse_regulation (r: Yojson.Safe.t) =
   let r = assert_assoc r in
   let section = assert_string (List.assoc "section" r) in
+  let title = assert_string (List.assoc "regulation" r) in
+  let url = assert_string (List.assoc "reg_url" r) in
   try
     let needs = match List.assoc_opt "needs" r with
       | Some needs -> parse_needs needs
@@ -194,7 +198,7 @@ let parse_regulation (r: Yojson.Safe.t) =
     let applies = parse_applies (List.assoc "applies" r) in
     match applies with
     | None -> Some (section, None)
-    | Some applies -> Some (section, Some { applies; needs; section })
+    | Some applies -> Some (section, Some { applies; needs; section; title; url })
   with e ->
     debug "Cannot parse regulation %s: %s" section (Printexc.to_string e);
     None
@@ -279,7 +283,7 @@ let relevant violation =
   let needs = List.fold_left (fun acc section ->
     NS.union acc (NS.of_list (lookup section).needs)
   ) NS.empty sections in
-  sections, (List.of_seq (NS.to_seq needs))
+  List.map lookup sections, (List.of_seq (NS.to_seq needs))
 
 
 (***********************
@@ -428,10 +432,19 @@ let mk_need n =
   | IsConstruction -> "is_construction"
   )
 
-let mk_relevant (r: string list * needs) =
+let mk_relevant (violation: regulation) (r: regulation list * needs) =
   object%js
-    val sections = Js.array (Array.of_list (List.map Js.string (fst r)))
+    val sections = Js.array (Array.of_list (List.map (fun r ->
+      object%js
+        val charge = Js.string r.section
+        val url = Js.string r.url
+        val title = Js.string r.title
+      end
+    ) (fst r)))
     val needs = Js.array (Array.of_list (List.map mk_need (snd r)))
+    val title = violation.title
+    val url = violation.url
+    val charge = violation.section
   end
 
 let _ =
@@ -444,7 +457,7 @@ let _ =
       mk_outcome outcome
 
     method relevant (input: Js.js_string Js.t): _ Js.t =
-      mk_relevant (relevant (Js.to_string input))
+      mk_relevant (lookup (Js.to_string input)) (relevant (Js.to_string input))
   end)
 
 let _ =
