@@ -33,67 +33,67 @@
          </v-col>
         </v-row>
         <v-form @submit.prevent="computeNeeds">
-        <v-row>
+          <v-row>
             <v-spacer></v-spacer>
             <v-col cols="10">
-                <v-autocomplete
-                    v-model="charges"
-                    :disabled="isUpdating"
-                    :items="regulations"
-                    :rules="chargeSelectorRules"
-                    required
-                    filled
-                    chips
-                    clearable
-                    deletable-chips
-                    multiple
-                    color="primary"
-                    label="Select one or more charges to evaluate"
-                    item-text="regulation"
-                    item-value="section"
-                >
-                  <template v-slot:selection="data">
-                    <v-chip
-                      v-bind="data.attrs"
-                      :input-value="data.selected"
-                      close
-                      @click="data.select"
-                      @click:close="remove(data.item)"
-                    >
-                      {{ data.item.regulation }}
-                    </v-chip>
+              <v-autocomplete
+                  v-model="charges"
+                  :disabled="isUpdating"
+                  :items="regulations"
+                  :rules="chargeSelectorRules"
+                  required
+                  filled
+                  chips
+                  clearable
+                  deletable-chips
+                  multiple
+                  color="primary"
+                  label="Select one or more charges to evaluate"
+                  item-text="regulation"
+                  item-value="section"
+              >
+                <template v-slot:selection="data">
+                  <v-chip
+                    v-bind="data.attrs"
+                    :input-value="data.selected"
+                    close
+                    @click="data.select"
+                    @click:close="remove(data.item)"
+                  >
+                    {{ data.item.regulation }}
+                  </v-chip>
+                </template>
+                <template v-slot:item="data">
+                  <template
+                    v-if="typeof data.item !== 'object'"
+                  >
+                    <v-list-item-content v-text="data.item"></v-list-item-content>
                   </template>
-                  <template v-slot:item="data">
-                    <template
-                      v-if="typeof data.item !== 'object'"
-                    >
-                      <v-list-item-content v-text="data.item"></v-list-item-content>
-                    </template>
-                    <template v-else>
-                      <v-list-item-content>
-                        <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
-                        <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
-                      </v-list-item-content>
-                    </template>
+                  <template v-else>
+                    <v-list-item-content>
+                      <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
+                      <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
+                    </v-list-item-content>
                   </template>
-                </v-autocomplete>
-              </v-col>
+                </template>
+              </v-autocomplete>
+            </v-col>
+            <v-spacer></v-spacer>
+          </v-row>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-col cols="10">
               <v-spacer></v-spacer>
-        </v-row>
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-col cols="10">
+              <v-btn
+                type="submit"
+                color="primary"
+              >
+                Submit
+              </v-btn>
+              <v-spacer></v-spacer>
+            </v-col>
             <v-spacer></v-spacer>
-            <v-btn
-              type="submit"
-              color="primary"
-            >
-              Submit
-            </v-btn>
-            <v-spacer></v-spacer>
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-row>
+          </v-row>
         </v-form>
         <v-card
           class="mx-auto"
@@ -102,21 +102,40 @@
           v-if="relevant.length > 0"
         >
           <v-card-title>
-            Regulations relevant for these violations:
+            Relevant regulations:
           </v-card-title>
           <v-list-item two-line v-for="r in relevant" v-bind:key="r.charge">
             <v-list-item-content>
               <v-list-item-title>
-                {{ r.title }} <a :href="r.url">({{ r.charge }})</a>
+                For {{ r.title }} <a target="_blank" :href="r.url">({{ r.charge }})</a>:
               </v-list-item-title>
               <v-list-item-subtitle>
                 <span v-for="(s, i) in r.sections" v-bind:key="s.charge">
                   <span v-if="i != 0">, </span>
-                  {{ s.charge }} <a :href="s.url">({{ s.title }})</a>
+                  {{ s.charge }} <a target="_blank" :href="s.url">({{ s.title }})</a>
                 </span>
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
+        </v-card>
+        <v-spacer />
+        <v-card
+          class="mx-auto"
+          max-width="600"
+          tile
+          v-if="Object.keys(needs).length > 0"
+        >
+          <v-card-title>
+            We need more information!
+          </v-card-title>
+          <v-form>
+            <v-text-field
+              value=""
+              label="Age of the defendant"
+              v-if="needs.age"
+            ></v-text-field>
+            <span v-if="needs.priors">We also need prior offenses</span>
+          </v-form>
         </v-card>
       </v-container>
     </v-main>
@@ -138,11 +157,7 @@ export default {
       relevant: [
         // { charge: "test-charge", sections: [ "test-section1", "test-section2" ]}
       ],
-      needs: {
-        age: false,
-        priors: false,
-        is_construction: false
-      },
+      needs: {},
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
       ]
@@ -172,8 +187,8 @@ export default {
         this.regulations.splice(index, 1)
     },
     computeNeeds() {
-      let this_ = this;
       this.relevant = [];
+      this.needs = {};
       this.charges.forEach(c => {
         let r = lfo.relevant(c);
         this.relevant.push(r);
