@@ -96,9 +96,15 @@
         </v-row>
         </v-form>
         <v-row>
-          <v-col v-if="relevant.length > 0">
+          <v-row v-if="relevant.length > 0">
           Regulations relevant for these violations:
-          </v-col>
+          </v-row>
+          <v-row v-for="r in relevant" v-bind:key="r.charge">
+            For {{ r.charge }}:
+            <span v-for="s in r.sections" v-bind:key="s">
+              {{ s }}
+            </span>
+          </v-row>
         </v-row>
       </v-container>
     </v-main>
@@ -107,6 +113,7 @@
 
 <script>
 import axios from 'axios';
+import lfo from 'hawaii-lfo';
 
 export default {
   name: 'App',
@@ -116,11 +123,16 @@ export default {
       charges: [],
       isUpdating: false,
       regulations: [],
-      relevant: [],
+      relevant: [{ charge: "test-charge", sections: [ "test-section1",
+      "test-section2" ]}],
+      needs: {
+        age: false,
+        priors: false,
+        is_construction: false
+      },
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
-      ],
-      needs: []
+      ]
     }
   },
   async created() {
@@ -147,7 +159,15 @@ export default {
         this.regulations.splice(index, 1)
     },
     computeNeeds() {
-      console.log(this.charges);
+      this.relevant = [];
+      this.charges.forEach(c => {
+        let { sections, needs } = lfo.relevant(c);
+        this.relevant.push({
+          charge: c,
+          sections: sections
+        });
+        needs.forEach(x => (needs[x] = true));
+      });
     },
   },
 }

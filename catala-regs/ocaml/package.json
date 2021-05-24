@@ -1,0 +1,19 @@
+{
+  "name": "hawaii-lfo",
+  "version": "0.0.1",
+  "description": "A set of Catala-generated implementations for various parts of Hawaii State Regulations",
+  "main": "_build/default/wrapper.bc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfo-calculator/hawaii.git"
+  },
+  "author": "Jonathan Protzenko <jonathan.protzenko@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lfo-calculator/hawaii/issues"
+  },
+  "homepage": "https://github.com/lfo-calculator/hawaii#readme"
+}
