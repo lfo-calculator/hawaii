@@ -98,6 +98,7 @@ let computation_of_reg: (section * computation) list = [
 type metadata = {
   title: string;
   url: string;
+  violation: bool;
 }
 
 (* Our structured representation of a regulation. *)
@@ -158,6 +159,7 @@ let string_of_applies = function
 let assert_string = function `String s -> s | _ -> failwith "not a string"
 let assert_list = function `List s -> s | _ -> failwith "not a list"
 let assert_assoc = function `Assoc s -> s | _ -> failwith "not an assoc"
+let assert_bool = function `Bool s -> s | _ -> failwith "not an bool"
 
 let find haystack needle =
   let r = Str.regexp (Str.quote needle) in
@@ -193,7 +195,8 @@ let parse_regulation (r: Yojson.Safe.t) =
   let section = assert_string (List.assoc "section" r) in
   let title = assert_string (List.assoc "regulation" r) in
   let url = assert_string (List.assoc "reg_url" r) in
-  let metadata = { title; url } in
+  let violation = assert_bool (List.assoc "violation" r) in
+  let metadata = { title; url; violation } in
   try
     let needs = match List.assoc_opt "needs" r with
       | Some needs -> parse_needs needs
@@ -264,19 +267,17 @@ let init (json: Yojson.Safe.t) =
   ) json;
   (* Fill the violation (e.g. "286-135") --> sections (e.g. "286-136"; "607-4") mapping. *)
   debug "[init] initializing mapping from violations to relevant sections";
-  List.iter (fun (violation, r, _) ->
-    match r with
-    | None ->
-        let relevant = Hashtbl.fold (fun section reg acc ->
-          if applies reg violation then
-            (* let _ = debug "%s (%s) applies to %s" section reg.section violation in *)
-            section :: acc
-          else
-            (* let _ = debug "%s (%s, %s) DOES NOT apply to %s" section (string_of_applies reg.applies) reg.section violation in *)
-            acc
-        ) regulation_of_section [] in
-        Hashtbl.add sections_of_violation violation relevant
-    | Some _ -> ()
+  List.iter (fun (violation, _, m) ->
+    if m.violation then
+      let relevant = Hashtbl.fold (fun section reg acc ->
+        if applies reg violation then
+          (* let _ = debug "%s (%s) applies to %s" section reg.section violation in *)
+          section :: acc
+        else
+          (* let _ = debug "%s (%s, %s) DOES NOT apply to %s" section (string_of_applies reg.applies) reg.section violation in *)
+          acc
+      ) regulation_of_section [] in
+      Hashtbl.add sections_of_violation violation relevant
   ) json
 
 let lookup s =
@@ -284,6 +285,13 @@ let lookup s =
     Hashtbl.find regulation_of_section s
   with Not_found as e ->
     debug "Missing entry in the section --> regulation table: %s" s;
+    raise e
+
+let lookup_violation s =
+  try
+    Hashtbl.find sections_of_violation s
+  with Not_found as e ->
+    debug "Missing entry in the violation --> relevant sections table: %s" s;
     raise e
 
 let lookup_metadata s =
@@ -301,7 +309,7 @@ end)
 (* [relevant r1] returns the set of regulations [rs], such that for each [r] in
    [rs], we have [applies r r1] *)
 let relevant violation =
-  let sections = Hashtbl.find sections_of_violation violation in
+  let sections = lookup_violation violation in
   let needs = List.fold_left (fun acc section ->
     NS.union acc (NS.of_list (lookup section).needs)
   ) NS.empty sections in

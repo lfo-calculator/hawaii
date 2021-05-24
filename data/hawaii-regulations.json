@@ -4,56 +4,56 @@
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-1/",
     "section": "286-1",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Definitions",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-2/",
     "section": "286-2",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Powers and duties of the governor",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-3/",
     "section": "286-3",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Medical advisory board",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-4_1/",
     "section": "286-4.1",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "State highway safety council",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-5/",
     "section": "286-5",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "County traffic or highway safety councils",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-6/",
     "section": "286-6",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "County highway safety programs",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-7/",
     "section": "286-7",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Rules and regulations",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-8/",
     "section": "286-8",
     "applies": "291C-31..291C-36",
-    "violation":"false",
+    "violation":false,
     "needs": [ "is_construction" ]
   },
   {
@@ -61,56 +61,56 @@
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-9/",
     "section": "286-9",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Arrest or citation",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-10/",
     "section": "286-10",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "All-terrain vehicle; utility-terrain vehicle; permitted use",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-12/",
     "section": "286-12",
     "applies": "self",
-    "violation":"true"
+    "violation":true
   },
   {
     "regulation": "Powers and duties",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-16/",
     "section": "286-16",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Enforcement",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-17/",
     "section": "286-17",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Rules",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-18/",
     "section": "286-18",
     "applies": "0",
-    "violation":"false"
+    "violation":false
   },
   {
     "regulation": "Vehicles and mopeds without required equipment or in unsafe condition",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-21/",
     "section": "286-21",
     "applies": "0",
-    "violation":"true"
+    "violation":true
   },
   {
     "regulation": "Inspection by officers of the police department",
     "reg_url": "https://sammade.github.io/aloha-io/title-17/chapter-286/section-286-22/",
     "section": "286-22",
     "applies": "0",
-    "violation":"true"
+    "violation":true
   },
   {
     "regulation": "Sales of motor vehicle equipment; approval and identification required; prohibitions on use",
