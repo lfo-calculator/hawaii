@@ -95,13 +95,16 @@ let computation_of_reg: (section * computation) list = [
     out.penalties_out);
 ]
 
+type metadata = {
+  title: string;
+  url: string;
+}
+
 (* Our structured representation of a regulation. *)
 type regulation = {
   applies: applies;
   needs: needs;
   section: string;
-  title: string;
-  url: string;
 }
 
 and applies =
@@ -190,6 +193,7 @@ let parse_regulation (r: Yojson.Safe.t) =
   let section = assert_string (List.assoc "section" r) in
   let title = assert_string (List.assoc "regulation" r) in
   let url = assert_string (List.assoc "reg_url" r) in
+  let metadata = { title; url } in
   try
     let needs = match List.assoc_opt "needs" r with
       | Some needs -> parse_needs needs
@@ -197,8 +201,8 @@ let parse_regulation (r: Yojson.Safe.t) =
     in
     let applies = parse_applies (List.assoc "applies" r) in
     match applies with
-    | None -> Some (section, None)
-    | Some applies -> Some (section, Some { applies; needs; section; title; url })
+    | None -> Some (section, None, metadata)
+    | Some applies -> Some (section, Some { applies; needs; section }, metadata)
   with e ->
     debug "Cannot parse regulation %s: %s" section (Printexc.to_string e);
     None
@@ -213,6 +217,9 @@ let parse_json (json: Yojson.Safe.t) =
 (* This contains only regulations that have computational content, i.e. those
    for which [applies] is not "0". *)
 let regulation_of_section: (string, regulation) Hashtbl.t =
+  Hashtbl.create 41
+
+let metadata_of_section: (string, metadata) Hashtbl.t =
   Hashtbl.create 41
 
 let sections_of_violation =
@@ -239,7 +246,7 @@ let init (json: Yojson.Safe.t) =
   let json = parse_json json in
   (* Fill the section (e.g. "286-136") --> regulation (e.g. { applies = "..." }) mapping. *)
   debug "[init] initializing mapping from sections to regulation objects";
-  List.iter (fun (s, r) ->
+  List.iter (fun (s, r, _) ->
     match r with
     | Some r ->
         Hashtbl.add regulation_of_section s r;
@@ -251,25 +258,40 @@ let init (json: Yojson.Safe.t) =
     | None ->
         ()
   ) json;
+  debug "[init] initializing metadata";
+  List.iter (fun (s, _, m) ->
+    Hashtbl.add metadata_of_section s m
+  ) json;
   (* Fill the violation (e.g. "286-135") --> sections (e.g. "286-136"; "607-4") mapping. *)
   debug "[init] initializing mapping from violations to relevant sections";
-  List.iter (fun (violation, r) ->
+  List.iter (fun (violation, r, _) ->
     match r with
     | None ->
         let relevant = Hashtbl.fold (fun section reg acc ->
           if applies reg violation then
-            let _ = debug "%s (%s) applies to %s" section reg.section violation in
+            (* let _ = debug "%s (%s) applies to %s" section reg.section violation in *)
             section :: acc
           else
-            let _ = debug "%s (%s, %s) DOES NOT apply to %s" section (string_of_applies reg.applies) reg.section violation in
+            (* let _ = debug "%s (%s, %s) DOES NOT apply to %s" section (string_of_applies reg.applies) reg.section violation in *)
             acc
         ) regulation_of_section [] in
         Hashtbl.add sections_of_violation violation relevant
     | Some _ -> ()
   ) json
 
-let lookup =
-  Hashtbl.find regulation_of_section
+let lookup s =
+  try
+    Hashtbl.find regulation_of_section s
+  with Not_found as e ->
+    debug "Missing entry in the section --> regulation table: %s" s;
+    raise e
+
+let lookup_metadata s =
+  try
+    Hashtbl.find metadata_of_section s
+  with Not_found as e ->
+    debug "Missing entry in the section --> metadata table: %s" s;
+    raise e
 
 module NS = Set.Make(struct
   type t = need
@@ -432,19 +454,21 @@ let mk_need n =
   | IsConstruction -> "is_construction"
   )
 
-let mk_relevant (violation: regulation) (r: regulation list * needs) =
+let mk_relevant (violation: string * metadata) (r: regulation list * needs) =
+  let section, m = violation in
   object%js
     val sections = Js.array (Array.of_list (List.map (fun r ->
+      let m = lookup_metadata r.section in
       object%js
         val charge = Js.string r.section
-        val url = Js.string r.url
-        val title = Js.string r.title
+        val url = Js.string m.url
+        val title = Js.string m.title
       end
     ) (fst r)))
     val needs = Js.array (Array.of_list (List.map mk_need (snd r)))
-    val title = violation.title
-    val url = violation.url
-    val charge = violation.section
+    val charge = Js.string section
+    val url = Js.string m.url
+    val title = Js.string m.title
   end
 
 let _ =
@@ -457,7 +481,8 @@ let _ =
       mk_outcome outcome
 
     method relevant (input: Js.js_string Js.t): _ Js.t =
-      mk_relevant (lookup (Js.to_string input)) (relevant (Js.to_string input))
+      let charge = Js.to_string input in
+      mk_relevant (charge, lookup_metadata charge) (relevant (Js.to_string input))
   end)
 
 let _ =

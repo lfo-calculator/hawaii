@@ -106,7 +106,9 @@
           </v-card-title>
           <v-list-item two-line v-for="r in relevant" v-bind:key="r.charge">
             <v-list-item-content>
-              <v-list-item-title>{{ r.charge }} <a :href="r.url">({{ r.title }})</a></v-list-item-title>
+              <v-list-item-title>
+                {{ r.title }} <a :href="r.url">({{ r.charge }})</a>
+              </v-list-item-title>
               <v-list-item-subtitle>
                 <span v-for="(s, i) in r.sections" v-bind:key="s.charge">
                   <span v-if="i != 0">, </span>
@@ -173,8 +175,9 @@ export default {
       let this_ = this;
       this.relevant = [];
       this.charges.forEach(c => {
-        this.relevant.push(lfo.relevant(c));
-        c.needs.forEach(x => (this.needs[x] = true));
+        let r = lfo.relevant(c);
+        this.relevant.push(r);
+        r.needs.forEach(x => (this.needs[x] = true));
       });
     },
   },
