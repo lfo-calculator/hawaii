@@ -1,7 +1,7 @@
 (executable
  (name wrapper)
  (modes byte js)
- (modules Wrapper main config conversions data)
+ (modules Wrapper main conversions data)
  (public_name hawaii_lfo_web)
  (preprocess
   (pps js_of_ocaml-ppx))

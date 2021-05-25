@@ -1,6 +1,6 @@
 # All of these ML files are produced by the build
 SHELL	= /bin/bash
-ML	= main.ml config.ml conversions.ml data.ml
+ML	= main.ml conversions.ml data.ml
 CATALA	?= catala --language=en
 JS	= _build/default/wrapper.bc.js
 JSON	= ../../data/hawaii-regulations.json
@@ -10,9 +10,6 @@ all: $(JS)
 	sed -i.bak "s/.*version.*$$/  \"version\": \"0.0.$(shell date +'%Y%m%d%H%M')\",/g" package.json
 
 .PRECIOUS: $(ML)
-
-config.ml:
-	echo "let base = \"$(shell pwd)\";;" > $@
 
 data.ml: $(JSON)
 	echo "let json = {|" > $@
