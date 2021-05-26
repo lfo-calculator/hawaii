@@ -57,7 +57,7 @@ type infraction = violation
 type computation =
   | N of (unit -> penalties)
   | V of (violation -> penalties)
-  | ODP of (offense -> defendant -> bool -> penalties)
+  | VDP of (violation -> defendant -> bool -> penalties)
 
 (* Associative list that, given a section (whose [applies] field is not [0]),
    returns the corresponding computation. *)
@@ -72,9 +72,9 @@ let computation_of_reg: (section * computation) list = [
       penalties_in = H.no_input
     } in
     out.penalties_out);
-  "286-136", ODP (fun o d p ->
+  "286-136", VDP (fun v d p ->
     let out = s_286_136 {
-      offense_in = H.thunk o;
+      violation_in = H.thunk v;
       defendant_in = H.thunk d;
       max_fine_in = H.no_input;
       min_fine_in = H.no_input;
@@ -371,12 +371,12 @@ let call f infraction date age priors =
    [compute] captures the main logic: for each infraction, find the set of
    regulations that apply, feed the data into Catala, then collect the results.
    *)
-let compute (infractions: (string * date option) list) (age: int option) (priors: bool option): outcome =
-  List.map (fun (infraction, date) ->
+let compute (infractions: (string * bool option) list) (age: int option): outcome =
+  List.map (fun (infraction, has_priors) ->
     Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
       if applies (lookup regulation) infraction then begin
         debug "%s applies to %s" regulation infraction;
-        let p = call f infraction date age priors in
+        let p = call f infraction age has_priors in
         Some (regulation, p)
       end else
         None
@@ -439,17 +439,8 @@ let mk_relevant (relevant: relevant): _ Js.t =
       mk_needs (List.of_seq (NS.to_seq relevant.generic))
   end
 
-(* The [get_*] functions convert JS types to option-based types suitable for
-   [compute], above *)
-class type js_offense = object
-  method dateOf: Js.date Js.t Js.optdef Js.readonly_prop
-  method violation: Js.js_string Js.t Js.readonly_prop
-end
-
-let get_offense (o: js_offense Js.t) =
-  Js.to_string o##.violation,
-  Option.map H.catala_date_of_js_date (Js.Optdef.to_option o##.dateOf)
-
+(* Step 2: extract enough relevant information from the object above, now with
+   null fields filled out. *)
 class type js_input = object
   method violations: js_offense Js.t Js.js_array Js.t Js.readonly_prop
   method priors: js_offense Js.t Js.js_array Js.t Js.optdef Js.readonly_prop
