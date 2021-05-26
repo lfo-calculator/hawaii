@@ -47,18 +47,17 @@ let debug fmt =
 
 (* Here, we build a table that maps sections to their corresponding Catala
    function. *)
-type priors = offense array
 type penalties = penalty array
 type section = string
 type infraction = violation
 
 (* N: none
  * V: violation
- * OP: offense + defendant (priors + age) *)
+ * OP: offense + defendant + two priors in past five years *)
 type computation =
   | N of (unit -> penalties)
   | V of (violation -> penalties)
-  | OD of (offense -> defendant -> penalties)
+  | ODP of (offense -> defendant -> bool -> penalties)
 
 (* Associative list that, given a section (whose [applies] field is not [0]),
    returns the corresponding computation. *)
@@ -73,14 +72,14 @@ let computation_of_reg: (section * computation) list = [
       penalties_in = H.no_input
     } in
     out.penalties_out);
-  "286-136", OD (fun o d ->
+  "286-136", ODP (fun o d p ->
     let out = s_286_136 {
       offense_in = H.thunk o;
       defendant_in = H.thunk d;
       max_fine_in = H.no_input;
       min_fine_in = H.no_input;
       max_days_in = H.no_input;
-      priors_same_offense_in = H.no_input;
+      two_violations_past_five_years_in = H.thunk p;
       paragraph_b_applies_in = H.no_input;
       paragraph_c_applies_in = H.no_input;
       penalties_in = H.no_input
@@ -121,7 +120,7 @@ and needs =
 
 and need =
   | Age
-  | Priors
+  | TwoPriorsPastFiveYears
   | IsConstruction
 
 (* TODO: rollout actual parsers *)
@@ -169,7 +168,7 @@ let parse_need (need: Yojson.Safe.t) =
   let need = assert_string need in
   match need with
   | "age" -> Age
-  | "priors" -> Priors
+  | "two_priors_past_five_years" -> TwoPriorsPastFiveYears
   | "is_construction" -> IsConstruction
   | _ -> failwith ("Unknown value in the need field: " ^ need)
 
@@ -301,19 +300,50 @@ let lookup_metadata s =
     debug "Missing entry in the section --> metadata table: %s" s;
     raise e
 
+(************************************
+ * Computing required relevant info *
+ ************************************)
+
 module NS = Set.Make(struct
   type t = need
   let compare = compare
 end)
 
-(* [relevant r1] returns the set of regulations [rs], such that for each [r] in
-   [rs], we have [applies r r1] *)
+let is_generic = function
+  | IsConstruction -> true
+  | Age -> true
+  | TwoPriorsPastFiveYears -> false
+
+(* [relevant v] returns:
+ * - a set of /generic/ information required to compute the penalties associated
+ *   to violation v; generic information is provided once and for all, e.g. the
+ *   defendant's current age
+ * - an associative list of /contextual/ information that only make sense in the
+ *   context of violation [v], e.g. whether there were two identical violations
+ *   in the past five years; such contextual annotations come annotated with
+ *   their corresponding regulation *)
 let relevant violation =
   let sections = lookup_violation violation in
-  let needs = List.fold_left (fun acc section ->
-    NS.union acc (NS.of_list (lookup section).needs)
-  ) NS.empty sections in
-  List.map lookup sections, (List.of_seq (NS.to_seq needs))
+  let generic_needs, specific_needs = List.fold_left (fun (generic, specific) section ->
+    let regulation = lookup section in
+    let g, s = List.partition is_generic regulation.needs in
+    NS.union generic (NS.of_list g), (regulation, s) :: specific
+  ) (NS.empty, []) sections in
+  generic_needs, specific_needs
+
+type relevant = {
+  generic: NS.t;
+  contextual: (section * breakdown) list;
+}
+
+and breakdown = (regulation * needs) list
+
+let relevant_many violations: relevant =
+  let generic, contextual = List.fold_left (fun (generic, contextual) violation ->
+    let g, c = relevant violation in
+    NS.union g generic, (violation, c) :: contextual
+  ) (NS.empty, []) violations in
+  { generic; contextual }
 
 
 (***********************
@@ -332,16 +362,16 @@ let call f infraction date age priors =
   match f with
   | N f -> f ()
   | V f -> f infraction
-  | OD f ->
+  | ODP f ->
       let offense = { violation = infraction; date_of = must date } in
-      let defendant = { age = integer_of_int (must age); priors = must priors } in
-      f offense defendant
+      let defendant = { age = integer_of_int (must age) } in
+      f offense defendant (must priors)
 
 (* After the data has been converted from JS types to Catala representations,
    [compute] captures the main logic: for each infraction, find the set of
    regulations that apply, feed the data into Catala, then collect the results.
    *)
-let compute (infractions: (string * date option) list) (age: int option) (priors: priors option): outcome =
+let compute (infractions: (string * date option) list) (age: int option) (priors: bool option): outcome =
   List.map (fun (infraction, date) ->
     Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
       if applies (lookup regulation) infraction then begin
@@ -356,6 +386,58 @@ let compute (infractions: (string * date option) list) (age: int option) (priors
 (*******************
  * Interop with JS *
  *******************)
+
+let get_assoc (o: _ Js.t) =
+  let ks = Array.to_list (Js.to_array (Js.object_keys o)) in
+  List.map (fun k -> Js.to_string k, Js.Opt.to_option (Js.Unsafe.get o k)) ks
+
+let mk_assoc (kvs: (string * 'a option) list): _ Js.t =
+  let o = object%js end in
+  let o = Js.Unsafe.coerce o in
+  List.iter (fun (k, v) -> Js.Unsafe.set o k (Js.Opt.option v)) kvs;
+  o
+
+let mk_need n =
+  match n with
+  | Age -> "age"
+  | TwoPriorsPastFiveYears -> "two_priors_past_fives_years"
+  | IsConstruction -> "is_construction"
+
+let mk_needs ns: _ Js.t =
+  mk_assoc (List.map (fun n -> mk_need n, None) ns)
+
+(* Step 1: compute relevant information needed for a given set of violations *)
+let mk_relevant (relevant: relevant): _ Js.t =
+  object%js
+    val contextual =
+      (* { "286-135": { *)
+      mk_assoc (List.map (fun (v, reg_and_needs) ->
+        let m = lookup_metadata v in
+        v, Some (object%js
+          (* "title": "Renting motor vehicle to another" *)
+          val title = Js.string m.title;
+          val url = Js.string m.url;
+          (* "relevant": { *)
+          val relevant = mk_assoc (List.map (fun (r, needs) ->
+            let m = lookup_metadata r.section in
+            (* "286-135": { *)
+            r.section, Some (object%js
+              (* "title": "Penalties" *)
+              val title = Js.string m.title;
+              val url = Js.string m.url;
+              (* "needs": "two_priors_past_five_years" *)
+              val needs = mk_needs needs
+            end)
+            (* } *)
+          ) reg_and_needs)
+          (* } *)
+        end)
+      ) relevant.contextual)
+      (* }} *)
+
+    val needs =
+      mk_needs (List.of_seq (NS.to_seq relevant.generic))
+  end
 
 (* The [get_*] functions convert JS types to option-based types suitable for
    [compute], above *)
@@ -454,30 +536,6 @@ end
 
 let mk_outcome (o: outcome) =
   Js.array (Array.of_list (List.map (fun (v, ps) -> mk_one_outcome v ps) o))
-
-let mk_need n =
-  Js.string (match n with
-  | Age -> "age"
-  | Priors -> "priors"
-  | IsConstruction -> "is_construction"
-  )
-
-let mk_relevant (violation: string * metadata) (r: regulation list * needs) =
-  let section, m = violation in
-  object%js
-    val sections = Js.array (Array.of_list (List.map (fun r ->
-      let m = lookup_metadata r.section in
-      object%js
-        val charge = Js.string r.section
-        val url = Js.string m.url
-        val title = Js.string m.title
-      end
-    ) (fst r)))
-    val needs = Js.array (Array.of_list (List.map mk_need (snd r)))
-    val charge = Js.string section
-    val url = Js.string m.url
-    val title = Js.string m.title
-  end
 
 let _ =
   Js.export_all (object%js

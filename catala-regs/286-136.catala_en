@@ -9,14 +9,13 @@ declaration scope S_286_136:
 
   context offense content Offense
   context defendant content Defendant
+  context two_violations_past_five_years content boolean
 
   # Internal:
 
   context max_fine content money
   context min_fine content money
   context max_days content duration
-
-  context priors_same_offense content integer
 
   context paragraph_b_applies condition
   context paragraph_c_applies condition
@@ -80,13 +79,6 @@ scope S_286_136:
   # whether the defendant has two or more prior convictions for the same offense in
   # the preceding five-year period. 118 H. 259 (App.), 188 P.3d 773 (2008).
 
-  # TODO: need to figure out how years are defined
-  definition priors_same_offense equals
-    number for prior in defendant.priors of (
-     prior.violation = offense.violation and
-        prior.date_of +@ 5 year >=@ offense.date_of
-    )
-
   rule paragraph_b_applies under condition
     (offense.violation with pattern Section286_102 or
       offense.violation with pattern Section286_122 or
@@ -96,7 +88,7 @@ scope S_286_136:
       offense.violation with pattern Section286_133 or
       offense.violation with pattern Section286_134
     ) and
-    priors_same_offense >= 2 and
+    two_violations_past_five_years and
     not paragraph_c_applies
   consequence fulfilled
 

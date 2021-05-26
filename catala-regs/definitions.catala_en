@@ -8,8 +8,6 @@ declaration structure Offense:
   data violation content Violation
 
 declaration structure Defendant:
-  data priors content collection Offense
-  # A number of years
   data age content integer
 
 declaration enumeration Fund:

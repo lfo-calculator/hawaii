@@ -496,7 +496,7 @@
     "section": "286-136",
     "applies": "286-83..286-135",
     "violation": false,
-    "needs": [ "age", "priors" ]
+    "needs": [ "age", "two_priors_past_five_years" ]
   },
   {
     "regulation": "Reckless driving of vehicle or riding of animals; penalty",
