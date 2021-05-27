@@ -119,9 +119,7 @@ and needs =
   need list
 
 and need =
-  | Age
-  | TwoPriorsPastFiveYears
-  | IsConstruction
+  string
 
 (* TODO: rollout actual parsers *)
 let section_leq s1 s2 =
@@ -164,13 +162,7 @@ let find haystack needle =
   let r = Str.regexp (Str.quote needle) in
   Str.search_forward r haystack 0
 
-let parse_need (need: Yojson.Safe.t) =
-  let need = assert_string need in
-  match need with
-  | "age" -> Age
-  | "two_priors_past_five_years" -> TwoPriorsPastFiveYears
-  | "is_construction" -> IsConstruction
-  | _ -> failwith ("Unknown value in the need field: " ^ need)
+let parse_need = assert_string
 
 let parse_needs (needs: Yojson.Safe.t) =
   let needs = assert_list needs in
@@ -310,9 +302,12 @@ module NS = Set.Make(struct
 end)
 
 let is_generic = function
-  | IsConstruction -> true
-  | Age -> true
-  | TwoPriorsPastFiveYears -> false
+  | "is_construction" -> true
+  | "age" -> true
+  | "two_priors_past_fives_years" -> false
+  | x ->
+      debug "Unknown value for the `needs` field: %s" x;
+      raise Not_found
 
 (* [relevant v] returns:
  * - a set of /generic/ information required to compute the penalties associated
@@ -350,21 +345,33 @@ let relevant_many violations: relevant =
  * Computing penalties *
  ***********************)
 
+type need_ =
+  | Age of int
+  | TwoPriorsWithinPastFiveYears of bool
+  | IsConstruction of bool
+
+type needs_ =
+  need_ list
+
 (* We annotate each penalty with the regulation that justifies it. *)
 type outcome = (violation * (section * penalties) list) list
 
-let call f infraction age has_priors =
-  let must = function
-    | Some x -> x
-    | None -> failwith (Printf.sprintf "For %s -- got an empty option" infraction)
-  in
+let call f infraction generic_needs contextual_needs =
   let infraction = Conversions.statute_of_string infraction in
   match f with
   | N f -> f ()
   | V f -> f infraction
   | VDP f ->
-      let defendant = { age = integer_of_int (must age) } in
-      f infraction defendant (must has_priors)
+      let age = List.find_map
+        (function Age x -> Some x | _ -> None)
+        generic_needs
+      in
+      let has_priors = List.find_map
+        (function TwoPriorsWithinPastFiveYears x -> Some x | _ -> None)
+        contextual_needs
+      in
+      let defendant = { age = integer_of_int (Option.get age) } in
+      f infraction defendant (Option.get has_priors)
 
 (* After the data has been converted from JS types to Catala representations,
    [compute] captures the main logic: for each infraction, find the set of
@@ -373,12 +380,12 @@ let call f infraction age has_priors =
    TODO: bool option = has_priors -- introduce a data structure for generic and
    contextual information? with labels?
    *)
-let compute (infractions: (string * bool option) list) (age: int option): outcome =
-  List.map (fun (infraction, has_priors) ->
+let compute (infractions: (string * needs_) list) (generic: needs_): outcome =
+  List.map (fun (infraction, contextual_needs) ->
     Conversions.statute_of_string infraction, List.filter_map (fun (regulation, f) ->
       if applies (lookup regulation) infraction then begin
         debug "%s applies to %s" regulation infraction;
-        let p = call f infraction age has_priors in
+        let p = call f infraction generic contextual_needs in
         Some (regulation, p)
       end else
         None
@@ -399,14 +406,8 @@ let mk_assoc (kvs: (string * 'a option) list): _ Js.t =
   List.iter (fun (k, v) -> Js.Unsafe.set o k (Js.Opt.option v)) kvs;
   o
 
-let mk_need n =
-  match n with
-  | Age -> "age"
-  | TwoPriorsPastFiveYears -> "two_priors_past_fives_years"
-  | IsConstruction -> "is_construction"
-
 let mk_needs ns: _ Js.t =
-  mk_assoc (List.map (fun n -> mk_need n, None) ns)
+  mk_assoc (List.map (fun n -> n, None) ns)
 
 (* Step 1: compute relevant information needed for a given set of violations *)
 let mk_relevant (relevant: relevant): _ Js.t =
@@ -443,29 +444,32 @@ let mk_relevant (relevant: relevant): _ Js.t =
 
 (* Step 2: extract enough relevant information from the object above, now with
    null fields filled out. *)
-class type js_input = object
-  method violations: js_offense Js.t Js.js_array Js.t Js.readonly_prop
-  method priors: js_offense Js.t Js.js_array Js.t Js.optdef Js.readonly_prop
-  method age: int Js.optdef Js.readonly_prop
-end
+let get_need (kv: string * _ Js.t) =
+  let s, n = kv in
+  match s with
+  | "age" -> Age (Obj.magic n)
+  | "two_violations_past_five_years" -> TwoPriorsWithinPastFiveYears (Js.to_bool n)
+  | "is_construction" -> IsConstruction (Js.to_bool n)
+  | _ -> debug "Unknown need field from JS: %s" s; raise Not_found
+
+let get_needs o =
+  List.map get_need
+    (List.filter_map (fun (k, v) ->
+      match v with Some v -> Some (k, v) | None -> None
+    ) (get_assoc o##.needs))
 
 let get_input (o: _ Js.t) =
-  let needs = get_assoc o##.needs in
-  let age: int option = List.assoc "age" needs in
-  let contextual = get_assoc o##.contextual in
-  let contextual = List.map (fun (v, o) ->
-    let has_priors = o##.
-  
-  List.map get_offense (Array.to_list (Js.to_array o##.violations)),
-  Option.map (fun priors ->
-    Array.map (fun p ->
-      let v, d = get_offense p in
-      if d = None then
-        failwith (Printf.sprintf "For prior violation %s, no date provided!" v);
-      { violation = Conversions.statute_of_string v; date_of = Option.get d }
-    ) (Js.to_array priors)
-  ) (Js.Optdef.to_option o##.priors),
-  Js.Optdef.to_option o##.age
+  let generic_needs = get_needs o in
+  let sections = get_assoc o##.contextual in
+  let sections = List.map (fun (v, o) ->
+    let o = Option.get o in
+    let relevant = get_assoc o##.relevant in
+    (* In the object sent from OCaml to JS after the first phase, requirements
+       are grouped by regulation. We discard this grouping here. *)
+    let relevant = List.flatten (List.map (fun (_, o) -> get_needs (Option.get o)) relevant) in
+    v, relevant
+  ) sections in
+  sections, generic_needs
 
 (* The [mk_*] functions go in the other direction and embed the result of
    [compute] into suitable JS types *)
@@ -538,16 +542,16 @@ let mk_outcome (o: outcome) =
 
 let _ =
   Js.export_all (object%js
-    method computePenalties (input: js_input Js.t): _ Js.t =
+    method computePenalties (input: _ Js.t): _ Js.t =
       debug "[Wrapper.ml] computing penalties";
-      let violations, priors, age = get_input input in
+      let contextual, generic = get_input input in
       debug "[Wrapper.ml] input translated";
-      let outcome = compute violations age priors in
+      let outcome = compute contextual generic in
       mk_outcome outcome
 
-    method relevant (input: Js.js_string Js.t): _ Js.t =
-      let charge = Js.to_string input in
-      mk_relevant (charge, lookup_metadata charge) (relevant (Js.to_string input))
+    method relevant (input: Js.js_string Js.t Js.js_array Js.t): _ Js.t =
+      let input = List.map Js.to_string (Array.to_list (Js.to_array input)) in
+      mk_relevant (relevant_many input)
   end)
 
 let _ =
