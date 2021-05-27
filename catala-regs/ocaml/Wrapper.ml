@@ -304,7 +304,7 @@ end)
 let is_generic = function
   | "is_construction" -> true
   | "age" -> true
-  | "two_priors_past_fives_years" -> false
+  | "two_priors_past_five_years" -> false
   | x ->
       debug "Unknown value for the `needs` field: %s" x;
       raise Not_found
@@ -448,7 +448,7 @@ let get_need (kv: string * _ Js.t) =
   let s, n = kv in
   match s with
   | "age" -> Age (Obj.magic n)
-  | "two_violations_past_five_years" -> TwoPriorsWithinPastFiveYears (Js.to_bool n)
+  | "two_priors_past_five_years" -> TwoPriorsWithinPastFiveYears (Js.to_bool n)
   | "is_construction" -> IsConstruction (Js.to_bool n)
   | _ -> debug "Unknown need field from JS: %s" s; raise Not_found
 

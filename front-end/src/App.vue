@@ -95,48 +95,52 @@
             <v-spacer></v-spacer>
           </v-row>
         </v-form>
-        <v-card
-          class="mx-auto"
-          max-width="600"
-          tile
-          v-if="relevant.length > 0"
-        >
-          <v-card-title>
-            Relevant regulations:
-          </v-card-title>
-          <v-list-item two-line v-for="r in relevant" v-bind:key="r.charge">
-            <v-list-item-content>
-              <v-list-item-title>
-                For {{ r.title }} <a target="_blank" :href="r.url">({{ r.charge }})</a>:
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                <span v-for="(s, i) in r.sections" v-bind:key="s.charge">
-                  <span v-if="i != 0">, </span>
-                  {{ s.charge }} <a target="_blank" :href="s.url">({{ s.title }})</a>
-                </span>
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
-        <v-spacer />
-        <v-card
-          class="mx-auto"
-          max-width="600"
-          tile
-          v-if="Object.keys(needs).length > 0"
-        >
-          <v-card-title>
-            We need more information!
-          </v-card-title>
-          <v-form>
-            <v-text-field
-              value=""
-              label="Age of the defendant"
-              v-if="needs.age"
-            ></v-text-field>
-            <span v-if="needs.priors">We also need prior offenses</span>
-          </v-form>
-        </v-card>
+        <v-container v-if="relevant != null">
+          <v-card
+            class="mx-auto"
+            max-width="1000"
+            tile
+            v-if="Object.keys(relevant.needs).length > 0"
+          >
+            <v-card-title>
+              General-purpose information required:
+            </v-card-title>
+            <v-form>
+              <v-text-field
+                value=""
+                label="Age of the defendant"
+                v-if="'age' in relevant.needs"
+              ></v-text-field>
+            </v-form>
+          </v-card>
+          <v-card
+            class="mx-auto"
+            max-width="1000"
+            tile
+            v-for="(s, section) in relevant.contextual"
+            v-bind:key="section"
+          >
+            <v-card-title>
+              {{ s.title }} (<a target="_blank" :href="s.url">{{ section }}</a>)
+            </v-card-title>
+            <v-subheader>Relevant regulations:</v-subheader>
+            <v-form>
+              <v-list-item two-line v-for="(relevant_s, relevant_section) in s.relevant" v-bind:key="relevant_section">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ relevant_s.title }} (<a target="_blank" :href="relevant_s.url">{{ relevant_section }}</a>)
+                  </v-list-item-title>
+                  <v-list-item-subtitle v-if="Object.keys(relevant_s.needs).length > 0">
+                    <v-checkbox v-if="'two_priors_past_five_years' in relevant_s.needs"
+                      label="Two identical offenses within past five years"
+                    >
+                    </v-checkbox>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-form>
+          </v-card>
+        </v-container>
       </v-container>
     </v-main>
   </v-app>
@@ -154,9 +158,7 @@ export default {
       charges: [],
       isUpdating: false,
       regulations: [],
-      relevant: [
-        // { charge: "test-charge", sections: [ "test-section1", "test-section2" ]}
-      ],
+      relevant: null,
       needs: {},
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
@@ -187,13 +189,10 @@ export default {
         this.regulations.splice(index, 1)
     },
     computeNeeds() {
-      this.relevant = [];
-      this.needs = {};
-      this.charges.forEach(c => {
-        let r = lfo.relevant(c);
-        this.relevant.push(r);
-        r.needs.forEach(x => (this.needs[x] = true));
-      });
+      let r = lfo.relevant(this.charges);
+      console.log(r);
+      this.relevant = r;
+      return;
     },
   },
 }
