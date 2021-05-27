@@ -7,7 +7,7 @@ declaration scope S_286_136:
 
   # Inputs:
 
-  context offense content Offense
+  context violation content Violation
   context defendant content Defendant
   context two_violations_past_five_years content boolean
 
@@ -55,13 +55,13 @@ scope S_286_136:
 
   label max_days_paragraph_a
   exception definition max_days under condition
-    offense.violation with pattern Section286_102 or
-    offense.violation with pattern Section286_122 or
-    offense.violation with pattern Section286_130 or
-    offense.violation with pattern Section286_131 or
-    offense.violation with pattern Section286_132 or
-    offense.violation with pattern Section286_133 or
-    offense.violation with pattern Section286_134
+    violation with pattern Section286_102 or
+    violation with pattern Section286_122 or
+    violation with pattern Section286_130 or
+    violation with pattern Section286_131 or
+    violation with pattern Section286_132 or
+    violation with pattern Section286_133 or
+    violation with pattern Section286_134
   consequence equals 30 day
 ```
 
@@ -80,13 +80,13 @@ scope S_286_136:
   # the preceding five-year period. 118 H. 259 (App.), 188 P.3d 773 (2008).
 
   rule paragraph_b_applies under condition
-    (offense.violation with pattern Section286_102 or
-      offense.violation with pattern Section286_122 or
-      offense.violation with pattern Section286_130 or
-      offense.violation with pattern Section286_131 or
-      offense.violation with pattern Section286_132 or
-      offense.violation with pattern Section286_133 or
-      offense.violation with pattern Section286_134
+    (violation with pattern Section286_102 or
+      violation with pattern Section286_122 or
+      violation with pattern Section286_130 or
+      violation with pattern Section286_131 or
+      violation with pattern Section286_132 or
+      violation with pattern Section286_133 or
+      violation with pattern Section286_134
     ) and
     two_violations_past_five_years and
     not paragraph_c_applies

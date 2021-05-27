@@ -3,10 +3,6 @@
 > Begin metadata
 
 ```catala
-declaration structure Offense:
-  data date_of content date
-  data violation content Violation
-
 declaration structure Defendant:
   data age content integer
 

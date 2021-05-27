@@ -353,7 +353,7 @@ let relevant_many violations: relevant =
 (* We annotate each penalty with the regulation that justifies it. *)
 type outcome = (violation * (section * penalties) list) list
 
-let call f infraction date age priors =
+let call f infraction age has_priors =
   let must = function
     | Some x -> x
     | None -> failwith (Printf.sprintf "For %s -- got an empty option" infraction)
@@ -362,14 +362,16 @@ let call f infraction date age priors =
   match f with
   | N f -> f ()
   | V f -> f infraction
-  | ODP f ->
-      let offense = { violation = infraction; date_of = must date } in
+  | VDP f ->
       let defendant = { age = integer_of_int (must age) } in
-      f offense defendant (must priors)
+      f infraction defendant (must has_priors)
 
 (* After the data has been converted from JS types to Catala representations,
    [compute] captures the main logic: for each infraction, find the set of
    regulations that apply, feed the data into Catala, then collect the results.
+
+   TODO: bool option = has_priors -- introduce a data structure for generic and
+   contextual information? with labels?
    *)
 let compute (infractions: (string * bool option) list) (age: int option): outcome =
   List.map (fun (infraction, has_priors) ->
@@ -447,7 +449,13 @@ class type js_input = object
   method age: int Js.optdef Js.readonly_prop
 end
 
-let get_input (o: js_input Js.t) =
+let get_input (o: _ Js.t) =
+  let needs = get_assoc o##.needs in
+  let age: int option = List.assoc "age" needs in
+  let contextual = get_assoc o##.contextual in
+  let contextual = List.map (fun (v, o) ->
+    let has_priors = o##.
+  
   List.map get_offense (Array.to_list (Js.to_array o##.violations)),
   Option.map (fun priors ->
     Array.map (fun p ->
