@@ -87,17 +87,10 @@
                   </v-chip>
                 </template>
                 <template v-slot:item="data">
-                  <template
-                    v-if="typeof data.item !== 'object'"
-                  >
-                    <v-list-item-content v-text="data.item"></v-list-item-content>
-                  </template>
-                  <template v-else>
-                    <v-list-item-content>
-                      <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
-                      <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
-                    </v-list-item-content>
-                  </template>
+                  <v-list-item-content>
+                    <v-list-item-title v-html="data.item.regulation"></v-list-item-title>
+                    <v-list-item-subtitle v-html="data.item.section"></v-list-item-subtitle>
+                  </v-list-item-content>
                 </template>
               </v-autocomplete>
               <v-btn
@@ -109,36 +102,35 @@
             </v-stepper-content>
 
             <v-stepper-content step="2">
-              <v-container v-if="relevant != null">
-                <v-card
-                  class="mx-auto"
-                  max-width="1000"
-                  tile
-                  v-if="Object.keys(relevant.needs).length > 0"
-                >
-                  <v-card-title>
-                    General-purpose information required:
-                  </v-card-title>
-                  <v-form>
+              <v-container>
+                <v-form v-if="relevant != null">
+                  <v-card
+                    class="mx-auto"
+                    max-width="1000"
+                    tile
+                    v-if="Object.keys(relevant.needs).length > 0"
+                  >
+                    <v-card-title>
+                      General-purpose information required:
+                    </v-card-title>
                     <v-text-field
+                      v-model="relevant.needs.age"
                       value=""
                       label="Age of the defendant"
                       v-if="'age' in relevant.needs"
                     ></v-text-field>
-                  </v-form>
-                </v-card>
-                <v-card
-                  class="mx-auto"
-                  max-width="1000"
-                  tile
-                  v-for="(s, section) in relevant.contextual"
-                  v-bind:key="section"
-                >
-                  <v-card-title>
-                    {{ s.title }} (<a target="_blank" :href="s.url">{{ section }}</a>)
-                  </v-card-title>
-                  <v-subheader>Relevant regulations:</v-subheader>
-                  <v-form>
+                  </v-card>
+                  <v-card
+                    class="mx-auto"
+                    max-width="1000"
+                    tile
+                    v-for="(s, section) in relevant.contextual"
+                    v-bind:key="section"
+                  >
+                    <v-card-title>
+                      {{ s.title }} (<a target="_blank" :href="s.url">{{ section }}</a>)
+                    </v-card-title>
+                    <v-subheader>Relevant regulations:</v-subheader>
                     <v-list-item two-line v-for="(relevant_s, relevant_section) in s.relevant" v-bind:key="relevant_section">
                       <v-list-item-content>
                         <v-list-item-title>
@@ -146,14 +138,15 @@
                         </v-list-item-title>
                         <v-list-item-subtitle v-if="Object.keys(relevant_s.needs).length > 0">
                           <v-checkbox v-if="'two_priors_past_five_years' in relevant_s.needs"
+                            v-model="relevant_s.needs.two_priors_past_five_years"
                             label="Two identical offenses within past five years"
                           >
                           </v-checkbox>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
-                  </v-form>
-                </v-card>
+                  </v-card>
+                </v-form>
               </v-container>
 
 
@@ -205,7 +198,7 @@ export default {
       autoUpdate: true,
       charges: [],
       isUpdating: false,
-      regulations: json.regulations,
+      regulations: json.regulations.filter(x => x.violation),
       relevant: null,
       needs: {},
       e1: 1,
