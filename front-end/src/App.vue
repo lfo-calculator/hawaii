@@ -38,7 +38,7 @@
               :complete="e1 > 1"
               step="1"
             >
-              Name of step 1
+              Charges
             </v-stepper-step>
 
             <v-divider></v-divider>
@@ -47,13 +47,13 @@
               :complete="e1 > 2"
               step="2"
             >
-              Name of step 2
+              Relevant information
             </v-stepper-step>
 
             <v-divider></v-divider>
 
             <v-stepper-step step="3">
-              Name of step 3
+              Penalties
             </v-stepper-step>
           </v-stepper-header>
 
@@ -163,22 +163,56 @@
             </v-stepper-content>
 
             <v-stepper-content step="3">
-              <v-card
-                class="mb-12"
-                color="grey lighten-1"
-                height="200px"
-              ></v-card>
+              <v-container v-if="penalties != null">
+                <v-card
+                  class="mx-auto"
+                  max-width="1000"
+                  tile
+                  v-for="v in penalties"
+                  v-bind:key="v.violation"
+                >
+                  <v-card-title>
+                    Violation {{ v.title }} (<a target="_blank" :href="v.url">{{ v.violation }}</a>)
+                  </v-card-title>
+                  <v-list-item two-line v-for="p in v.penalties" v-bind:key="p.regulation">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ p.title }} (<a target="_blank" :href="p.url">{{ p.regulation }}</a>)
+                      </v-list-item-title>
+                      <v-subheader>Applicable penalties:</v-subheader>
+                      <v-list-item two-line v-for="p_ in p.penalties" v-bind:key="JSON.stringify(p_)">
+                        <v-list-item-title v-if="p_.kind == 'fee'">
+                        Fee
+                          <span v-if="p_.fee.min == p_.fee.max">of ${{p_.fee.min/100}}</span>
+                          <span v-else>between ${{p_.fee.min/100}} and ${{p_.fee.max/100}}</span>
+                        </v-list-item-title>
+                        <v-list-item-title v-if="p_.kind == 'fine'">
+                        Fine
+                          <span v-if="p_.fine.min == p_.fine.max">of ${{p_.fine.min/100}}</span>
+                          <span v-else>between ${{p_.fine.min/100}} and ${{p_.fine.max/100}}</span>
+                        </v-list-item-title>
+                        <v-list-item-title v-if="p_.kind == 'imprisonment'">
+                        Imprisonment of
+                          <span v-if="p_.days.min == p_.days.max">of ${{p_.days.min/100}} days</span>
+                          <span v-else>between ${{p_.minFine/100}} and ${{p_.maxFine/100}} days</span>
+                        </v-list-item-title>
+                      </v-list-item>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-card>
 
-              <v-btn
-                color="primary"
-                @click="e1 = 1"
-              >
-                Continue
-              </v-btn>
 
-              <v-btn text>
-                Cancel
-              </v-btn>
+                <v-btn
+                  color="primary"
+                  @click="e1 = 1"
+                >
+                  Continue
+                </v-btn>
+
+                <v-btn text>
+                  Cancel
+                </v-btn>
+              </v-container>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -200,8 +234,8 @@ export default {
       isUpdating: false,
       regulations: json.regulations.filter(x => x.violation),
       relevant: null,
+      penalties: null,
       needs: {},
-      penalties: {},
       e1: 1,
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
@@ -233,11 +267,11 @@ export default {
       let r = lfo.relevant(this.charges);
       console.log(r);
       this.relevant = r;
-      return;
     },
     computePenalties() {
       let p = lfo.computePenalties(this.relevant);
       console.log(p);
+      this.penalties = p;
     }
   },
 }

@@ -481,18 +481,18 @@ let mk_duration (d: duration) =
   end
 
 let mk_imprisonment (i: imprisonment) = object%js
-  val min_days = mk_duration i.min_days
-  val max_days = mk_duration i.max_days
+  val min = mk_duration i.min_days
+  val max = mk_duration i.max_days
 end
 
 let mk_fine (i: fine) = object%js
-  val min_fine = i.min_fine
-  val max_fine = i.max_fine
+  val min = i.min_fine
+  val max = i.max_fine
 end
 
 let mk_fee (i: fee) = object%js
-  val min_fee = i.min_fee
-  val max_fee = i.max_fee
+  val min = i.min_fee
+  val max = i.max_fee
 end
 
 let rec mk_penalty (p: penalty) = object%js
@@ -524,18 +524,27 @@ let rec mk_penalty (p: penalty) = object%js
     | _ -> Js.undefined
 end
 
-let mk_annotated_penalty (r: string) (ps: penalties) = object%js
-  val regulation = Js.string r
-  val penalties = Js.array (Array.map mk_penalty ps)
-end
+let mk_annotated_penalty (r: string) (ps: penalties) =
+  let m = lookup_metadata r in
+  object%js
+    val regulation = Js.string r
+    val title = Js.string m.title
+    val url = Js.string m.url
+    val penalties = Js.array (Array.map mk_penalty ps)
+  end
 
-let mk_one_outcome (v: violation) (ps: (section * penalties) list) = object%js
-  val violation = Js.string (Conversions.string_of_statute v)
-  val penalties =
-    Js.array (Array.of_list (List.map (fun (r, p) ->
-      mk_annotated_penalty r p
-    ) ps))
-end
+let mk_one_outcome (v: violation) (ps: (section * penalties) list) =
+  let v = Conversions.string_of_statute v in
+  let m = lookup_metadata v in
+  object%js
+    val violation = Js.string v
+    val title = Js.string m.title
+    val url = Js.string m.url
+    val penalties =
+      Js.array (Array.of_list (List.map (fun (r, p) ->
+        mk_annotated_penalty r p
+      ) ps))
+  end
 
 let mk_outcome (o: outcome) =
   Js.array (Array.of_list (List.map (fun (v, ps) -> mk_one_outcome v ps) o))
