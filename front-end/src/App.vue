@@ -195,7 +195,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import json from '../../data/hawaii-regulations.json'
 import lfo from 'hawaii-lfo';
 
 export default {
@@ -205,7 +205,7 @@ export default {
       autoUpdate: true,
       charges: [],
       isUpdating: false,
-      regulations: [],
+      regulations: json.regulations,
       relevant: null,
       needs: {},
       e1: 1,
@@ -216,9 +216,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(`http://localhost:3000/regulations?violation=true`)
-
-      this.regulations = res.data;
+      // nothing here anymore
     } catch(e) {
       console.error(e)
     }
