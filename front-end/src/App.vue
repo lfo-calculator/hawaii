@@ -152,7 +152,7 @@
 
               <v-btn
                 color="primary"
-                @click="e1 = 3, computeNeeds()"
+                @click="e1 = 3, computePenalties()"
               >
                 Continue
               </v-btn>
@@ -201,6 +201,7 @@ export default {
       regulations: json.regulations.filter(x => x.violation),
       relevant: null,
       needs: {},
+      penalties: {},
       e1: 1,
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
@@ -234,6 +235,10 @@ export default {
       this.relevant = r;
       return;
     },
+    computePenalties() {
+      let p = lfo.computePenalties(this.relevant);
+      console.log(p);
+    }
   },
 }
 </script>

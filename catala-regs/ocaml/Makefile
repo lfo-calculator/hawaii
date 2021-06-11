@@ -30,3 +30,6 @@ main.ml: $(wildcard ../*.catala_en) ../infractions.catala_en
 
 $(JS): $(ML) Wrapper.ml
 	dune build --profile=release
+
+clean:
+	rm -rf _build $(ML)
