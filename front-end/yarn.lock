@@ -4252,7 +4252,7 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     minimalistic-assert "^1.0.1"
 
 "hawaii-lfo@file:../catala-regs/ocaml":
-  version "0.0.202106181414"
+  version "0.0.202106181445"
 
 he@1.2.x, he@^1.1.0:
   version "1.2.0"

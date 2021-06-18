@@ -406,8 +406,14 @@ let mk_assoc (kvs: (string * 'a option) list): _ Js.t =
   List.iter (fun (k, v) -> Js.Unsafe.set o k (Js.Opt.option v)) kvs;
   o
 
+let default = function
+  | "age" -> Obj.magic 18
+  | "is_construction"
+  | "two_priors_past_five_years" -> Js.bool false
+  | _ -> failwith "unknown need"
+
 let mk_needs ns: _ Js.t =
-  mk_assoc (List.map (fun n -> n, None) ns)
+  mk_assoc (List.map (fun n -> n, Some (default n)) ns)
 
 (* Step 1: compute relevant information needed for a given set of violations *)
 let mk_relevant (relevant: relevant): _ Js.t =
