@@ -95,7 +95,7 @@
               </v-autocomplete>
               <v-btn
                 color="primary"
-                @click="e1 = 2, computeNeeds()"
+                @click="computeNeeds()"
               >
                 Continue
               </v-btn>
@@ -152,13 +152,14 @@
 
               <v-btn
                 color="primary"
-                @click="e1 = 3, computePenalties()"
+                @click="computePenalties()"
               >
                 Continue
               </v-btn>
 
-              <v-btn text>
-                Cancel
+              <v-btn text
+                @click="e1 = 1">
+                Back
               </v-btn>
             </v-stepper-content>
 
@@ -204,13 +205,9 @@
 
                 <v-btn
                   color="primary"
-                  @click="e1 = 1"
+                  @click="e1 = needs_anything ? 2 : 1"
                 >
-                  Continue
-                </v-btn>
-
-                <v-btn text>
-                  Cancel
+                  Back
                 </v-btn>
               </v-container>
             </v-stepper-content>
@@ -236,6 +233,7 @@ export default {
       relevant: null,
       penalties: null,
       needs: {},
+      needs_anything: false,
       e1: 1,
       chargeSelectorRules: [
         value => !!value || 'Please select at least one regulation'
@@ -267,11 +265,20 @@ export default {
       let r = lfo.relevant(this.charges);
       console.log(r);
       this.relevant = r;
+      this.needs_anything = Object.keys(r.needs).length > 0;
+      for (let charge in r.contextual)
+        for (let regulation in r.contextual[charge].relevant)
+          this.needs_anything ||= Object.keys(r.contextual[charge].relevant[regulation].needs).length > 0;
+      if (this.needs_anything)
+        this.e1 = 2;
+      else
+        this.computePenalties();
     },
     computePenalties() {
       let p = lfo.computePenalties(this.relevant);
       console.log(p);
       this.penalties = p;
+      this.e1 = 3;
     }
   },
 }
