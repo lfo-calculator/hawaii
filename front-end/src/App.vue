@@ -182,21 +182,7 @@
                       </v-list-item-title>
                       <v-subheader>Applicable penalties:</v-subheader>
                       <v-list-item two-line v-for="p_ in p.penalties" v-bind:key="JSON.stringify(p_)">
-                        <v-list-item-title v-if="p_.kind == 'fee'">
-                        Fee
-                          <span v-if="p_.fee.min == p_.fee.max">of ${{p_.fee.min/100}}</span>
-                          <span v-else>between ${{p_.fee.min/100}} and ${{p_.fee.max/100}}</span>
-                        </v-list-item-title>
-                        <v-list-item-title v-if="p_.kind == 'fine'">
-                        Fine
-                          <span v-if="p_.fine.min == p_.fine.max">of ${{p_.fine.min/100}}</span>
-                          <span v-else>between ${{p_.fine.min/100}} and ${{p_.fine.max/100}}</span>
-                        </v-list-item-title>
-                        <v-list-item-title v-if="p_.kind == 'imprisonment'">
-                        Imprisonment of
-                          <span v-if="p_.imprisonment.min == p_.imprisonment.max">of ${{p_.days.min}} days</span>
-                          <span v-else>between ${{p_.imprisonment.min}} and ${{p_.imprisonment.max}}</span>
-                        </v-list-item-title>
+                        <penalty :penalty="p_" />
                       </v-list-item>
                     </v-list-item-content>
                   </v-list-item>
@@ -221,6 +207,7 @@
 <script>
 import json from '../../data/hawaii-regulations.json'
 import lfo from 'hawaii-lfo';
+import Penalty from './Penalty.vue';
 
 export default {
   name: 'App',
@@ -281,5 +268,6 @@ export default {
       this.e1 = 3;
     }
   },
+  components: { Penalty }
 }
 </script>
