@@ -474,7 +474,7 @@ let get_input (o: _ Js.t) =
 (* The [mk_*] functions go in the other direction and embed the result of
    [compute] into suitable JS types *)
 let mk_duration (d: duration) =
-  let days, months, years = duration_to_days_months_years d in object%js
+  let years, months, days = duration_to_days_months_years d in object%js
     val days = days
     val months = months
     val years = years

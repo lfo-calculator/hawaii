@@ -193,8 +193,8 @@
                         </v-list-item-title>
                         <v-list-item-title v-if="p_.kind == 'imprisonment'">
                         Imprisonment of
-                          <span v-if="p_.days.min == p_.days.max">of ${{p_.days.min/100}} days</span>
-                          <span v-else>between ${{p_.minFine/100}} and ${{p_.maxFine/100}} days</span>
+                          <span v-if="p_.imprisonment.min == p_.imprisonment.max">of ${{p_.days.min}} days</span>
+                          <span v-else>between ${{p_.imprisonment.min}} and ${{p_.imprisonment.max}}</span>
                         </v-list-item-title>
                       </v-list-item>
                     </v-list-item-content>
