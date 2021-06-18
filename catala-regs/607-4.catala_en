@@ -64,10 +64,42 @@ that involve stopping (when prohibited), standing, or parking…. $10 for each
 violation in addition to any fine imposed by the court, and whether or not such
 fine is suspended
 
+```catala
+scope S_607_4:
+
+  definition category under condition
+    false
+  consequence equals Paragraph7
+
+  definition penalties under condition category = Paragraph7
+  consequence equals [
+    One content (Fee content (Fee {
+      -- min_fee: $10
+      -- max_fee: $10
+      -- fund: Clerk
+    }))]
+```
+
 (8) Administrative costs associated with the processing of traffic citations
 which do not involve stopping, standing, or parking… $40 for each violation in
 addition to any fine imposed by the court, and whether or not such fine is
 suspended
+
+```catala
+scope S_607_4:
+
+  definition category under condition
+    false
+  consequence equals Paragraph8
+
+  definition penalties under condition category = Paragraph8
+  consequence equals [
+    One content (Fee content (Fee {
+      -- min_fee: $40
+      -- max_fee: $40
+      -- fund: Clerk
+    }))]
+```
 
 (9) Administrative costs associated with the processing of traffic citations
 issued for violations of a statute or ordinance relating to vehicles or their
@@ -79,7 +111,35 @@ such fine is suspended
 scope S_607_4:
 
   definition category under condition
-    violation = Section291_11_6
+    violation = Section286_12 or
+    violation = Section286_21 or
+    violation = Section286_22 or
+    violation = Section286_83 or
+    violation = Section286_85 or
+    violation = Section286_102 or
+    violation = Section286_102_3 or
+    violation = Section286_102_6 or
+    violation = Section286_116 or
+    violation = Section286_116_5 or
+    violation = Section286_122 or
+    violation = Section286_130 or
+    violation = Section286_131 or
+    violation = Section286_132 or
+    violation = Section286_133 or
+    violation = Section286_134 or
+    violation = Section286_135 or
+    violation = Section291_3_2 or
+    violation = Section291_3_3 or
+    violation = Section291_4_6 or
+    violation = Section291_8 or
+    violation = Section291_9 or
+    violation = Section291_11 or
+    violation = Section291_11_5 or
+    violation = Section291_11_6 or
+    violation = Section291_12 or
+    violation = Section291_13 or
+    violation = Section291_14 or
+    false
   consequence equals Paragraph9
 
   # NB: this intentionally errors out if we haven't yet classified the `offense`
