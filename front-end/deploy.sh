@@ -6,14 +6,14 @@ set -e
 # build
 yarn run build
 
-# navigate into the build output directory
-cd dist
+# for some reason the paths start with /hawaii-lfo FIXME
+mv dist hawaii-lfo
 
 # if you are deploying to a custom domain
-echo 'hawaii.lfocalculator.org' > CNAME
+# echo 'hawaii.lfocalculator.org' > CNAME
 
 git init
-git add -A
+git add -A hawaii-lfo
 git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.github.io
@@ -21,5 +21,3 @@ git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:lfocalculator/hawaii.git main:gh-pages
-
-cd -
