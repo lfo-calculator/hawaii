@@ -3,6 +3,6 @@ module.exports = {
     'vuetify'
   ],
   publicPath: process.env.NODE_ENV === 'production'
-  ? '/hawaii-lfo/front-end/'
+  ? '/hawaii-lfo/'
   : '/'
 }
