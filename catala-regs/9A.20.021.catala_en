@@ -1,0 +1,111 @@
+## RCW 9A.20.021 Maximum sentences for crimes committed July 1, 1984, and after.
+
+> Begin metadata
+
+```catala
+declaration scope RCW_9A_20_021:
+
+  # Inputs:
+  context class content Class
+
+  # Output:
+  context penalties content collection Penalty
+```
+
+> End metadata
+
+## [RCW 9A.20.021]
+
+Maximum sentences for crimes committed July 1, 1984, and after.
+(1) Felony. Unless a different maximum sentence for a classified felony is
+  specifically established by a statute of this state, no person convicted of a
+  classified felony shall be punished by confinement or fine exceeding the
+  following:
+  (a) For a class A felony, by confinement in a state correctional institution
+    for a term of life imprisonment, or by a fine in an amount fixed by the court
+    of fifty thousand dollars, or by both such confinement and fine;
+  (b) For a class B felony, by confinement in a state correctional institution
+    for a term of ten years, or by a fine in an amount fixed by the court of
+    twenty thousand dollars, or by both such confinement and fine;
+  (c) For a class C felony, by confinement in a state correctional institution
+    for five years, or by a fine in an amount fixed by the court of ten thousand
+    dollars, or by both such confinement and fine.
+(2) Gross misdemeanor. Every person convicted of a gross misdemeanor defined in
+  Title 9A RCW shall be punished by imprisonment in the county jail for a maximum
+  term fixed by the court of up to three hundred sixty-four days, or by a fine in
+  an amount fixed by the court of not more than five thousand dollars, or by both
+  such imprisonment and fine.
+(3) Misdemeanor. Every person convicted of a misdemeanor defined in Title 9A RCW
+  shall be punished by imprisonment in the county jail for a maximum term fixed by
+  the court of not more than ninety days, or by a fine in an amount fixed by the
+  court of not more than one thousand dollars, or by both such imprisonment and
+  fine.
+
+```catala
+scope RCW_9A_20_021:
+
+  definition penalties
+  under condition class = FelonyA
+  consequence equals [ Either content ([
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $50,000
+    });
+    Imprisonment content (Imprisonment {
+      -- min_days: 0 day
+      -- max_days: 99 year # TODO: infinity
+    })])]
+
+  definition penalties
+  under condition class = FelonyB
+  consequence equals [ Either content ([
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $10,000
+    });
+    Imprisonment content (Imprisonment {
+      -- min_days: 0 day
+      -- max_days: 10 year
+    })])]
+
+  definition penalties
+  under condition class = FelonyC
+  consequence equals [ Either content ([
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $10,000
+    });
+    Imprisonment content (Imprisonment {
+      -- min_days: 0 day
+      -- max_days: 5 year
+    })])]
+
+  definition penalties
+  under condition class = GrossMisdemeanor
+  consequence equals [ Either content ([
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $5,000
+    });
+    Imprisonment content (Imprisonment {
+      -- min_days: 0 day
+      -- max_days: 364 day
+    })])]
+
+  definition penalties
+  under condition class = SimpleMisdemeanor
+  consequence equals [ Either content ([
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $1,000
+    });
+    Imprisonment content (Imprisonment {
+      -- min_days: 0 day
+      -- max_days: 90 day
+    })])]
+```
+
+(4) This section applies to only those crimes committed on or after July 1,
+  1984.
+(5) The fines in this section apply to adult offenders only.
+

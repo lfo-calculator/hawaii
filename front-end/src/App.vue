@@ -6,10 +6,10 @@
       dark
     >
       <v-avatar :tile="true">
-        <img :src="require('@/assets/HI_seal.png')" alt="Hawaii State Seal">
+        <img :src="require('@/assets/WA_seal.png')" alt="Washington State Seal">
       </v-avatar>
       <div class="d-flex align-center">
-        <v-toolbar-title>Hawaii LFO Calculator</v-toolbar-title>
+        <v-toolbar-title>Washington LFO Calculator</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
         <v-row class="text-center">
           <v-col cols="12">
             <h1 class="display-1 font-weight-bold mb-3">
-              Welcome to the Hawaii LFO Calculator
+              Welcome to the Washington LFO Calculator
             </h1>
          </v-col>
         </v-row>

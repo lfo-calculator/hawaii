@@ -51,16 +51,17 @@ let mk_data () =
     | `Assoc l ->
         let reg = assert_string (List.assoc "regulation" l) in
         let sec = assert_string (List.assoc "section" l) in
+        (* TODO: use the `charge` field *)
         let is_generic =
           try
             let applies = assert_string (List.assoc "applies" l) in
-            applies = "*" ||
+            BatString.contains applies '*' ||
             (ignore (BatString.find applies ".."); true)
           with Not_found ->
             false
         in
         if not is_generic then
-          let constr = BatString.replace_chars (function '.' -> "_" | '-' -> "_" | x -> String.make 1 x) sec in
+          let constr = BatString.replace_chars (function '.' | '-' | '(' | ')' -> "_" | x -> String.make 1 x) sec in
           Some (sec, constr, reg)
         else
           None

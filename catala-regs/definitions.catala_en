@@ -6,11 +6,6 @@
 declaration structure Defendant:
   data age content integer
 
-declaration enumeration Fund:
-  -- NeuroTrauma
-  -- TraumaSystem
-  -- Clerk
-
 declaration structure Fine:
   data min_fine content money
   data max_fine content money
@@ -18,7 +13,6 @@ declaration structure Fine:
 declaration structure Fee:
   data min_fee content money
   data max_fee content money
-  data fund content Fund
 
 declaration structure Imprisonment:
   data min_days content duration
@@ -28,12 +22,34 @@ declaration enumeration Penalty_:
   -- Imprisonment content Imprisonment
   -- Fine content Fine
   -- Fee content Fee
-  -- LoseRightToDriveUntil18
-
 
 declaration enumeration Penalty:
   -- One content Penalty_
   -- Either content collection Penalty_
+
+# TODO: switch to markdown once https://github.com/CatalaLang/catala/issues/147
+# is fixed
+
+# ## RCW 9A.04.040
+#
+# Classes of crimes.
+#
+# (1) An offense defined by this title or by any other statute of this state, for
+#   which a sentence of imprisonment is authorized, constitutes a crime. Crimes are
+#   classified as felonies, gross misdemeanors, or misdemeanors.
+# (2) A crime is a felony if it is so designated in this title or by any other
+#   statute of this state or if persons convicted thereof may be sentenced to
+#   imprisonment for a term in excess of one year. A crime is a misdemeanor if it is
+#   so designated in this title or by any other statute of this state or if persons
+#   convicted thereof may be sentenced to imprisonment for no more than ninety days.
+#   Every other crime is a gross misdemeanor.
+
+declaration enumeration Class:
+  -- FelonyA
+  -- FelonyB
+  -- FelonyC
+  -- GrossMisdemeanor
+  -- SimpleMisdemeanor # same thing as "misdemeanor", just better to be explicit
 ```
 
 > End metadata

@@ -1,0 +1,56 @@
+## RCW 46.64.055 Additional monetary penalty.
+
+> Begin metadata
+
+```catala
+declaration scope RCW_46_64_055:
+
+  # Inputs:
+  context is_indigent content boolean
+
+  # Output:
+  context penalties content collection Penalty
+```
+
+> End metadata
+
+## [RCW 46.64.055 Additional monetary penalty.]
+
+(1) In addition to any other penalties imposed for conviction of a violation of
+this title that is a misdemeanor, gross misdemeanor, or felony, the court shall
+impose an additional penalty of fifty dollars. The court may not reduce, waive,
+or suspend the additional penalty unless the court finds the offender to be
+indigent.
+
+```catala
+scope RCW_46_64_055:
+
+  # JP: per RCW 9A.04.040 (see [definitions.catala_en]), crimes are either
+  # misdemeanors, gross misdemeanors or felonies.
+  definition penalties equals [ One content (
+    Fine content (Fine {
+      -- min_fine: $50
+      -- max_fine: $50
+    }))]
+
+  exception definition penalties
+  under condition is_indigent
+  consequence equals [ One content (
+    Fine content (Fine {
+      -- min_fine: $0
+      -- max_fine: $50
+    }))]
+```
+
+If a community restitution program for offenders is available in the
+jurisdiction, the court shall allow offenders to offset all or a part of the
+penalty due under this section by participation in the community restitution
+program.
+
+(2) Revenue from the additional penalty must be remitted under chapters 2.08,
+3.46, 3.50, 3.62, 10.82, and 35.20 RCW. Money remitted under this section to the
+state treasurer must be deposited in the state general fund. The balance of the
+revenue received by the county or city treasurer under this section must be
+deposited into the county or city current expense fund. Moneys retained by the
+city or county under this subsection shall constitute reimbursement for any
+liabilities under RCW 43.135.060.
