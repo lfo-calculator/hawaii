@@ -1,0 +1,97 @@
+## RCW 77.15.420 Illegally taken or possessed wildlife—Criminal wildlife penalty assessed.
+
+> Begin metadata
+
+```catala
+declaration scope RCW_77_15_420:
+
+  # Inputs:
+  context wildlife_penalty content money
+  context wildlife_penalty_doubled content boolean
+
+  # Output:
+  context penalties content collection Penalty
+```
+
+> End metadata
+
+## [RCW 77.15.420 Illegally taken or possessed wildlife—Criminal wildlife penalty assessed.]
+
+(1) If an adult offender is convicted of violating RCW 77.15.410 and that
+    violation results in the death of wildlife listed in this section, the court
+    shall require payment of the following amounts for each animal taken or
+    possessed. This shall be a criminal wildlife penalty assessment that shall be
+    paid to the clerk of the court and distributed each month to the state treasurer
+    for deposit in the fish and wildlife enforcement reward account created in RCW
+    77.15.425.
+    (a) Moose, mountain sheep, mountain goat, and all wildlife species classified as
+        endangered by rule of the commission, except for mountain caribou and grizzly
+        bear as listed under (d) of this subsection. . . .  $4,000
+    (b) Elk, deer, black bear, and cougar. . . .  $2,000
+    (c) Trophy animal elk and deer. . . .  $6,000
+    (d) Mountain caribou, grizzly bear, and trophy animal mountain sheep. . . .  $12,000
+
+```catala
+scope RCW_77_15_420:
+  definition penalties equals [ One content (
+    Fine content (Fine {
+      -- min_fine: wildlife_penalty
+      -- max_fine: wildlife_penalty
+    }))]
+```
+
+(2)
+    (a) For the purpose of this section a "trophy animal" is:
+        (i) A buck deer with four or more antler points on both sides, not including eyeguards;
+        (ii) A bull elk with five or more antler points on both sides, not including eyeguards; or
+        (iii) A mountain sheep with a horn curl of three-quarter curl or greater.
+    (b) For purposes of this subsection, "eyeguard" means an antler protrusion on
+        the main beam of the antler closest to the eye of the animal.
+
+(3) If two or more persons are convicted of illegally possessing wildlife in
+    subsection (1) of this section, the criminal wildlife penalty assessment shall
+    be imposed on them jointly and severally.
+
+(4) The criminal wildlife penalty assessment shall be imposed regardless of and
+    in addition to any sentence, fines, or costs otherwise provided for violating
+    any provision of this title. The criminal wildlife penalty assessment shall be
+    included by the court in any pronouncement of sentence and may not be suspended,
+    waived, modified, or deferred in any respect. This section may not be construed
+    to abridge or alter alternative rights of action or remedies in equity or under
+    common law or statutory law, criminal or civil.
+
+(5) A defaulted criminal wildlife penalty assessment may be collected by any
+    means authorized by law for the enforcement of orders of the court or collection
+    of a fine or costs, including but not limited to vacation of a deferral of
+    sentencing or vacation of a suspension of sentence.
+
+(6) A person assessed a criminal wildlife penalty assessment under this section
+    shall have his or her hunting license revoked and all hunting privileges
+    suspended until the penalty assessment is paid through the registry of the court
+    in which the penalty assessment was assessed. This revocation and suspension is
+    in addition to and runs concurrently with any revocation and suspension required
+    by law.
+
+(7) The criminal wildlife penalty assessments provided in subsection (1) of this
+    section shall be doubled in the following instances:
+    (a) When a person is convicted of spotlighting big game under RCW 77.15.450;
+    (b) When a person commits a violation that requires payment of a wildlife
+        penalty assessment within five years of a prior gross misdemeanor or felony
+        conviction under this title;
+    (c) When the trier of fact determines that the person took or possessed the
+        animal in question with the intent of bartering, selling, or otherwise
+        deriving economic profit from the animal or the animal's parts; or
+    (d) When the trier of fact determines that the person took the animal under
+        the supervision of a licensed guide.
+
+```catala
+scope RCW_77_15_420:
+  exception definition penalties
+  under condition wildlife_penalty_doubled
+  consequence equals [ One content (
+    Fine content (Fine {
+      -- min_fine: wildlife_penalty *$ 2.0
+      -- max_fine: wildlife_penalty *$ 2.0
+    }))]
+```
+

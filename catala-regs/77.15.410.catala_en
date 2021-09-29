@@ -1,0 +1,60 @@
+## RCW 77.15.410 Unlawful hunting of big game—Penalty.
+
+> Begin metadata
+
+```catala
+declaration scope RCW_77_15_410:
+
+  # Inputs:
+  context charge content Charge
+
+  # Output:
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 77.15.410]
+
+Unlawful hunting of big game—Penalty.
+
+(1) A person is guilty of unlawful hunting of big game in the second degree if
+    the person:
+    (a) Hunts for, takes, or possesses big game and the person does not have and
+        possess all licenses, tags, or permits required under this title; or
+    (b) Violates any department rule regarding seasons, bag or possession limits,
+        closed areas including game reserves, closed times, or any other rule
+        governing the hunting, taking, or possession of big game.
+(2) A person is guilty of unlawful hunting of big game in the first degree if
+    the person commits the act described in subsection (1) of this section and:
+    (a) The person hunts for, takes, or possesses three or more big game animals
+        within the same course of events; or
+    (b) The act occurs within five years of the date of a prior conviction under
+        this title involving unlawful hunting, killing, possessing, or taking big
+        game.
+(3)
+  (a) Unlawful hunting of big game in the second degree is a gross misdemeanor.
+      Upon conviction of an offense involving killing or possession of big game taken
+      during a closed season, closed area, without the proper license, tag, or permit
+      using an unlawful method, or in excess of the bag or possession limit, the
+      department shall revoke all of the person's hunting licenses and tags and order
+      a suspension of the person's hunting privileges for two years.
+  (b) Unlawful hunting of big game in the first degree is a class C felony. Upon
+      conviction, the department shall revoke all of the person's hunting licenses
+      or tags and order the person's hunting privileges suspended for ten years.
+
+```catala
+scope RCW_77_15_410:
+  definition class
+  under condition charge = Section77_15_410_2_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section77_15_410_1_
+  consequence equals FelonyA
+```
+
+(4) For the purposes of this section, "same course of events" means within one
+    twenty-four hour period, or a pattern of conduct composed of a series of acts
+    that are unlawful under subsection (1) of this section, over a period of time
+    evidencing a continuity of purpose.

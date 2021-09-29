@@ -16,13 +16,13 @@ data.ml: $(JSON)
 	cat $(JSON) >> $@
 	echo "|}" >> $@
 
-../infractions.catala_en: $(JSON) $(SCRIPT)
+../charges.catala_en: $(JSON) $(SCRIPT)
 	ocaml $(SCRIPT) -catala $< -o $@
 
 conversions.ml: $(JSON) $(SCRIPT)
 	ocaml $(SCRIPT) -ocaml $< -o $@
 
-main.ml: $(wildcard ../*.catala_en) ../infractions.catala_en
+main.ml: $(wildcard ../*.catala_en) ../charges.catala_en
 	$(CATALA) OCaml ../main.catala_en -o $@
 
 %.run: ../%.catala_en

@@ -49,6 +49,6 @@
     "section": "77.15.420",
     "applies": "77.15.410(*)",
     "charge": false,
-    "needs": [ "wildlife_penalty" ]
+    "needs": [ "wildlife_penalty", "wildlife_penalty_doubled" ]
   }
 ]}

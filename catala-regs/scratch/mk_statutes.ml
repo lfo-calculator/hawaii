@@ -1,5 +1,5 @@
 (* This script takes a JSON list of statutes, and from it generates a Catala file declaring a
-   corresponding type of violations.
+   corresponding type of charges.
 
    Note that this script makes one *KEY* hypothesis: if a JSON entry applies to multiple
    infractions, that is, its "applies" field is of the form "*" or "foo .. bar", then we assume that
@@ -22,7 +22,7 @@ let print_catala dst data =
 > Begin metadata
 
 ```catala
-declaration enumeration Violation:
+declaration enumeration Charge:
 |} !source;
   List.iter (fun (as_string, as_catala, comment) ->
     Printf.fprintf dst "  -- Section%s	# %s\n" as_catala comment
