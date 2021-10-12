@@ -216,7 +216,7 @@ export default {
       autoUpdate: true,
       charges: [],
       isUpdating: false,
-      regulations: json.regulations.filter(x => x.violation),
+      regulations: json.regulations.filter(x => x.charge),
       relevant: null,
       penalties: null,
       needs: {},
