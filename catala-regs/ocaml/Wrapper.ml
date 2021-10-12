@@ -49,49 +49,64 @@ let debug fmt =
    function. *)
 type penalties = penalty array
 type section = string
-type infraction = violation
 
-(* N: none
- * V: violation
- * OP: offense + defendant + two priors in past five years *)
-type computation =
-  | N of (unit -> penalties)
-  | V of (violation -> penalties)
-  | VDP of (violation -> defendant -> bool -> penalties)
+type specific_context = {
+  must_collect_dna: bool option;
+  charge: charge option;
+  class_: class_ option;
+  wildlife_penalty: money option;
+  wildlife_penalty_doubled: bool option;
+}
+
+type generic_context = {
+  is_indigent: bool option;
+}
+
+type 'a computation = generic_context -> specific_context -> 'a
+
+let must name = function
+  | Some x -> x
+  | None ->
+      failwith (Printf.sprintf "required contextual information %s is not provided" name)
 
 (* Associative list that, given a section (whose [applies] field is not [0]),
    returns the corresponding computation. *)
-let computation_of_reg: (section * computation) list = [
-  "291-10", N (fun () ->
-    let out = s_291_10 {
+let penalty_of_reg: (section * penalties computation) list = [
+  "46.64.055", (fun g s ->
+    let out = r_c_w_46_64_55 {
+      is_indigent_in = (fun () -> must "is_indigent" g.is_indigent);
       penalties_in = H.no_input
     } in
     out.penalties_out);
-  "291-11.6", N (fun () ->
-    let out = s_291_11_6 {
+  "9A.20.021", (fun g s ->
+    let out = r_c_w_9_a_20_21 {
+      class_in = (fun () -> must "class" s.class_);
       penalties_in = H.no_input
     } in
     out.penalties_out);
-  "286-136", VDP (fun v d p ->
-    let out = s_286_136 {
-      violation_in = H.thunk v;
-      defendant_in = H.thunk d;
-      max_fine_in = H.no_input;
-      min_fine_in = H.no_input;
-      max_days_in = H.no_input;
-      two_violations_past_five_years_in = H.thunk p;
-      paragraph_b_applies_in = H.no_input;
-      paragraph_c_applies_in = H.no_input;
+  "43.43.7541", (fun g s ->
+    let out = r_c_w_43_43_7541 {
+      must_collect_dna_in = (fun () -> must "must_collect_dna" s.must_collect_dna);
       penalties_in = H.no_input
     } in
     out.penalties_out);
-  "607-4", V (fun v ->
-    let out = s_607_4 {
-      violation_in = H.thunk v;
-      category_in = H.no_input;
+  (* TODO: "43.43.754" *)
+  "77.15.420", (fun g s ->
+    let out = r_c_w_77_15_420 {
+      wildlife_penalty_in = (fun () -> must "wildlife_penalty" s.wildlife_penalty);
+      wildlife_penalty_doubled_in = (fun () -> must "wildlife_penalty_doubled" s.wildlife_penalty_doubled);
       penalties_in = H.no_input
     } in
     out.penalties_out);
+]
+
+let charge_of_reg: (section * charge computation) list = [
+  "77.15.410", (fun g s ->
+    let out = r_c_w_77_15_410 {
+      charge_in = (fun () -> must "charge" s.charge);
+      class_in = H.no_input
+    } in
+    out.charge_out);
 ]
 
 type metadata = {
@@ -109,11 +124,14 @@ type regulation = {
 
 and applies =
   | Self
-  | All
+  | Wild of prefix
   | Ranges of range list
 
 and range =
   section * section
+
+and prefix =
+  section list
 
 and needs =
   need list
@@ -121,35 +139,27 @@ and needs =
 and need =
   string
 
+let parse_section s =
+  match List.rev (String.split_on_char '.' s) with
+  | [] -> failwith "section field contains no dots?!!"
+  | hd :: tl ->
+      try
+        let i = String.index hd '(' in
+        let sub = String.sub hd (i + 1) (String.length hd - i - 2) in
+        print_endline "sub";
+        let hd = String.sub hd 0 i in
+        List.rev (sub :: hd :: tl)
+      with Not_found ->
+        List.rev ("" :: hd :: tl)
+
 (* TODO: rollout actual parsers *)
 let section_leq s1 s2 =
-  (* 291C-11.3 *)
-  let parse_section s =
-    let i = String.index s '-' in
-    let l = String.sub s 0 i in
-    let r = String.sub s (i + 1) (String.length s - i - 1) in
-    let l1, l2 =
-      let maybe_letter = String.get l (String.length l - 1) in
-      if 'A' <= maybe_letter && maybe_letter <= 'Z' then
-        int_of_string (String.sub l 0 (String.length l - 1)), maybe_letter
-      else
-        int_of_string l, '0'
-    in
-    let r1, r2 =
-      try
-        let i = String.index r '.' in
-        int_of_string (String.sub r 0 i), int_of_string (String.sub r (i + 1) (String.length r - i - 1))
-      with Not_found ->
-        int_of_string r, 0
-    in
-    l1, l2, r1, r2
-  in
   parse_section s1 <= parse_section s2
 
 
 let string_of_applies = function
   | Self -> "self"
-  | All -> "*"
+  | Wild p -> String.concat "." p ^ ".*"
   | Ranges rs ->
       String.concat "," (List.map (fun (lower, upper) -> Printf.sprintf "%s..%s" lower upper) rs)
 
@@ -173,7 +183,8 @@ let parse_applies (applies: Yojson.Safe.t) =
   match applies with
   | "0" -> None
   | "self" -> Some Self
-  | "*" -> Some All
+  | s when s.[String.length s - 1] = '*' ->
+      Some (Wild (List.rev (List.tl (List.rev (String.split_on_char '.' s)))))
   | applies ->
       (* TODO: fixme here for a list and possibly singleton ranges *)
       let i = find applies ".." in
@@ -185,7 +196,7 @@ let parse_regulation (r: Yojson.Safe.t) =
   let r = assert_assoc r in
   let section = assert_string (List.assoc "section" r) in
   let title = assert_string (List.assoc "regulation" r) in
-  let url = assert_string (List.assoc "reg_url" r) in
+  let url = Printf.sprintf "https://app.leg.wa.gov/RCW/default.aspx?cite=%s" section in
   let violation = assert_bool (List.assoc "violation" r) in
   let metadata = { title; url; violation } in
   try
@@ -227,8 +238,19 @@ let applies reg infraction =
       (* See ../../data/README.md: we assume the penalty for the infraction is in the
          relevant section *)
       reg.section = infraction
-  | All ->
-      true
+  | Wild p ->
+      let components = parse_section infraction in
+      let rec match_ ps cs =
+        match ps, cs with
+        | p :: ps, c :: cs when p = c ->
+            match_ ps cs
+        | [], _ ->
+            true
+        | _ ->
+            false
+      in
+      match_ p components
+
   | Ranges rs ->
       let applies (lower, upper) =
         section_leq lower infraction && section_leq infraction upper

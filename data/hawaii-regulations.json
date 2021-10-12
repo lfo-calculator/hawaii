@@ -3,7 +3,8 @@
     "regulation": "Additional monetary penalty.",
     "section": "46.64.055",
     "applies": "46.*",
-    "charge": false
+    "charge": false,
+    "needs": [ "is_indigent" ]
   },
   {
     "regulation": "Maximum sentences for crimes committed July 1, 1984, and after.",
@@ -30,7 +31,8 @@
     "regulation": "Unlawful hunting of big game—Penalty.",
     "section": "77.15.410",
     "applies": "77.15.410(*)",
-    "charge": false
+    "charge": false,
+    "needs": [ "charge" ]
   },
   {
     "regulation": "Unlawful hunting of big game (First Degree)",
