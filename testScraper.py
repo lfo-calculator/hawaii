@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from enum import Enum
 import sys
 import re
+import csv
 
 websiteBase = 'https://app.leg.wa.gov/RCW/'
 websiteHomePage = 'https://app.leg.wa.gov/RCW/default.aspx?cite=77.15.410'
@@ -106,6 +107,12 @@ def format_the_line(line_to_format, section_number):
     return return_string
         
 
+with open('statutesInCSV.csv') as csvfile:
+    reader = csv.reader(csvfile, delimiter=',')
+    priority_sections = next(reader)
+
+print(priority_sections)
+    
 raw_html = simple_get(websiteHomePage)
 if len(raw_html) == 0:
     print('No HTML retrieved')
@@ -152,7 +159,7 @@ else:
                 formatted_line = format_the_line(the_line, rcw_number)
                 all_the_text = all_the_text + formatted_line
 
-    print(all_the_text)
+    #print(all_the_text)
     #print(content.prettify())
     #with open('test_regs/' + file_name, 'a') as f:
         #f.write(all_the_text)
