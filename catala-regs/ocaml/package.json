@@ -1,6 +1,6 @@
 {
   "name": "hawaii-lfo",
-  "version": "0.0.202107091404",
+  "version": "0.0.202110121622",
   "description": "A set of Catala-generated implementations for various parts of Hawaii State Regulations",
   "main": "_build/default/wrapper.bc.js",
   "scripts": {
