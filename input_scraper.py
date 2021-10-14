@@ -48,6 +48,9 @@ def get_charge(line_to_check, the_section_number):
         charge = 'FelonyB'
     elif line_to_check.find('class C felony') > -1:
         charge = 'FelonyC'
+    elif line_to_check.find('felony') > -1:
+        # possible general list - no charges
+        charge = ''
     elif line_to_check.find('gross misdemeanor') > -1:
         charge = 'GrossMisdemeanor'
     elif line_to_check.find('misdemeanor') > -1:
@@ -64,6 +67,9 @@ def get_charge(line_to_check, the_section_number):
 
 def format_catala(the_section_number):
     global all_the_charges
+    if len(all_the_charges) == 0:
+        return ''
+    
     return_block = '\n```catala\nscope RCW_' + '_'.join(the_section_number.split('.')) + ':'
     number_of_charges = len(all_the_charges)
 
@@ -71,6 +77,7 @@ def format_catala(the_section_number):
         return_block = return_block + '\n' + all_the_charges[i]
 
     return_block = return_block + '```\n\n'
+    all_the_charges.clear()
     return return_block
     
     
@@ -91,8 +98,8 @@ def format_the_line(line_to_format, section_number):
             index_of_subsection = split.find('(') + 1
             global current_subsection
             new_subsection = split[index_of_subsection]
-            #if current_subsection is not new_subsection:
-                #catala_code = format_catala(section_number)
+            if current_subsection is not new_subsection:
+                catala_code = format_catala(section_number)
             current_subsection = split[index_of_subsection]
             
         if re.search(sub_roman, split):
@@ -106,68 +113,68 @@ def format_the_line(line_to_format, section_number):
             
         return_string = return_string + catala_code + split + '\n'
     return return_string
-        
 
-with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',')
-    for row in reader:
-        website = websiteBase + row[0]
-        raw_html = simple_get(website)
-        if len(raw_html) == 0:
-            print('No HTML retrieved')
-        else:
-            all_the_text = ''
-            html = BeautifulSoup(raw_html, 'html.parser')
-            content = html.find('div', id='contentWrapper')
-            if content is None:
-                print('No content wrapper for ' + website)
-                continue
+
+for i in range(1, len(sys.argv)):
+    website = websiteBase + sys.argv[i]
+    raw_html = simple_get(website)
+    if len(raw_html) == 0:
+        print('No HTML retrieved')
+    else:
+        all_the_text = ''
+        html = BeautifulSoup(raw_html, 'html.parser')
+        content = html.find('div', id='contentWrapper')
+        if content is None:
+            print('No content wrapper for ' + website)
+            continue
             
-            divs = content.find_all('div')
+        divs = content.find_all('div')
 
-            # First div has RCW and section number
-            rcw_number = divs[0].find('a').get_text()
-            file_name = rcw_number + '.catala_en'
-            if os.path.isfile('catala-regs/' + file_name):
-                print('file ' + file_name + ' already exists.')
-                continue            
+        # First div has RCW and section number
+        rcw_number = divs[0].find('a').get_text()
+        file_name = rcw_number + '.catala_en'
+        if os.path.isfile('catala-regs/' + file_name):
+            print('file ' + file_name + ' already exists.')
+            continue            
     
-            the_title = '## [' + divs[0].get_text() + ']'
-            the_title = ' '.join(the_title.split())
+        the_title = '## [' + divs[0].get_text() + ']'
+        the_title = ' '.join(the_title.split())
     
-            all_the_text = the_title + '\n\n'
+        all_the_text = the_title + '\n\n'
     
-            # Second div has description of section
-            the_script = divs[1].get_text()
-            all_the_text = all_the_text + the_script + '\n\n'
+        # Second div has description of section
+        the_script = divs[1].get_text()
+        all_the_text = all_the_text + the_script + '\n\n'
     
-            # 3rd div has all the other divs
-            the_text = divs[2].find_all('div')
+        # 3rd div has all the other divs
+        the_text = divs[2].find_all('div')
     
-            # remaining divs have text of section
-            for i in range(0, len(the_text)):
-                skippable = False
-                possible_table = the_text[i].find_all('tr')
-                if len(possible_table) > 0:
-                    for j in range(0, len(possible_table)):
-                        row_text = possible_table[j].get_text(' ', strip=True)
-                        formatted_line = format_the_line(row_text, rcw_number)
-                        all_the_text = all_the_text + formatted_line
-                else:
-                    # Check if parent is a tr
-                    for parent in the_text[i].parents:
-                        if parent.name == 'tr':
-                            skippable = True
-                            break
-                        if parent.id == 'contentWrapper':
-                            break
-                    if skippable is not True:
-                        the_line = the_text[i].get_text()
-                        formatted_line = format_the_line(the_line, rcw_number)
-                        all_the_text = all_the_text + formatted_line
+        # remaining divs have text of section
+        for i in range(0, len(the_text)):
+            skippable = False
+            possible_table = the_text[i].find_all('tr')
+            if len(possible_table) > 0:
+                for j in range(0, len(possible_table)):
+                    row_text = possible_table[j].get_text(' ', strip=True)
+                    formatted_line = format_the_line(row_text, rcw_number)
+                    all_the_text = all_the_text + formatted_line
+            else:
+                # Check if parent is a tr
+                for parent in the_text[i].parents:
+                    if parent.name == 'tr':
+                        skippable = True
+                        break
+                    if parent.id == 'contentWrapper':
+                        break
+                if skippable is not True:
+                    the_line = the_text[i].get_text()
+                    formatted_line = format_the_line(the_line, rcw_number)
+                    all_the_text = all_the_text + formatted_line
 
-            #print(all_the_text)
-            #print(content.prettify())
-            with open('test_regs/' + file_name, 'a') as f:
-                f.write(all_the_text)
+        all_the_text = all_the_text + format_catala(rcw_number)
+
+        #print(all_the_text)
+        #print(content.prettify())
+        with open('test_regs/' + file_name, 'a') as f:
+            f.write(all_the_text)
     

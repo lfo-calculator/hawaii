@@ -40,30 +40,11 @@ def log_error(e):
     print('My Error:', e, time.strftime(('%X %x %Z')))
 
 
-def get_charge(line_to_check, the_section_number):
-    charge = ''
-    if line_to_check.find('class A felony') > -1:
-        charge = 'FelonyA'
-    elif line_to_check.find('class B felony') > -1:
-        charge = 'FelonyB'
-    elif line_to_check.find('class C felony') > -1:
-        charge = 'FelonyC'
-    elif line_to_check.find('gross misdemeanor') > -1:
-        charge = 'GrossMisdemeanor'
-    elif line_to_check.find('misdemeanor') > -1:
-        charge = 'SimpleMisdemeanor'
-
-    if len(charge) > 0:
-        global current_subsection
-        section_with_underscores = '_'.join(the_section_number.split('.'))
-        condition_charge = 'Section' + section_with_underscores + '_' + current_subsection + '_'        
-        return '  definition class\n  under condition charge = ' + condition_charge + '\n  consequence equals ' + charge + '\n'
-    else:
-        return None
-
-
 def format_catala(the_section_number):
     global all_the_charges
+    if len(all_the_charges) == 0:
+        return ''
+    
     return_block = '\n```catala\nscope RCW_' + '_'.join(the_section_number.split('.')) + ':'
     number_of_charges = len(all_the_charges)
 
@@ -71,42 +52,9 @@ def format_catala(the_section_number):
         return_block = return_block + '\n' + all_the_charges[i]
 
     return_block = return_block + '```\n\n'
+    all_the_charges.clear()
     return return_block
     
-    
-def format_the_line(line_to_format, section_number):
-    return_string = ''
-    split_index = line_to_format.find(')(')
-    if split_index == 2:
-        really_more = [ line_to_format[:split_index + 1], line_to_format[split_index + 1:] ]
-    else:
-        really_more = [ line_to_format ]
-                
-    global all_the_charges
-    catala_code = ''
-    
-    # indent according to regex
-    for split in really_more:
-        if re.search(sub_numeric, split):
-            index_of_subsection = split.find('(') + 1
-            global current_subsection
-            new_subsection = split[index_of_subsection]
-            #if current_subsection is not new_subsection:
-                #catala_code = format_catala(section_number)
-            current_subsection = split[index_of_subsection]
-            
-        if re.search(sub_roman, split):
-            split = '        ' + split
-        elif re.search(sub_alpha, split):
-            split = '    ' + split
-
-        the_charge = get_charge(split, section_number)
-        if the_charge is not None:
-            all_the_charges.append(the_charge)
-            
-        return_string = return_string + catala_code + split + '\n'
-    return return_string
-        
 
 with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')

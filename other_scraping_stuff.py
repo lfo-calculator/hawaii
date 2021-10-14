@@ -48,6 +48,9 @@ def get_charge(line_to_check, the_section_number):
         charge = 'FelonyB'
     elif line_to_check.find('class C felony') > -1:
         charge = 'FelonyC'
+    elif line_to_check.find('felony') > -1:
+        # possible general list - no charges
+        charge = ''
     elif line_to_check.find('gross misdemeanor') > -1:
         charge = 'GrossMisdemeanor'
     elif line_to_check.find('misdemeanor') > -1:
@@ -64,6 +67,9 @@ def get_charge(line_to_check, the_section_number):
 
 def format_catala(the_section_number):
     global all_the_charges
+    if len(all_the_charges) == 0:
+        return ''
+    
     return_block = '\n```catala\nscope RCW_' + '_'.join(the_section_number.split('.')) + ':'
     number_of_charges = len(all_the_charges)
 
@@ -71,6 +77,7 @@ def format_catala(the_section_number):
         return_block = return_block + '\n' + all_the_charges[i]
 
     return_block = return_block + '```\n\n'
+    all_the_charges.clear()
     return return_block
     
     
@@ -91,8 +98,8 @@ def format_the_line(line_to_format, section_number):
             index_of_subsection = split.find('(') + 1
             global current_subsection
             new_subsection = split[index_of_subsection]
-            #if current_subsection is not new_subsection:
-                #catala_code = format_catala(section_number)
+            if current_subsection is not new_subsection:
+                catala_code = format_catala(section_number)
             current_subsection = split[index_of_subsection]
             
         if re.search(sub_roman, split):
@@ -106,7 +113,7 @@ def format_the_line(line_to_format, section_number):
             
         return_string = return_string + catala_code + split + '\n'
     return return_string
-        
+
 
 with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
