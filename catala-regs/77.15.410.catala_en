@@ -51,7 +51,7 @@ scope RCW_77_15_410:
 
   definition class
   under condition charge = Section77_15_410_1_
-  consequence equals FelonyA
+  consequence equals FelonyC
 ```
 
 (4) For the purposes of this section, "same course of events" means within one
