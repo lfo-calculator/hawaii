@@ -113,12 +113,12 @@
                     <v-card-title>
                       General-purpose information required:
                     </v-card-title>
-                    <v-text-field
-                      v-model="relevant.needs.age"
-                      value=""
-                      label="Age of the defendant"
-                      v-if="'age' in relevant.needs"
-                    ></v-text-field>
+                    <v-checkbox
+                      v-model="relevant.needs.is_indigent"
+                      label="Defendant is indigent"
+                      v-if="'is_indigent' in relevant.needs"
+                      value="false"
+                    ></v-checkbox>
                   </v-card>
                   <v-card
                     class="mx-auto"
@@ -137,11 +137,24 @@
                           {{ relevant_s.title }} (<a target="_blank" :href="relevant_s.url">{{ relevant_section }}</a>)
                         </v-list-item-title>
                         <v-list-item-subtitle v-if="Object.keys(relevant_s.needs).length > 0">
-                          <v-checkbox v-if="'two_priors_past_five_years' in relevant_s.needs"
-                            v-model="relevant_s.needs.two_priors_past_five_years"
-                            label="Two identical offenses within past five years"
+                          <v-checkbox v-if="'wildlife_penalty_doubled' in relevant_s.needs"
+                            v-model="relevant_s.needs.wildlife_penalty_doubled"
+                            label="Wildlife penalty should be doubled"
+                            value="false"
                           >
                           </v-checkbox>
+                          <v-checkbox v-if="'must_collect_dna' in relevant_s.needs"
+                            v-model="relevant_s.needs.must_collect_dna"
+                            label="Defendant DNA should be collected"
+                            value="false"
+                          >
+                          </v-checkbox>
+                          <v-text-field v-if="'wildlife_penalty' in relevant_s.needs"
+                            v-model="relevant_s.needs.wildlife_penalty"
+                            label="Wildlife penalty"
+                            value="0"
+                          >
+                          </v-text-field>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>

@@ -498,14 +498,17 @@ let mk_relevant (relevant: relevant): _ Js.t =
 
 (* Step 2: extract enough relevant information from the object above, now with
    null fields filled out. This is super untyped and awkward. *)
-let get_need (type a) (k: string) (kvs: (string * _ Js.t) list): a =
-  let v = List.assoc k kvs in
-  match k with
-  | "wildlife_penalty" -> Obj.magic ((Obj.magic v) :> int)
-  | "wildlife_penalty_doubled"
-  | "must_collect_dna"
-  | "is_indigent" -> Obj.magic (Js.to_bool (Obj.magic v))
-  | _ -> debug "Unknown need field from JS: %s" k; raise Not_found
+let get_need (type a) (k: string) (kvs: (string * _ Js.t) list): a option =
+  match List.assoc_opt k kvs with
+  | Some v ->
+      Some begin match k with
+      | "wildlife_penalty" -> Obj.magic ((Obj.magic v) :> int)
+      | "wildlife_penalty_doubled"
+      | "must_collect_dna"
+      | "is_indigent" -> Obj.magic (Js.to_bool (Obj.magic v))
+      | _ -> debug "Unknown need field from JS: %s" k; raise Not_found
+      end
+  | _ -> None
 
 let get_kvs o =
   List.filter_map (fun (k, v) ->
@@ -527,7 +530,7 @@ let get_specific_context o =
   }
 
 let get_input (o: _ Js.t) =
-  let generic_needs = get_generic_context o##.needs in
+  let generic_needs = get_generic_context (get_assoc o##.needs) in
   let sections = get_assoc o##.contextual in
   let sections = List.map (fun (v, o) ->
     let o = Option.get o in
