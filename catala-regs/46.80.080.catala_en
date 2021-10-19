@@ -1,0 +1,43 @@
+## RCW 46.80.080 Records�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.80.080 Records�Penalty.]
+
+(1) Every vehicle wrecker shall maintain books or files in which the wrecker shall keep a record and a description of:
+    (a) Every vehicle wrecked, dismantled, disassembled, or substantially altered by the wrecker; and
+    (b) Every major component part acquired by the wrecker; together with a bill of sale signed by a seller whose identity has been verified and the name and address of the person, firm, or corporation from whom the wrecker purchased the vehicle or part. Major component parts other than cores shall be further identified by the vehicle identification number of the vehicle from which the part came.
+(2) The record shall also contain the following data regarding the wrecked or acquired vehicle or vehicle that is the source of a major component part other than a core:
+    (a) The certificate of title number (if previously titled in this or any other state);
+    (b) Name of state where last registered;
+    (c) Number of the last license number plate issued;
+    (d) Name of vehicle;
+    (e) Motor or identification number and serial number of the vehicle;
+    (f) Date purchased;
+    (g) Disposition of the motor and chassis;
+    (h) Yard number assigned by the licensee to the vehicle or major component part, which shall also appear on the identified vehicle or part; and
+    (i) Such other information as the department may require.
+(3) The records shall also contain a bill of sale signed by the seller for other minor component parts acquired by the licensee, identifying the seller by name, address, and date of sale.
+(4) The records shall be maintained by the licensee at his or her established place of business for a period of three years from the date of acquisition.
+(5) The record is subject to inspection at all times during regular business hours by members of the police department, sheriff's office, members of the Washington state patrol, or officers or employees of the department.
+(6) A vehicle wrecker shall also maintain a similar record of all disabled vehicles that have been towed or transported to the vehicle wrecker's place of business or to other places designated by the owner of the vehicle or his or her representative. This record shall specify the name and description of the vehicle, name of owner, number of license plate, condition of the vehicle and place to which it was towed or transported.
+(7) Failure to comply with this section is a gross misdemeanor.
+
+```catala
+scope RCW_46_80_080:
+  definition class
+  under condition charge = Section46_80_080_
+  consequence equals GrossMisdemeanor
+```
+

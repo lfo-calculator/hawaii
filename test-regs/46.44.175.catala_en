@@ -1,0 +1,29 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.44.175 Penalties—Hearing.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.44.175 Penalties—Hearing.]
+
+(1) Failure of any person or agent acting for a person who causes to be moved or moves a mobile home as defined in RCW 46.04.302 upon public highways of this state and failure to comply with any of the provisions of RCW 46.44.170 and 46.44.173 is a traffic infraction for which a penalty of not less than one hundred dollars or more than five hundred dollars shall be assessed. In addition to the above penalty, the department of transportation or local authority may withhold issuance of a special permit or suspend a continuous special permit as provided by RCW 46.44.090 and 46.44.093 for a period of not less than thirty days.
+(2) Any person who shall alter, reuse, transfer, or forge the decal required by RCW 46.44.170, or who shall display a decal knowing it to have been forged, reused, transferred, or altered, shall be guilty of a gross misdemeanor.
+(3) Any person or agent who is denied a special permit or whose special permit is suspended may upon request receive a hearing before the department of transportation or the local authority having jurisdiction. The department or the local authority after such hearing may revise its previous action.
+
+```catala
+scope RCW_46_44_175:
+  definition class
+  under condition charge = Section46_44_175_2_
+  consequence equals GrossMisdemeanor
+```
+

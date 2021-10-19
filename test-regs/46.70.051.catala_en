@@ -1,0 +1,38 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.70.051 Issuance of license—Private party dissemination of vehicle database.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.70.051 Issuance of license—Private party dissemination of vehicle database.]
+
+(1) After the application has been filed, the fee paid, and bond posted, if required, the department shall, if no denial order is in effect and no proceeding is pending under RCW 46.70.101, issue the appropriate license, which license, in the case of a vehicle dealer, shall designate the classification of the dealer. Nothing prohibits a vehicle dealer from obtaining licenses for more than one classification, and nothing prevents any vehicle dealer from dealing in other classes of vehicles on an isolated basis.
+(2) An auction company licensed under chapter 18.11 RCW may sell at auction all classifications of vehicles under a motor vehicle dealer's license issued under this chapter including motor vehicles, miscellaneous type vehicles, and mobile homes and travel trailers.
+(3) At the time the department issues a vehicle dealer license, the department shall provide to the dealer a current, up-to-date vehicle dealer manual that may be provided electronically setting forth the various statutes and rules applicable to vehicle dealers. In addition, at the time any such license is renewed under RCW 46.70.083, the department shall provide the dealer with any updates or current revisions to the vehicle dealer manual. These updates or current revisions may be provided electronically.
+(4) The department may contract with responsible private parties to provide them elements of the vehicle database on a regular basis. The private parties may only disseminate this information to licensed vehicle dealers.
+    (a) Subject to the disclosure agreement provisions of RCW 46.12.635 and the requirements of Executive Order 97-01, the department may provide to the contracted private parties the following information:
+        (i) All vehicle and title data necessary to accurately disclose known title defects, brands, or flags and odometer discrepancies;
+        (ii) All registered and legal owner information necessary to determine true ownership of the vehicle and the existence of any recorded liens, including but not limited to liens of the department of social and health services or its successor; and
+        (iii) Any data in the department's possession necessary to calculate the motor vehicle excise tax, license, and registration fees including information necessary to determine the applicability of regional transit authority excise and use tax surcharges.
+    (b) The department may provide this information in any form the contracted private party and the department agree upon, but if the data is to be transmitted over the Internet or similar public network from the department to the contracted private party, it must be encrypted.
+    (c) The department shall give these contracted private parties advance written notice of any change in the information referred to in (a)(i), (ii), or (iii) of this subsection, including information pertaining to the calculation of motor vehicle excise taxes.
+    (d) The department shall revoke a contract made under this subsection (4) with a private party who disseminates information from the vehicle database to anyone other than a licensed vehicle dealer. A private party who obtains information from the vehicle database under a contract with the department and disseminates any of that information to anyone other than a licensed vehicle dealer is guilty of a gross misdemeanor punishable under chapter 9A.20 RCW.
+    (e) Nothing in this subsection (4) authorizes a vehicle dealer or any other organization or entity not otherwise appointed as a vehicle licensing subagent under RCW 46.01.140 to perform any of the functions of a vehicle licensing subagent so appointed.
+
+```catala
+scope RCW_46_70_051:
+  definition class
+  under condition charge = Section46_70_051_4_d_
+  consequence equals GrossMisdemeanor
+```
+

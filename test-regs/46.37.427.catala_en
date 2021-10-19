@@ -1,0 +1,41 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.427 Studded tire fee.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.427 Studded tire fee.]
+
+Beginning July 1, 2016:
+(1)
+    (a) In addition to all other fees imposed on the retail sale of tires, a five dollar fee is imposed on the retail sale of each new tire sold that contains studs. For the purposes of this subsection, "new tire sold that contains studs" means a tire that is manufactured for vehicle purposes and contains metal studs, and does not include bicycle tires or retreaded vehicle tires.
+    (b) The five dollar fee must be paid by the buyer to the seller, and each seller must collect from the buyer the full amount of the fee. The fee collected from the buyer by the seller must be paid to the department of revenue in accordance with RCW 82.32.045; however, the seller retains ten percent of the fee collected.
+    (c) The portion of the fee paid to the department of revenue under (b) of this subsection must be deposited in the motor vehicle fund created under RCW 46.68.070.
+(2) The fee to be collected by the seller, less the ten percent that the seller retains as specified in subsection (1)(b) of this section, must be held in trust by the seller until paid to the department of revenue, and any seller who appropriates or converts the fee collected to any use other than the payment of the fee on the due date is guilty of a gross misdemeanor.
+(3) Any seller that fails to collect the fee imposed under this section or, having collected the fee, fails to pay it to the department of revenue by the date due, whether such failure is the result of the seller or the result of acts or conditions beyond the seller's control, is personally liable to the state for the amount of the fee.
+(4) The amount of the fee, until paid by the buyer to the seller or to the department of revenue, constitutes a debt from the buyer to the seller. Any seller who fails or refuses to collect the fee as required with the intent to violate this section or to gain some advantage or benefit and any buyer who refuses to pay the fee due is guilty of a misdemeanor.
+(5) The department of revenue must collect on the business excise tax return from the businesses selling new tires that contain studs at retail the number of tires sold and the fee imposed under this section. The department of revenue must incorporate into its audit cycle a reconciliation of the number of tires sold and the amount of revenue collected by the businesses selling new tires that contain studs.
+(6) All other applicable provisions of chapter 82.32 RCW have full force and application with respect to the fee imposed under this section.
+(7) The department of revenue must administer this section.
+
+```catala
+scope RCW_46_37_427:
+  definition class
+  under condition charge = Section46_37_427_2_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_37_427_4_
+  consequence equals SimpleMisdemeanor
+```
+

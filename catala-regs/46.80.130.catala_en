@@ -1,0 +1,28 @@
+## RCW 46.80.130 All storage at place of business�Screening required�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.80.130 All storage at place of business�Screening required�Penalty.]
+
+(1) It is unlawful for a vehicle wrecker to keep a vehicle or any integral part thereof in any place other than the established place of business, designated in the certificate issued by the department, without permission of the department.
+(2) All premises containing vehicles or parts thereof shall be enclosed by a wall or fence of such height as to obscure the nature of the business carried on therein. To the extent reasonably necessary or permitted by the topography of the land, the department may establish specifications or standards for the fence or wall. The wall or fence shall be painted or stained a neutral shade that blends in with the surrounding premises, and the wall or fence must be kept in good repair. A living hedge of sufficient density to prevent a view of the confined area may be substituted for such a wall or fence. Any dead or dying portion of the hedge shall be replaced.
+(3) Violation of subsection (1) of this section is a gross misdemeanor.
+
+```catala
+scope RCW_46_80_130:
+  definition class
+  under condition charge = Section46_80_130_
+  consequence equals GrossMisdemeanor
+```
+

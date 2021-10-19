@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.16A.070 Registration—Cancellation, refusal, etc.—Appeals.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.16A.070 Registration—Cancellation, refusal, etc.—Appeals.]
+
+(1) The department may refuse to issue or may cancel a registration certificate at any time when the department determines that an applicant for registration is not entitled to a registration certificate. Notice of cancellation may be accomplished by sending a notice by first-class mail using the last known address in department records for the registered or legal owner or owners, and completing an affidavit of first-class mail. It is unlawful for any person to remove, drive, or operate the vehicle until a proper registration certificate has been issued. A person removing, driving, or operating a vehicle after the refusal to issue or cancellation of the registration is guilty of a gross misdemeanor.
+(2)
+    (a) The suspension, revocation, cancellation, or refusal by the director of a registration certificate provided under this chapter is conclusive unless the person whose registration or certificate is suspended, revoked, canceled, or refused appeals to the superior court of Thurston county or the person's county of residence.
+    (b) Notice of appeal must be filed within ten days after receipt of the notice of suspension, revocation, cancellation, or refusal. Upon the filing of the notice of appeal, the court shall issue an order to the director to show cause why the registration should not be granted or reinstated and return the order not less than ten days after the date of service to the director. Service must be in the same manner as prescribed for the service of a summons and complaint in other civil actions.
+    (c) Upon the hearing on the order to show cause, the court shall hear evidence concerning matters with reference to the suspension, revocation, cancellation, or refusal of the registration and shall enter judgment either affirming or setting aside the suspension, revocation, cancellation, or refusal.
+
+```catala
+scope RCW_46_16A_070:
+  definition class
+  under condition charge = Section46_16A_070_1_
+  consequence equals GrossMisdemeanor
+```
+

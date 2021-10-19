@@ -1,0 +1,29 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.61.024 Attempting to elude police vehicle—Defense—License revocation.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.024 Attempting to elude police vehicle—Defense—License revocation.]
+
+(1) Any driver of a motor vehicle who willfully fails or refuses to immediately bring his or her vehicle to a stop and who drives his or her vehicle in a reckless manner while attempting to elude a pursuing police vehicle, after being given a visual or audible signal to bring the vehicle to a stop, shall be guilty of a class C felony. The signal given by the police officer may be by hand, voice, emergency light, or siren. The officer giving such a signal shall be in uniform and the vehicle shall be equipped with lights and sirens.
+(2) It is an affirmative defense to this section which must be established by a preponderance of the evidence that: (a) A reasonable person would not believe that the signal to stop was given by a police officer; and (b) driving after the signal to stop was reasonable under the circumstances.
+(3) The license or permit to drive or any nonresident driving privilege of a person convicted of a violation of this section shall be revoked by the department of licensing.
+
+```catala
+scope RCW_46_61_024:
+  definition class
+  under condition charge = Section46_61_024_1_
+  consequence equals FelonyC
+```
+

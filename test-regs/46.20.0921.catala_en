@@ -1,0 +1,55 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.0921 Violations—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.0921 Violations—Penalty.]
+
+(1) It is a misdemeanor for any person:
+    (a) To display or cause or permit to be displayed or have in his or her possession any fictitious or fraudulently altered driver's license or identicard;
+    (b) To lend his or her driver's license or identicard to any other person or knowingly permit the use thereof by another;
+    (c) To display or represent as one's own any driver's license or identicard not issued to him or her;
+    (d) Willfully to fail or refuse to surrender to the department upon its lawful demand any driver's license or identicard which has been suspended, revoked or canceled;
+    (e) To use a false or fictitious name in any application for a driver's license or identicard or to knowingly make a false statement or to knowingly conceal a material fact or otherwise commit a fraud in any such application;
+    (f) To permit any unlawful use of a driver's license or identicard issued to him or her.
+(2) It is a class C felony for any person to sell or deliver a stolen driver's license or identicard.
+(3) It is unlawful for any person to manufacture, sell, or deliver a forged, fictitious, counterfeit, fraudulently altered, or unlawfully issued driver's license or identicard, or to manufacture, sell, or deliver a blank driver's license or identicard except under the direction of the department. A violation of this subsection is:
+    (a) A class C felony if committed (i) for financial gain or (ii) with intent to commit forgery, theft, or identity theft; or
+    (b) A gross misdemeanor if the conduct does not violate (a) of this subsection.
+(4) Notwithstanding subsection (3) of this section, it is a misdemeanor for any person under the age of twenty-one to manufacture or deliver fewer than four forged, fictitious, counterfeit, or fraudulently altered driver's licenses or identicards for the sole purpose of misrepresenting a person's age.
+(5) In a proceeding under subsection (2), (3), or (4) of this section that is related to an identity theft under RCW 9.35.020, the crime will be considered to have been committed in any locality where the person whose means of identification or financial information was appropriated resides, or in which any part of the offense took place, regardless of whether the defendant was ever actually in that locality.
+
+```catala
+scope RCW_46_20_0921:
+  definition class
+  under condition charge = Section46_20_0921_1_
+  consequence equals SimpleMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_0921_2_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_20_0921_3_a_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_20_0921_3_b_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_0921_4_
+  consequence equals SimpleMisdemeanor
+```
+

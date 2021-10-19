@@ -1,0 +1,35 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.12.755 Ownership of motor vehicle by person under eighteen prohibited—Exception.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.12.755 Ownership of motor vehicle by person under eighteen prohibited—Exception.]
+
+(1) A person under the age of eighteen may not be the registered or legal owner of a motor vehicle unless the:
+    (a) Motor vehicle was previously registered in the person's name in another jurisdiction while a resident of that jurisdiction;
+    (b) Person is on active military duty with the United States armed forces; or
+    (c) Person is, in effect, emancipated.
+(2) It is unlawful for any person to convey, sell, or transfer the ownership of any motor vehicle to a person under the age of eighteen. This subsection does not apply to a vehicle dealer properly licensed under chapter 46.70 RCW if the minor provides the dealer with a certified copy of an original birth certificate showing that the minor is over eighteen years of age. The vehicle dealer shall submit the certified copy of the original birth certificate with an application for certificate of title to the department, county auditor or other agent, or subagent appointed by the director.
+(3) A person is guilty of a misdemeanor punishable by a fine of not more than two hundred fifty dollars or by imprisonment in a county jail for not more than ninety days if that person with actual notice of the prohibition:
+    (a) Gives, sells, or transfers the ownership of a motor vehicle to a person under the age of eighteen;
+    (b) Is a registered or legal owner of a motor vehicle in violation of subsection (1) of this section; or
+    (c) Transfers, sells, or encumbers an interest in a motor vehicle in violation of RCW 46.61.5058.
+
+```catala
+scope RCW_46_12_755:
+  definition class
+  under condition charge = Section46_12_755_3_
+  consequence equals SimpleMisdemeanor
+```
+

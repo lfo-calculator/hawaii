@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.64.035 Posting of security or bail by nonresident—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.64.035 Posting of security or bail by nonresident—Penalty.]
+
+Any nonresident of the state of Washington who is issued a notice of infraction or a citation for a traffic offense may be required to post either a bond or cash security in the amount of the infraction penalty or to post bail. The court shall by January 1, 1990, accept, in lieu of bond or cash security, valid major credit cards issued by a bank or other financial institution or automobile club card guaranteed by an insurance company licensed to conduct business in the state. If payment is made by credit card the court is authorized to impose, in addition to any penalty or fine, an amount equal to the charge to the court for accepting such cards. If the person cannot post the bond, cash security, or bail, he or she shall be taken to a magistrate or judge for a hearing at the first possible working time of the court. If the person refuses to comply with this section, he or she shall be guilty of a misdemeanor. This section does not apply to residents of states that have entered into a reciprocal agreement as outlined in RCW 46.23.020.
+
+```catala
+scope RCW_46_64_035:
+  definition class
+  under condition charge = Section46_64_035__
+  consequence equals SimpleMisdemeanor
+```
+

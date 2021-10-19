@@ -1,0 +1,52 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.16A.320 Vehicle trip permits—Restrictions and requirements—Fee—Penalty—Rules.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.16A.320 Vehicle trip permits—Restrictions and requirements—Fee—Penalty—Rules.]
+
+(1)
+    (a) A vehicle owner may operate an unregistered vehicle on public highways under the authority of a trip permit issued by this state. For purposes of trip permits, a vehicle is considered unregistered if:
+        (i) Under reciprocal relations with another jurisdiction, the owner would be required to register the vehicle in this state;
+        (ii) Not registered when registration is required under this chapter;
+        (iii) The license tabs have expired; or
+        (iv) The current gross weight license is insufficient for the load being carried. The licensed gross weight may not exceed eighty thousand pounds for a combination of vehicles or forty thousand pounds for a single unit vehicle with three or more axles.
+    (b) Trip permits are required to move mobile homes or park model trailers and may only be issued if property taxes are paid in full.
+(2) Trip permits may not be:
+    (a) Issued to vehicles registered under RCW 46.16A.455(5) in lieu of further registration within the same registration year; or
+    (b) Used for commercial motor vehicles owned by a motor carrier subject to RCW 46.32.080 if the motor carrier's department of transportation number has been placed out of service by the Washington state patrol. A violation of or a failure to comply with this subsection is a gross misdemeanor, subject to a minimum monetary penalty of two thousand five hundred dollars for the first violation and five thousand dollars for each subsequent violation.
+(3)
+    (a) Each trip permit authorizes the operation of a single vehicle at the maximum legal weight limit for the vehicle for a period of three consecutive days beginning with the day of first use. No more than three trip permits may be used for any one vehicle in any thirty consecutive day period. No more than two trip permits may be used for any one recreational vehicle, as defined in RCW 43.22.335, in a one-year period. Every trip permit must:
+        (i) Identify the vehicle for which it is issued;
+        (ii) Be completed in its entirety;
+        (iii) Be signed by the operator before operation of the vehicle on the public highways of this state;
+        (iv) Not be altered or corrected. Altering or correcting data on the trip permit invalidates the trip permit; and
+        (v) Be displayed on the vehicle for which it is issued as required by the department.
+    (b) Vehicles operating under the authority of trip permits are subject to all laws, rules, and regulations affecting the operation of similar vehicles in this state.
+(4) Prorate operators operating commercial vehicles on trip permits in Washington shall retain the customer copy of each permit for four years.
+(5) Trip permits may be obtained from field offices of the department of transportation, department of licensing, county auditors or other agents, and subagents appointed by the department for the fee provided in RCW 46.17.400(1)(h). Exchanges, credits, or refunds may not be given for trip permits after they have been purchased.
+(6) Except as provided in subsection (2)(b) of this section, a violation of or a failure to comply with this section is a gross misdemeanor.
+(7) The department may adopt rules necessary to administer this section.
+
+```catala
+scope RCW_46_16A_320:
+  definition class
+  under condition charge = Section46_16A_320_2_b_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_16A_320_6_
+  consequence equals GrossMisdemeanor
+```
+

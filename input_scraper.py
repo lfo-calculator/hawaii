@@ -3,6 +3,7 @@ from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
 from enum import Enum
+import time
 import sys
 import os
 import re
@@ -115,8 +116,8 @@ def format_the_line(line_to_format, section_number):
     return return_string
 
 
-for i in range(1, len(sys.argv)):
-    website = websiteBase + sys.argv[i]
+def retrieve_website_text(website_arg):
+    website = websiteBase + website_arg
     raw_html = simple_get(website)
     if len(raw_html) == 0:
         print('No HTML retrieved')
@@ -126,7 +127,7 @@ for i in range(1, len(sys.argv)):
         content = html.find('div', id='contentWrapper')
         if content is None:
             print('No content wrapper for ' + website)
-            continue
+            return
             
         divs = content.find_all('div')
 
@@ -135,7 +136,7 @@ for i in range(1, len(sys.argv)):
         file_name = rcw_number + '.catala_en'
         if os.path.isfile('catala-regs/' + file_name):
             print('file ' + file_name + ' already exists.')
-            continue            
+            return            
     
         the_title = '## [' + divs[0].get_text() + ']'
         the_title = ' '.join(the_title.split())
@@ -173,8 +174,18 @@ for i in range(1, len(sys.argv)):
 
         all_the_text = all_the_text + format_catala(rcw_number)
 
-        #print(all_the_text)
+        print(all_the_text)
         #print(content.prettify())
-        with open('test_regs/' + file_name, 'a') as f:
-            f.write(all_the_text)
+        #with open('test_regs/' + file_name, 'a') as f:
+            #f.write(all_the_text)
+
+
+if len(sys.argv) > 1:
+    for i in range(1, len(sys.argv)):
+        retrieve_website_text(sys.argv[i])
+else:
+    with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            retrieve_website_text(row[0])
     

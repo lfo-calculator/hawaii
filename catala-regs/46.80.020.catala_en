@@ -1,0 +1,35 @@
+## RCW 46.80.020 License required�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.80.020 License required�Penalty.]
+
+(1)
+    (a) Except as provided in (b) of this subsection, it is unlawful for a person to engage in the business of wrecking vehicles without having first applied for and received a license.
+    (b) As defined in chapter 70A.205 RCW, a solid waste disposal site that is compliant with all applicable regulations may wreck a nonmotorized abandoned recreational vehicle, as defined in RCW 46.53.010.
+(2)
+    (a) Except as provided in (b) of this subsection, a person or firm engaged in the unlawful activity described in this section is guilty of a gross misdemeanor.
+    (b) A second or subsequent offense is a class C felony punishable according to chapter 9A.20 RCW.
+
+```catala
+scope RCW_46_80_020:
+  definition class
+  under condition charge = Section46_80_020_2_a_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_80_020_2_b_
+  consequence equals FelonyC
+```
+

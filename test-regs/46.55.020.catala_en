@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.55.020 Registration required—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.55.020 Registration required—Penalty.]
+
+(1) A person shall not engage in or offer to engage in the activities of a registered tow truck operator without a current registration certificate from the department of licensing authorizing him or her to engage in such activities.
+(2) Any person engaging in or offering to engage in the activities of a registered tow truck operator without the registration certificate required by this chapter is guilty of a gross misdemeanor.
+(3) A registered operator who engages in a business practice that is prohibited under this chapter may be issued a notice of traffic infraction under chapter 46.63 RCW and is also subject to the civil penalties that may be imposed by the department under this chapter.
+(4) A person found to have committed an offense that is a traffic infraction under this chapter is subject to a monetary penalty of at least two hundred fifty dollars.
+(5) All traffic infractions issued under this chapter shall be under the jurisdiction of the district court in whose jurisdiction they were issued.
+
+```catala
+scope RCW_46_55_020:
+  definition class
+  under condition charge = Section46_55_020_2_
+  consequence equals GrossMisdemeanor
+```
+

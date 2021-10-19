@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.005 Driving without a license—Misdemeanor, when.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.005 Driving without a license—Misdemeanor, when.]
+
+Except as expressly exempted by this chapter, it is a misdemeanor for a person to drive any motor vehicle upon a highway in this state without a valid driver's license issued to Washington residents under this chapter. This section does not apply if at the time of the stop the person is not in violation of RCW 46.20.342(1) or * 46.20.420 and has in his or her possession an expired driver's license or other valid identifying documentation under RCW 46.20.035. A violation of this section is a lesser included offense within the offenses described in RCW 46.20.342(1) or * 46.20.420.
+
+```catala
+scope RCW_46_20_005:
+  definition class
+  under condition charge = Section46_20_005__
+  consequence equals SimpleMisdemeanor
+```
+

@@ -1,0 +1,38 @@
+## RCW 46.70.021 License required for dealers or manufacturers�Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.70.021 License required for dealers or manufacturers�Penalties.]
+
+(1) It is unlawful for any person, firm, or association to act as a vehicle dealer or vehicle manufacturer, to engage in business as such, serve in the capacity of such, advertise himself, herself, or themselves as such, solicit sales as such, or distribute or transfer vehicles for resale in this state, without first obtaining and holding a current license as provided in this chapter, unless the title of the vehicle is in the name of the seller.
+(2) It is unlawful for any person other than a licensed vehicle dealer to display a vehicle for sale unless the registered owner or legal owner is the displayer or holds a notarized power of attorney.
+(3)
+    (a) Except as provided in (b) of this subsection, a person or firm engaged in buying and offering for sale, or buying and selling five or more vehicles in a twelve-month period, or in any other way engaged in dealer activity without holding a vehicle dealer license, is guilty of a gross misdemeanor, and upon conviction subject to a fine of up to five thousand dollars for each violation and up to three hundred sixty-four days in jail.
+    (b) A second offense is a class C felony punishable under chapter 9A.20 RCW.
+(4) A violation of this section is also a per se violation of chapter 19.86 RCW and is considered a deceptive practice.
+(5) The department of licensing, the Washington state patrol, the attorney general's office, and the department of revenue shall cooperate in the enforcement of this section.
+(6) A distributor, factory branch, or factory representative shall not be required to have a vehicle manufacturer license so long as the vehicle manufacturer so represented is properly licensed pursuant to this chapter.
+(7) Nothing in this chapter prohibits financial institutions from cooperating with vehicle dealers licensed under this chapter in dealer sales or leases. However, financial institutions shall not broker vehicles and cooperation is limited to organizing, promoting, and financing of such dealer sales or leases.
+
+```catala
+scope RCW_46_70_021:
+  definition class
+  under condition charge = Section46_70_021_3_a_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_70_021_3_b_
+  consequence equals FelonyC
+```
+

@@ -1,0 +1,33 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.18.285 Ride share license plates.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.18.285 Ride share license plates.]
+
+(1) A registered owner who uses a passenger motor vehicle for ride sharing or ride sharing for persons with special transportation needs, as defined in RCW 46.74.010, shall apply to the department, county auditor or other agent, or subagent appointed by the director for special ride share license plates. The registered owner must qualify for the tax exemptions provided in RCW 82.08.0287, 82.12.0282, or 82.44.015, and pay the special ride share license plate fee required under RCW 46.17.220(18) when the special ride share license plates are initially issued.
+(2) The special ride share license plates:
+    (a) Must be of a distinguishing separate numerical series or design as defined by the department;
+    (b) Must be returned to the department when no longer in use or when the registered owner no longer qualifies for the tax exemptions provided in subsection (1) of this section; and
+    (c) Are not required to be renewed annually for motor vehicles described in RCW 46.16A.170.
+(3) Special ride share license plates may be transferred from one motor vehicle to another motor vehicle as described in subsection (1) of this section upon application to the department, county auditor or other agent, or subagent appointed by the director.
+(4) Any person who knowingly makes a false statement of a material fact in the application for a special license plate under subsection (1) of this section is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_18_285:
+  definition class
+  under condition charge = Section46_18_285_4_
+  consequence equals GrossMisdemeanor
+```
+

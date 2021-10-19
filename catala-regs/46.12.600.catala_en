@@ -1,0 +1,43 @@
+## RCW 46.12.600 Destruction of vehicle�Surrender of certificate, penalty�Report of settlement by insurance company�Market value threshold.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.12.600 Destruction of vehicle�Surrender of certificate, penalty�Report of settlement by insurance company�Market value threshold.]
+
+(1)
+    (a) The registered owner or legal owner shall:
+        (i) Report the destruction of the vehicle issued a certificate of title or registration certificate to the department within fifteen days of its destruction; and
+        (ii) Submit the certificate of title or affidavit in lieu of title marked "DESTROYED." The registered owner's name, address, and the date of destruction must be clearly shown on the certificate of title or affidavit in lieu of title.
+    (b) It is a gross misdemeanor to fail to notify the department and be in possession of a certificate of title of a destroyed vehicle on the sixteenth day after the vehicle is destroyed and each day thereafter.
+(2) The insurance company or self-insurer shall report the destruction or total loss of vehicles issued a certificate of title or registration certificate to the department within fifteen days after the settlement claim. The report must be submitted regardless of where or in what jurisdiction the total loss occurred. An insurer shall report total loss vehicles to the department in any of the following manners:
+    (a) Electronically through the department's online reporting system. An insurer choosing this option must immediately destroy ownership documents after filing the electronic report;
+    (b) Submitting the certificate of title or affidavit in lieu of title marked "DESTROYED." The insurer's name, address, and the date of loss must be clearly shown on the certificate of title or affidavit in lieu of title; or
+    (c) Submitting a properly completed total loss claim settlement form provided by the department.
+(3) The registered owner, legal owner, or insurer reporting the destruction or total loss of a motor vehicle six years old or older must include a statement on whether the fair market value of the motor vehicle immediately before its destruction was at least equal to the market value threshold. The age of the motor vehicle is determined by subtracting the model year from the current calendar year.
+(4) The market value threshold is six thousand seven hundred ninety dollars or a greater amount as set by rule of the department. The department shall:
+    (a) Increase the market value threshold amount:
+        (i) When the consumer price index for all urban consumers, compiled by the bureau of labor statistics, United States department of labor, or its successor, for the west region, in the expenditure category "used cars and trucks," shows an annual average increase over the previous year;
+        (ii) By the same percentage increase of the annual average shown in the consumer price index; and
+        (iii) On July 1st of the year immediately following the year with the increase of the annual average;
+    (b) Round each increase of the market value threshold to the nearest ten dollars;
+    (c) Not increase the market value threshold amount if the amount of the increase would be less than fifty dollars; and
+    (d) Carry forward any unmade increases to succeeding years until the cumulative increase is at least fifty dollars.
+
+```catala
+scope RCW_46_12_600:
+  definition class
+  under condition charge = Section46_12_600_1_b_
+  consequence equals GrossMisdemeanor
+```
+

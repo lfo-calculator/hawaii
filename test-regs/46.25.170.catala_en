@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.25.170 Civil and criminal penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.25.170 Civil and criminal penalties.]
+
+(1) A person subject to RCW 81.04.405 who is determined by the utilities and transportation commission, after notice, to have committed an act that is in violation of RCW 46.25.020, 46.25.030, 46.25.040, 46.25.050, or 46.25.110 is liable to Washington state for the civil penalties provided for in RCW 81.04.405.
+(2) A person who violates or fails to comply with, or who procures, aids, or abets in the violation of any provision of RCW 46.25.020, 46.25.030, 46.25.040, 46.25.050, or 46.25.110 is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_25_170:
+  definition class
+  under condition charge = Section46_25_170_2_
+  consequence equals GrossMisdemeanor
+```
+

@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.015 Driving without a license—Traffic infraction, when.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.015 Driving without a license—Traffic infraction, when.]
+
+(1) Except as expressly exempted by this chapter, it is a traffic infraction and not a misdemeanor under RCW 46.20.005 if a person:
+    (a) Drives any motor vehicle upon a highway in this state without a valid driver's license issued to Washington residents under this chapter in his or her possession;
+    (b) Provides the citing officer with an expired driver's license or other valid identifying documentation under RCW 46.20.035 at the time of the stop; and
+    (c) Is not driving while suspended or revoked in violation of RCW 46.20.342(1) or * 46.20.420.
+(2) A person who violates this section is subject to a penalty of two hundred fifty dollars. If the person appears in person before the court or submits by mail written proof that he or she obtained a valid license after being cited, the court shall reduce the penalty to fifty dollars.
+
+```catala
+scope RCW_46_20_015:
+  definition class
+  under condition charge = Section46_20_015_1_
+  consequence equals SimpleMisdemeanor
+```
+

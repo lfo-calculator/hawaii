@@ -1,0 +1,32 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.435 Unlawful installation of safety glazing or film sunscreening material, penalty—Unlawful purchase or sale of safety glazing or film sunscreening material installation services, penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.435 Unlawful installation of safety glazing or film sunscreening material, penalty—Unlawful purchase or sale of safety glazing or film sunscreening material installation services, penalty.]
+
+(1) A person is guilty of unlawful installation of safety glazing or film sunscreening material if he or she knowingly installs safety glazing or film sunscreening material in violation of RCW 46.37.430. Installation includes both the original application of safety glazing or film sunscreening material and the installation of vehicle windows which have already had safety glazing or film sunscreening material applied. Unlawful installation of safety glazing or film sunscreening material is a misdemeanor.
+(2) A person is guilty of unlawful purchase or sale of safety glazing or film sunscreening material installation services if he or she provides or receives compensation with the knowledge that such compensation is for the purpose of installing safety glazing or film sunscreening material in violation of RCW 46.37.430. Installation includes both the original application of safety glazing or film sunscreening material and the installation of vehicle windows which have already had safety glazing or film sunscreening material applied. Unlawful purchase or sale of safety glazing or film sunscreening material installation services is a gross misdemeanor.
+
+```catala
+scope RCW_46_37_435:
+  definition class
+  under condition charge = Section46_37_435_1_
+  consequence equals SimpleMisdemeanor
+
+  definition class
+  under condition charge = Section46_37_435_2_
+  consequence equals GrossMisdemeanor
+```
+

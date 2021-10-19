@@ -1,0 +1,31 @@
+## RCW 46.61.522 Vehicular assault�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.522 Vehicular assault�Penalty.]
+
+(1) A person is guilty of vehicular assault if he or she operates or drives any vehicle:
+    (a) In a reckless manner and causes substantial bodily harm to another; or
+    (b) While under the influence of intoxicating liquor or any drug, as defined by RCW 46.61.502, and causes substantial bodily harm to another; or
+    (c) With disregard for the safety of others and causes substantial bodily harm to another.
+(2) Vehicular assault is a class B felony punishable under chapter 9A.20 RCW.
+(3) As used in this section, "substantial bodily harm" has the same meaning as in RCW 9A.04.110.
+
+```catala
+scope RCW_46_61_522:
+  definition class
+  under condition charge = Section46_61_522_1_
+  consequence equals FelonyB
+```
+

@@ -1,0 +1,35 @@
+## RCW 46.10.490 Operating violations.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.10.490 Operating violations.]
+
+(1) It is a traffic infraction for any person to operate any snowmobile:
+    (a) At a rate of speed greater than reasonable and prudent under the existing conditions.
+    (b) In a manner so as to endanger the property of another.
+    (c) Without a lighted headlight and taillight between the hours of dusk and dawn, or when otherwise required for the safety of others.
+    (d) Without an adequate braking device which may be operated either by hand or foot.
+    (e) Without an adequate and operating muffling device which shall effectively blend the exhaust and motor noise in such a manner so as to preclude excessive or unusual noise, and, (i) on snowmobiles manufactured on or before January 4, 1973, which shall effectively limit such noise at a level of eighty-six decibels, or below, on the "A" scale at fifty feet, and (ii) on snowmobiles manufactured after January 4, 1973, which shall effectively limit such noise at a level of eighty-two decibels, or below, on the "A" scale at fifty feet, and (iii) on snowmobiles manufactured after January 1, 1975, which shall effectively limit such noise at a level of seventy-eight decibels, or below, as measured on the "A" scale at a distance of fifty feet, under testing procedures as established by the department of ecology; except snowmobiles used in organized racing events in an area designated for that purpose may use a bypass or cutout device. This section shall not affect the power of the department of ecology to adopt noise performance standards for snowmobiles. Noise performance standards adopted or to be adopted by the department of ecology shall be in addition to the standards contained in this section, but the department's standards shall supersede this section to the extent of any inconsistency.
+    (f) Upon the paved portion or upon the shoulder or inside bank or slope of any public roadway or highway, or upon the median of any divided highway, except as provided in RCW 46.10.460 and 46.10.470.
+    (g) In any area or in such a manner so as to expose the underlying soil or vegetation, or to injure, damage, or destroy trees or growing crops.
+    (h) Without a current registration decal affixed thereon, if not exempted under RCW 46.10.410 as now or hereafter amended.
+(2) It is a misdemeanor for any person to operate any snowmobile so as to endanger the person of another or while under the influence of intoxicating liquor or narcotics or habit-forming drugs.
+
+```catala
+scope RCW_46_10_490:
+  definition class
+  under condition charge = Section46_10_490_2_
+  consequence equals SimpleMisdemeanor
+```
+

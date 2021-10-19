@@ -1,0 +1,36 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.740 Notation on driving record—Verification of interlock—Penalty, exception. (Effective until January 1, 2022.)
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.740 Notation on driving record—Verification of interlock—Penalty, exception. (Effective until January 1, 2022.)]
+
+(1) The department shall attach or imprint a notation on the driving record of any person restricted under RCW 46.20.720, 46.61.5055, or 10.05.140 stating that the person may operate only a motor vehicle equipped with a functioning ignition interlock device. The department shall determine the person's eligibility for licensing based upon written verification by a company doing business in the state that it has installed the required device on a vehicle owned or operated by the person seeking reinstatement. If, based upon notification from the interlock provider or otherwise, the department determines that an ignition interlock required under this section is no longer installed or functioning as required, the department shall suspend the person's license or privilege to drive. Whenever the license or driving privilege of any person is suspended or revoked as a result of noncompliance with an ignition interlock requirement, the suspension shall remain in effect until the person provides notice issued by a company doing business in the state that a vehicle owned or operated by the person is equipped with a functioning ignition interlock device.
+(2) It is a gross misdemeanor for a person with such a notation on his or her driving record to operate a motor vehicle that is not so equipped, unless the notation resulted from a restriction imposed as a condition of release and the restriction has been released by the court prior to driving.
+(3) Any sentence imposed for a violation of subsection (2) of this section shall be served consecutively with any sentence imposed under RCW 46.20.750, 46.61.502, 46.61.504, or 46.61.5055.
+(1) The department shall attach or imprint a notation on the driving record of any person restricted under RCW 46.20.720, 46.61.5055, or 10.05.140 stating that the person may operate only a motor vehicle equipped with a functioning ignition interlock device. The department shall determine the person's eligibility for licensing based upon written verification by a company doing business in the state that it has installed the required device on a vehicle owned or operated by the person seeking reinstatement. If, based upon notification from the interlock provider or otherwise, the department determines that an ignition interlock required under this section is no longer installed or functioning as required, the department shall suspend the person's license or privilege to drive. Whenever the license or driving privilege of any person is suspended or revoked as a result of noncompliance with an ignition interlock requirement, the suspension shall remain in effect until the person provides notice issued by a company doing business in the state that a vehicle owned or operated by the person is equipped with a functioning ignition interlock device.
+(2) It is a gross misdemeanor for a person with such a notation on his or her driving record to operate a motor vehicle that is not so equipped, unless the notation resulted from a restriction imposed as a condition of release and the restriction has been released by the court prior to driving. Any time a person is convicted under this section, the court shall immediately notify the department for purposes of RCW 46.20.720(3)(e).
+(3) Any sentence imposed for a violation of subsection (2) of this section shall be served consecutively with any sentence imposed under RCW 46.20.750, 46.61.502, 46.61.504, or 46.61.5055.
+
+```catala
+scope RCW_46_20_740:
+  definition class
+  under condition charge = Section46_20_740_2_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_740_2_
+  consequence equals GrossMisdemeanor
+```
+

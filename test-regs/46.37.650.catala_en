@@ -1,0 +1,46 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.650 Air bags—Manufacture, importation, sale, or installation of counterfeit, nonfunctional, damaged, or previously deployed—Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.650 Air bags—Manufacture, importation, sale, or installation of counterfeit, nonfunctional, damaged, or previously deployed—Penalties.]
+
+(1)
+    (a) It is unlawful for a person, with criminal negligence, to manufacture or import a motor vehicle air bag, that: (i) Is a counterfeit air bag, (ii) is a nonfunctional air bag, (iii) is a previously deployed or damaged air bag that is part of an inflatable restraint system, or (iv) otherwise does not meet all applicable federal safety standards for an air bag. This subsection does not apply to nondeployed salvage air bags that meet the requirements of RCW 46.37.660(1).
+    (b) A person in violation of this subsection is guilty of a class C felony if the criminal negligence caused bodily injury as defined in RCW 9A.04.110 or death to another person.
+    (c) A person in violation of this subsection is guilty of a class C felony, regardless if the criminal negligence caused harm to another.
+(2)
+    (a) It is unlawful for a person, in a reckless manner, to sell, offer for sale, install, or reinstall a device in a vehicle for compensation, or distribute as an auto part, or replace a motor vehicle air bag, that: (i) Is a counterfeit air bag, (ii) is a nonfunctional air bag, (iii) is a previously deployed or damaged air bag that is part of an inflatable restraint system, or (iv) otherwise does not meet all applicable federal safety standards for an air bag. This subsection does not apply to nondeployed salvage air bags that meet the requirements of RCW 46.37.660(1).
+    (b) A person in violation of this subsection is guilty of a class C felony if the reckless manner caused bodily injury as defined in RCW 9A.04.110 or death to another person.
+    (c) A person in violation of this subsection is guilty of a class C felony, regardless if the reckless manner caused harm to another.
+
+```catala
+scope RCW_46_37_650:
+  definition class
+  under condition charge = Section46_37_650_1_b_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_650_1_c_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_650_2_b_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_650_2_c_
+  consequence equals FelonyC
+```
+

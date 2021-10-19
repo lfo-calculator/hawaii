@@ -1,0 +1,26 @@
+## RCW 46.79.120 Unlicensed hulk hauling or scrap processing�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.79.120 Unlicensed hulk hauling or scrap processing�Penalty.]
+
+Any hulk hauler or scrap processor who engages in the business of hulk hauling or scrap processing without holding a current license issued by the department for authorization to do so, or, holding such a license, exceeds the authority granted by that license, is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_79_120:
+  definition class
+  under condition charge = Section46_79_120_
+  consequence equals GrossMisdemeanor
+```
+

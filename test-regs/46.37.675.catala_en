@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.675 Signal preemption device—Accident—Death—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.675 Signal preemption device—Accident—Death—Penalty.]
+
+(1) When an accident that results in death to a person occurs as a proximate result of the operation of a signal preemption device which was not authorized in RCW 46.37.670, the driver is guilty of negligently causing death by use of a signal preemption device.
+(2) Negligently causing death by use of a signal preemption device is a class B felony punishable under chapter 9A.20 RCW.
+
+```catala
+scope RCW_46_37_675:
+  definition class
+  under condition charge = Section46_37_675_2_
+  consequence equals FelonyB
+```
+

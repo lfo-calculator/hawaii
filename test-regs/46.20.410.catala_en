@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.410 Penalty—Violation.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.410 Penalty—Violation.]
+
+(1) Any person convicted for violation of any restriction of an occupational driver's license or a temporary restricted driver's license shall in addition to the cancellation of such license and any other penalties provided by law be fined not less than fifty nor more than two hundred dollars or imprisoned for not more than six months or both such fine and imprisonment.
+(2) It is a gross misdemeanor for a person to violate any restriction of an ignition interlock driver's license.
+
+```catala
+scope RCW_46_20_410:
+  definition class
+  under condition charge = Section46_20_410_2_
+  consequence equals GrossMisdemeanor
+```
+

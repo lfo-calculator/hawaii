@@ -1,0 +1,33 @@
+## RCW 46.12.610 Contaminated vehicles.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.12.610 Contaminated vehicles.]
+
+(1) A local health officer may notify the department that a vehicle has been:
+    (a) Declared unfit and prohibited from use as authorized in chapter 64.44 RCW if the vehicle has become contaminated as defined in RCW 64.44.010;
+    (b) Satisfactorily decontaminated and retested according to the written work plan approved by the local health officer.
+(2) The department shall brand vehicle records and certificates of title when it receives the notification from a local health officer as provided in subsection (1) of this section.
+(3) A person is guilty of a gross misdemeanor if he or she advertises for sale or sells a vehicle that has been declared unfit and prohibited from use by a local health officer if:
+    (a) The person has knowledge that the local health officer has issued an order declaring the vehicle unfit and prohibiting its use; or
+    (b) A notification has been placed on the certificate of title under subsection (2) of this section that the vehicle has been declared unfit and prohibited from use.
+(4) A person may advertise or sell a vehicle if a release for reuse document has been issued by a local health officer under chapter 64.44 RCW or a notification has been placed on the certificate of title under subsection (2) of this section that the vehicle has been decontaminated and released for reuse.
+
+```catala
+scope RCW_46_12_610:
+  definition class
+  under condition charge = Section46_12_610_3_
+  consequence equals GrossMisdemeanor
+```
+

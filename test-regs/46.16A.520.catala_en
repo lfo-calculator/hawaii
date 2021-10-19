@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.16A.520 Allowing unauthorized person to drive—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.16A.520 Allowing unauthorized person to drive—Penalty.]
+
+It is unlawful for any person in whose name a vehicle is registered knowingly to permit another person to drive the vehicle when the other person is not authorized to do so under the laws of this state. A violation of this section is a misdemeanor.
+
+```catala
+scope RCW_46_16A_520:
+  definition class
+  under condition charge = Section46_16A_520__
+  consequence equals SimpleMisdemeanor
+```
+

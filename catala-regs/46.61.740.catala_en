@@ -1,0 +1,27 @@
+## RCW 46.61.740 Theft of motor vehicle fuel.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.740 Theft of motor vehicle fuel.]
+
+(1) Any person who refuses to pay or evades payment for motor vehicle fuel that is pumped into a motor vehicle is guilty of theft of motor vehicle fuel. A violation of this subsection is a gross misdemeanor punishable under chapter 9A.20 RCW.
+(2) The court shall order the department to suspend the person's license, permit, or nonresident privilege to drive for a period specified by the court of up to six months.
+
+```catala
+scope RCW_46_61_740:
+  definition class
+  under condition charge = Section46_61_740_1_
+  consequence equals GrossMisdemeanor
+```
+

@@ -1,0 +1,30 @@
+## RCW 46.72.100 Unprofessional conduct�Bond/insurance policy�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.72.100 Unprofessional conduct�Bond/insurance policy�Penalty.]
+
+(1) In addition to the unprofessional conduct specified in RCW 18.235.130, the director may take disciplinary action if he or she has good reason to believe that one of the following is true of the operator or the applicant for a permit or certificate: 
+    (a) He or she is guilty of committing two or more offenses for which mandatory revocation of driver's license is provided by law; 
+    (b) he or she has been convicted of vehicular homicide or vehicular assault; 
+    (c) he or she is intemperate or addicted to the use of narcotics.
+(2) Any for hire operator who operates a for hire vehicle without first having filed a bond or insurance policy and having received a for hire permit and a for hire certificate as required by this chapter is guilty of a gross misdemeanor, and upon conviction shall be punished by imprisonment in jail for a period not exceeding ninety days or a fine of not exceeding five hundred dollars, or both fine and imprisonment.
+
+```catala
+scope RCW_46_72_100:
+  definition class
+  under condition charge = Section46_72_100_2_
+  consequence equals GrossMisdemeanor
+```
+

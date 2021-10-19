@@ -1,0 +1,30 @@
+## RCW 46.61.520 Vehicular homicide�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.520 Vehicular homicide�Penalty.]
+
+(1) When the death of any person ensues within three years as a proximate result of injury proximately caused by the driving of any vehicle by any person, the driver is guilty of vehicular homicide if the driver was operating a motor vehicle:
+    (a) While under the influence of intoxicating liquor or any drug, as defined by RCW 46.61.502; or
+    (b) In a reckless manner; or
+    (c) With disregard for the safety of others.
+(2) Vehicular homicide is a class A felony punishable under chapter 9A.20 RCW, except that, for a conviction under subsection (1)(a) of this section, an additional two years shall be added to the sentence for each prior offense as defined in RCW 46.61.5055.
+
+```catala
+scope RCW_46_61_520:
+  definition class
+  under condition charge = Section46_61_520_
+  consequence equals FelonyA
+```
+

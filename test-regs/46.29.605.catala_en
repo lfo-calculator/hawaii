@@ -1,0 +1,36 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.29.605 Suspension of registration, notice—Surrender of license plates—Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.29.605 Suspension of registration, notice—Surrender of license plates—Penalties.]
+
+(1) Whenever the involvement in a motor vehicle accident in this state results in the driving privilege of a person being suspended for failure to pay a judgment or deposit security, the department shall suspend the Washington registration of the motor vehicle if the person driving at the time of the accident was also the registered owner of the motor vehicle.
+(2) A notice of suspension shall be mailed by first-class mail to the owner's last known address of record in the department and shall be effective notwithstanding the owner's failure to receive the notice.
+(3) Upon suspension of the registration of a motor vehicle, the registered owner shall surrender all vehicle license plates registered to the vehicle. The department shall destroy the license plates and, upon reinstatement of the registration, shall issue new vehicle license plates as provided in RCW 46.16A.200(9).
+(4) Failure to surrender license plates under subsection (3) of this section is a misdemeanor punishable by imprisonment for not less than one day nor more than five days and by a fine of not less than fifty dollars nor more than two hundred fifty dollars.
+(5) No vehicle license plates, certificate of title, or registration certificate for a motor vehicle may be issued, and no vehicle registration may be renewed during the time the registration of the motor vehicle is suspended.
+(6) Any person who operates a vehicle in this state while the registration of the vehicle is suspended is guilty of a gross misdemeanor and upon conviction thereof shall be imprisoned for not less than two days nor more than five days and fined not less than one hundred dollars nor more than five hundred dollars.
+
+```catala
+scope RCW_46_29_605:
+  definition class
+  under condition charge = Section46_29_605_4_
+  consequence equals SimpleMisdemeanor
+
+  definition class
+  under condition charge = Section46_29_605_6_
+  consequence equals GrossMisdemeanor
+```
+

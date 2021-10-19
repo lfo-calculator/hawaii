@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.64.050 General penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.64.050 General penalty.]
+
+It is a traffic infraction for any person to violate any of the provisions of this title unless violation is by this title or other law of this state declared to be a felony, a gross misdemeanor, or a misdemeanor.
+Unless another penalty is in this title provided, every person convicted of a misdemeanor for violation of any provisions of this title shall be punished accordingly.
+
+```catala
+scope RCW_46_64_050:
+  definition class
+  under condition charge = Section46_64_050__
+  consequence equals SimpleMisdemeanor
+```
+

@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.48.175 Rules—Penalties—Responsibility for compliance.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.48.175 Rules—Penalties—Responsibility for compliance.]
+
+Each violation of any rules and/or regulations made pursuant to RCW 46.48.170 or 81.80.290 pertaining to vehicle equipment on motor carriers transporting hazardous material shall be a misdemeanor.
+Bail for such a violation shall be set at a minimum of one hundred dollars. The fine for such a violation shall be not less than two hundred dollars nor more than five hundred dollars. Compliance with the provisions of this chapter is the primary responsibility of the owner or lessee of the vehicle or any vehicle used in combination that is cited in the violation.
+
+```catala
+scope RCW_46_48_175:
+  definition class
+  under condition charge = Section46_48_175__
+  consequence equals SimpleMisdemeanor
+```
+

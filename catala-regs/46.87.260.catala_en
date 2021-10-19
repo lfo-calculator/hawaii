@@ -1,0 +1,26 @@
+## RCW 46.87.260 Alteration or forgery of credential�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.87.260 Alteration or forgery of credential�Penalty.]
+
+Any person who alters, forges, or causes to be altered or forged any credential, or holds or uses any credential knowing the credential to have been altered or forged, is guilty of a class B felony punishable according to chapter 9A.20 RCW.
+
+```catala
+scope RCW_46_87_260:
+  definition class
+  under condition charge = Section46_87_260_
+  consequence equals FelonyB
+```
+

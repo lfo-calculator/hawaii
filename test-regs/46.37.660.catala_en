@@ -1,0 +1,46 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.660 Air bags—Replacement requirements, diagnostic system—Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.660 Air bags—Replacement requirements, diagnostic system—Penalties.]
+
+(1)
+    (a) Whenever an air bag that is part of a previously deployed inflatable restraint system is replaced by either a new air bag that is part of an inflatable restraint system or a nondeployed salvage air bag that is part of an inflatable restraint system, the air bag must conform to the original equipment manufacturer requirements and the installer must verify that the self-diagnostic system for the inflatable restraint system indicates that the entire inflatable restraint system is operating properly.
+    (b) A person in violation of this subsection (1) is guilty of a class C felony if the violation caused bodily injury as defined in RCW 9A.04.110 or death to another person.
+    (c) A person in violation of this subsection (1) is guilty of a class C felony, regardless if the violation caused harm to another.
+(2)
+    (a) No person may sell, install, or reinstall in any motor vehicle any device that causes the vehicle's diagnostic system to inaccurately indicate that the vehicle is equipped with a functional air bag when a counterfeit air bag, a nonfunctional air bag, or no air bag is installed. This subsection does not apply to nondeployed salvage air bags that meet the requirements of subsection (1) of this section.
+    (b) A person in violation of this subsection (2) is guilty of a class C felony if the violation caused bodily injury as defined in RCW 9A.04.110 or death to another person.
+    (c) A person in violation of this subsection (2) is guilty of a class C felony, regardless if the violation caused harm to another.
+
+```catala
+scope RCW_46_37_660:
+  definition class
+  under condition charge = Section46_37_660_1_b_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_660_1_c_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_660_2_b_
+  consequence equals FelonyC
+
+  definition class
+  under condition charge = Section46_37_660_2_c_
+  consequence equals FelonyC
+```
+

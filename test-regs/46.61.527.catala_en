@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.61.527 Roadway construction zones.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.527 Roadway construction zones.]
+
+(1) The secretary of transportation shall adopt standards and specifications for the use of traffic control devices in roadway construction zones on state highways. A roadway construction zone is an area where construction, repair, or maintenance work is being conducted by public employees or private contractors, on or adjacent to any public roadway. For the purpose of the pilot program referenced in section 218(2), chapter 470, Laws of 2009, during the 2009-2011 fiscal biennium, a roadway construction zone includes areas where public employees or private contractors are not present but where a driving condition exists that would make it unsafe to drive at higher speeds, such as, when the department is redirecting or realigning lanes on or adjacent to any public roadway pursuant to ongoing construction.
+(2) No person may drive a vehicle in a roadway construction zone at a speed greater than that allowed by traffic control devices.
+(3) A person found to have committed any infraction relating to speed restrictions in a roadway construction zone shall be assessed a monetary penalty equal to twice the penalty assessed under RCW 46.63.110. This penalty may not be waived, reduced, or suspended.
+(4) A person who drives a vehicle in a roadway construction zone in such a manner as to endanger or be likely to endanger any persons or property, or who removes, evades, or intentionally strikes a traffic safety or control device is guilty of reckless endangerment of roadway workers. A violation of this subsection is a gross misdemeanor punishable under chapter 9A.20 RCW.
+(5) The department shall suspend for sixty days the license or permit to drive or a nonresident driving privilege of a person convicted of reckless endangerment of roadway workers.
+
+```catala
+scope RCW_46_61_527:
+  definition class
+  under condition charge = Section46_61_527_4_
+  consequence equals GrossMisdemeanor
+```
+

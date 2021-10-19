@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.08.170 Control of traffic on capitol grounds—Violations, traffic infractions, misdemeanors—Jurisdiction.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.08.170 Control of traffic on capitol grounds—Violations, traffic infractions, misdemeanors—Jurisdiction.]
+
+(1) Except as provided in subsection (2) of this section, any violation of a rule or regulation prescribed under RCW 46.08.150 is a traffic infraction, and the district courts of Thurston county shall have jurisdiction over such offenses: PROVIDED, That violation of a rule or regulation relating to traffic including parking, standing, stopping, and pedestrian offenses is a traffic infraction.
+(2) Violation of such a rule or regulation equivalent to those provisions of Title 46 RCW set forth in RCW 46.63.020 remains a misdemeanor.
+
+```catala
+scope RCW_46_08_170:
+  definition class
+  under condition charge = Section46_08_170_2_
+  consequence equals SimpleMisdemeanor
+```
+

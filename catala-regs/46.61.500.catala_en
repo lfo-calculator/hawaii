@@ -1,0 +1,32 @@
+## RCW 46.61.500 Reckless driving�Penalty. (Effective until January 1, 2022.)
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.500 Reckless driving�Penalty. (Effective until January 1, 2022.)]
+
+(1) Any person who drives any vehicle in willful or wanton disregard for the safety of persons or property is guilty of reckless driving. Violation of the provisions of this section is a gross misdemeanor punishable by imprisonment for up to three hundred sixty-four days and by a fine of not more than five thousand dollars.
+(2)
+    (a) Subject to (b) of this subsection, the license or permit to drive or any nonresident privilege of any person convicted of reckless driving shall be suspended by the department for not less than thirty days.
+    (b) When a reckless driving conviction is a result of a charge that was originally filed as a violation of RCW 46.61.502 or 46.61.504, or an equivalent local ordinance, the department shall grant credit on a day-for-day basis for any portion of a suspension, revocation, or denial already served under an administrative action arising out of the same incident. During any period of suspension, revocation, or denial due to a conviction for reckless driving as the result of a charge originally filed as a violation of RCW 46.61.502 or 46.61.504, any person who has obtained an ignition interlock driver's license under RCW 46.20.385 may continue to drive a motor vehicle pursuant to the provision of the ignition interlock driver's license without obtaining a separate temporary restricted driver's license under RCW 46.20.391.
+(3)
+    (a) Except as provided under (b) of this subsection, a person convicted of reckless driving who has one or more prior offenses as defined in RCW 46.61.5055(14) within seven years shall be required, under RCW 46.20.720, to install an ignition interlock device on all vehicles operated by the person if the conviction is the result of a charge that was originally filed as a violation of RCW 46.61.502, 46.61.504, or an equivalent local ordinance.
+    (b) A person convicted of reckless driving shall be required, under RCW 46.20.720, to install an ignition interlock device on all vehicles operated by the person if the conviction is the result of a charge that was originally filed as a violation of RCW 46.61.520 committed while under the influence of intoxicating liquor or any drug or RCW 46.61.522 committed while under the influence of intoxicating liquor or any drug.
+
+```catala
+scope RCW_46_61_500:
+  definition class
+  under condition charge = Section46_61_500_
+  consequence equals GrossMisdemeanor
+```
+

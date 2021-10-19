@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.30.040 Providing false evidence of financial responsibility—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.30.040 Providing false evidence of financial responsibility—Penalty.]
+
+Any person who knowingly provides false evidence of financial responsibility to a law enforcement officer or to a court, including an expired or canceled insurance policy, bond, or certificate of deposit is guilty of a misdemeanor.
+
+```catala
+scope RCW_46_30_040:
+  definition class
+  under condition charge = Section46_30_040__
+  consequence equals SimpleMisdemeanor
+```
+

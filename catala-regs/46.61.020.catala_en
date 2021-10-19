@@ -1,0 +1,27 @@
+## RCW 46.61.020 Refusal to give information to or cooperate with officer�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.020 Refusal to give information to or cooperate with officer�Penalty.]
+
+(1) It is unlawful for any person while operating or in charge of any vehicle to refuse when requested by a police officer to give his or her name and address and the name and address of the owner of such vehicle, or for such person to give a false name and address, and it is likewise unlawful for any such person to refuse or neglect to stop when signaled to stop by any police officer or to refuse upon demand of such police officer to produce his or her certificate of license registration of such vehicle, his or her insurance identification card, or his or her vehicle driver's license or to refuse to permit such officer to take any such license, card, or certificate for the purpose of examination thereof or to refuse to permit the examination of any equipment of such vehicle or the weighing of such vehicle or to refuse or neglect to produce the certificate of license registration of such vehicle, insurance card, or his or her vehicle driver's license when requested by any court. Any police officer shall on request produce evidence of his or her authorization as such.
+(2) A violation of this section is a misdemeanor.
+
+```catala
+scope RCW_46_61_020:
+  definition class
+  under condition charge = Section46_61_020_1_
+  consequence equals SimpleMisdemeanor
+```
+

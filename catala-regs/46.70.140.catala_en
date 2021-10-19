@@ -1,0 +1,26 @@
+## RCW 46.70.140 Handling "hot" vehicles�Unreported motor "switches"�Unauthorized use of dealer plates�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.70.140 Handling "hot" vehicles�Unreported motor "switches"�Unauthorized use of dealer plates�Penalty.]
+
+Any vehicle dealer who knowingly or with reason to know, buys or receives, sells or disposes of, conceals or has in the dealer's possession, any vehicle from which the motor or serial number has been removed, defaced, covered, altered, or destroyed, or any dealer, who removes from or installs in any motor vehicle registered with the department by motor block number, a new or used motor block without immediately notifying the department of such fact upon a form provided by the department, or any vehicle dealer who loans or permits the use of vehicle dealer license plates by any person not entitled to the use thereof, is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_70_140:
+  definition class
+  under condition charge = Section46_70_140_
+  consequence equals GrossMisdemeanor
+```
+

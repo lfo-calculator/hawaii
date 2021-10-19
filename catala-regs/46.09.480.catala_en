@@ -1,0 +1,29 @@
+## RCW 46.09.480 Additional violations�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.09.480 Additional violations�Penalty.]
+
+(1) No person may operate a nonhighway vehicle in such a way as to endanger human life.
+(2) No person shall operate a nonhighway vehicle in such a way as to run down or harass any wildlife or animal, nor carry, transport, or convey any loaded weapon in or upon, nor hunt from, any nonhighway vehicle except by permit issued by the director of fish and wildlife under RCW 77.32.237: PROVIDED, That it shall not be unlawful to carry, transport, or convey a loaded pistol in or upon a nonhighway vehicle if the person complies with the terms and conditions of chapter 9.41 RCW.
+(3) For the purposes of this section, "hunt" means any effort to kill, injure, capture, or purposely disturb a wild animal or bird.
+(4) Violation of this section is a gross misdemeanor.
+
+```catala
+scope RCW_46_09_480:
+  definition class
+  under condition charge = Section46_09_480_
+  consequence equals GrossMisdemeanor
+```
+

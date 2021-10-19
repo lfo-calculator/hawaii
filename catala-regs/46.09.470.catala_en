@@ -1,0 +1,45 @@
+## RCW 46.09.470 Operating violations�Exceptions.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.09.470 Operating violations�Exceptions.]
+
+(1) Except as provided in subsection (4) of this section, it is a traffic infraction for any person to operate any nonhighway vehicle:
+    (a) In such a manner as to endanger the property of another;
+    (b) On lands not owned by the operator or owner of the nonhighway vehicle without a lighted headlight and taillight between the hours of dusk and dawn, or when otherwise required for the safety of others regardless of ownership;
+    (c) On lands not owned by the operator or owner of the nonhighway vehicle without an adequate braking device or when otherwise required for the safety of others regardless of ownership;
+    (d) Without a spark arrester approved by the department of natural resources;
+    (e) Without an adequate, and operating, muffling device which effectively limits vehicle noise to no more than eighty-six decibels on the "A" scale at fifty feet as measured by the Society of Automotive Engineers (SAE) test procedure J 331a, except that a maximum noise level of one hundred and five decibels on the "A" scale at a distance of twenty inches from the exhaust outlet shall be an acceptable substitute in lieu of the Society of Automotive Engineers test procedure J 331a when measured:
+        (i) At a forty-five degree angle at a distance of twenty inches from the exhaust outlet;
+        (ii) With the vehicle stationary and the engine running at a steady speed equal to one-half of the manufacturer's maximum allowable ("red line") engine speed or where the manufacturer's maximum allowable engine speed is not known the test speed in revolutions per minute calculated as sixty percent of the speed at which maximum horsepower is developed; and
+        (iii) With the microphone placed ten inches from the side of the vehicle, one-half way between the lowest part of the vehicle body and the ground plane, and in the same lateral plane as the rearmost exhaust outlet where the outlet of the exhaust pipe is under the vehicle;
+    (f) On lands not owned by the operator or owner of the nonhighway vehicle upon the shoulder or inside bank or slope of any nonhighway road or highway, or upon the median of any divided highway;
+    (g) On lands not owned by the operator or owner of the nonhighway vehicle in any area or in such a manner so as to unreasonably expose the underlying soil, or to create an erosion condition, or to injure, damage, or destroy trees, growing crops, or other vegetation;
+    (h) On lands not owned by the operator or owner of the nonhighway vehicle or on any nonhighway road or trail, when these are restricted to pedestrian or animal travel;
+    (i) On any public lands in violation of rules and regulations of the agency administering such lands; and
+    (j) On a private nonhighway road in violation of RCW 46.09.450(3).
+(2) It is a misdemeanor for any person to operate any nonhighway vehicle while under the influence of intoxicating liquor or a controlled substance.
+(3)
+    (a) Except for an off-road vehicle equipped with seat belts and roll bars or an enclosed passenger compartment, it is a traffic infraction for any person to operate or ride an off-road vehicle on a nonhighway road without wearing upon his or her head a motorcycle helmet fastened securely while in motion. For purposes of this section, "motorcycle helmet" has the same meaning as provided in RCW 46.37.530.
+    (b) Subsection (3)(a) of this section does not apply to an off-road vehicle operator operating on his or her own land.
+    (c) Subsection (3)(a) of this section does not apply to an off-road vehicle used in production of agricultural and timber products on and across lands owned, leased, or managed by the owner or operator of the off-road vehicle or the operator's employer.
+(4) It is not a traffic infraction to operate an off-road vehicle on a street, road, or highway as authorized under RCW 46.09.360, 46.61.705, or 46.09.455.
+
+```catala
+scope RCW_46_09_470:
+  definition class
+  under condition charge = Section46_09_470_2_
+  consequence equals SimpleMisdemeanor
+```
+

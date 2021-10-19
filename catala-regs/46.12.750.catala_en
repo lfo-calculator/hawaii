@@ -1,0 +1,42 @@
+## RCW 46.12.750 Penalty for false statements, illegal transfers, alterations, or forgeries�Exception.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.12.750 Penalty for false statements, illegal transfers, alterations, or forgeries�Exception.]
+
+(1) A person is guilty of a class B felony if the person:
+    (a) Knowingly makes any false statement of a material fact, either on an application for a certificate of title or in any transfer of a certificate of title;
+    (b) Intentionally acquires or passes ownership of a vehicle which that person knows or has reason to believe has been stolen;
+    (c) Receives or transfers possession of a stolen vehicle from or to another person;
+    (d) Possesses any vehicle which that person knows or has reason to believe has been stolen;
+    (e) Alters or forges or causes the alteration or forgery of:
+        (i) A certificate of title or registration certificate issued by the department;
+        (ii) An assignment of a certificate of title or registration certificate; or
+        (iii) A release or notice of release of an encumbrance referred to on a certificate of title or registration certificate; or
+    (f) Holds or uses a certificate of title, registration certificate, assignment, release, or notice of release, knowing that it has been altered or forged.
+(2) A person convicted of violating subsection (1) of this section must be punished by a fine of not more than five thousand dollars or by imprisonment for not more than ten years, or both such fine and imprisonment. This subsection does not exclude any other offenses or penalties prescribed by any existing or future law for the larceny or unauthorized taking of a vehicle.
+(3) It is a class C felony for a person to sell or convey a vehicle certificate of title except in conjunction with the sale or transfer of the vehicle for which the certificate was originally issued.
+(4) This section does not apply to an officer of the law engaged at the time in the performance of official authorized law enforcement activities.
+
+```catala
+scope RCW_46_12_750:
+  definition class
+  under condition charge = Section46_12_750_1_
+  consequence equals FelonyB
+
+  definition class
+  under condition charge = Section46_12_750_3_
+  consequence equals FelonyC
+```
+

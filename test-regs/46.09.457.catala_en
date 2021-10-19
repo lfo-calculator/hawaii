@@ -1,0 +1,47 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.09.457 Equipment and declaration requirements for wheeled all-terrain vehicles—Exception.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.09.457 Equipment and declaration requirements for wheeled all-terrain vehicles—Exception.]
+
+(1) A person may operate a wheeled all-terrain vehicle upon any public roadway of this state, not including nonhighway roads and trails, subject to RCW 46.09.455 and the following equipment and declaration requirements:
+    (a) A person who operates a wheeled all-terrain vehicle must comply with the following equipment requirements:
+        (i) Headlights meeting the requirements of RCW 46.37.030 and 46.37.040 and used at all times when the vehicle is in motion upon a highway;
+        (ii) One tail lamp meeting the requirements of RCW 46.37.525 and used at all times when the vehicle is in motion upon a highway; however, a utility-type vehicle, as described under RCW 46.09.310, must have two tail lamps meeting the requirements of RCW 46.37.070(1) and to be used at all times when the vehicle is in motion upon a highway;
+        (iii) A stop lamp meeting the requirements of RCW 46.37.200;
+        (iv) Reflectors meeting the requirements of RCW 46.37.060;
+        (v) During hours of darkness, as defined in RCW 46.04.200, turn signals meeting the requirements of RCW 46.37.200. Outside of hours of darkness, the operator must comply with RCW 46.37.200 or 46.61.310;
+        (vi) A mirror attached to either the right or left handlebar, which must be located to give the operator a complete view of the highway for a distance of at least two hundred feet to the rear of the vehicle; however, a utility-type vehicle, as described under RCW 46.09.310(19), must have two mirrors meeting the requirements of RCW 46.37.400;
+        (vii) A windshield meeting the requirements of RCW 46.37.430, unless the operator wears glasses, goggles, or a face shield while operating the vehicle, of a type conforming to rules adopted by the Washington state patrol;
+        (viii) A horn or warning device meeting the requirements of RCW 46.37.380;
+        (ix) Brakes in working order;
+        (x) A spark arrester and muffling device meeting the requirements of RCW 46.09.470; and
+        (xi) For utility-type vehicles, as described under RCW 46.09.310(19), seat belts meeting the requirements of RCW 46.37.510.
+    (b) A person who operates a wheeled all-terrain vehicle upon a public roadway must provide a declaration that includes the following:
+        (i) Documentation of a safety inspection to be completed by a licensed wheeled all-terrain vehicle dealer or motor vehicle repair shop in the state of Washington that must outline the vehicle information and certify under oath that all wheeled all-terrain vehicle equipment as required under this section meets the requirements outlined in state and federal law. A person who makes a false statement regarding the inspection of equipment required under this section is guilty of false swearing, a gross misdemeanor, under RCW 9A.72.040;
+        (ii) Documentation that the licensed wheeled all-terrain vehicle dealer or motor vehicle repair shop did not charge more than fifty dollars per safety inspection and that the entire safety inspection fee is paid directly and only to the licensed wheeled all-terrain vehicle dealer or motor vehicle repair shop;
+        (iii) A statement that the licensed wheeled all-terrain vehicle dealer or motor vehicle repair shop is entitled to the full amount charged for the safety inspection;
+        (iv) A vehicle identification number verification that must be completed by a licensed wheeled all-terrain vehicle dealer or motor vehicle repair shop in the state of Washington;
+        (v) A release, on a form to be supplied by the department, signed by the owner of the wheeled all-terrain vehicle and verified by the department, county auditor or other agent, or subagent appointed by the director that releases the state, counties, cities, and towns from any liability; and
+        (vi) A statement that outlines that the owner understands that the original wheeled all-terrain vehicle was not manufactured for on-road use and that it has been modified for use on public roadways.
+(2) This section does not apply to emergency services vehicles, vehicles used for emergency management purposes, or vehicles used in the production of agricultural and timber products on and across lands owned, leased, or managed by the owner or operator of the wheeled all-terrain vehicle or the operator's employer.
+
+```catala
+scope RCW_46_09_457:
+  definition class
+  under condition charge = Section46_09_457_1_b_i_
+  consequence equals GrossMisdemeanor
+```
+

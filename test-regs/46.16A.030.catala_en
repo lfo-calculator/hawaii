@@ -1,0 +1,43 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.16A.030 Registration and display of plates required—Penalties—Expired registration, impoundment.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.16A.030 Registration and display of plates required—Penalties—Expired registration, impoundment.]
+
+(1) Vehicles must be registered as required by this chapter and must display license plates or decals assigned by the department.
+(2) It is unlawful for a person to operate any vehicle on a public highway of this state without having in full force and effect a current and proper vehicle registration and displaying license plates on the vehicle.
+(3) Vehicle license plates or registration certificates, whether original issues or duplicates, may not be issued or furnished by the department until the applicant makes satisfactory application for a certificate of title or presents satisfactory evidence that a certificate of title covering the vehicle has been previously issued.
+(4) Failure to make initial registration before operating a vehicle on the public highways of this state is a traffic infraction. A person committing this infraction must pay a fine of five hundred twenty-nine dollars, which may not be suspended or reduced. This fine is in addition to any delinquent taxes and fees that must be deposited and distributed in the same manner as if the taxes and fees were properly paid in a timely fashion. The five hundred twenty-nine dollar fine must be deposited into the vehicle licensing fraud account created in the state treasury in RCW 46.68.250.
+(5) Failure to renew an expired registration before operating a vehicle on the public highways of this state is a traffic infraction.
+(6) It is a gross misdemeanor for a resident, as identified in RCW 46.16A.140, to register a vehicle in another state, evading the payment of any tax or vehicle license fee imposed in connection with registration. It is punishable, in lieu of the fine in subsection (4) of this section, as follows:
+    (a) For a first offense:
+        (i) Up to three hundred sixty-four days in the county jail;
+        (ii) Payment of a fine of five hundred twenty-nine dollars plus any applicable assessments, which may not be suspended or reduced. The fine of five hundred twenty-nine dollars must be deposited into the vehicle licensing fraud account created in the state treasury in RCW 46.68.250;
+        (iii) A fine of one thousand dollars to be deposited into the vehicle licensing fraud account created in the state treasury in RCW 46.68.250, which may not be suspended or reduced; and
+        (iv) The delinquent taxes and fees, which must be deposited and distributed in the same manner as if the taxes and fees were properly paid in a timely fashion, and which may not be suspended or reduced;
+    (b) For a second or subsequent offense:
+        (i) Up to three hundred sixty-four days in the county jail;
+        (ii) Payment of a fine of five hundred twenty-nine dollars plus any applicable assessments, which may not be suspended or reduced, except as provided in RCW 10.05.180. The fine of five hundred twenty-nine dollars must be deposited into the vehicle licensing fraud account created in the state treasury in RCW 46.68.250;
+        (iii) A fine of five thousand dollars to be deposited into the vehicle licensing fraud account created in the state treasury in RCW 46.68.250, which may not be suspended or reduced; and
+        (iv) The amount of delinquent taxes and fees, which must be deposited and distributed in the same manner as if the taxes and fees were properly paid in a timely fashion, and which may not be suspended or reduced.
+(7) A vehicle with an expired registration of more than forty-five days parked on a public street may be impounded by a police officer under RCW 46.55.113(2).
+
+```catala
+scope RCW_46_16A_030:
+  definition class
+  under condition charge = Section46_16A_030_6_
+  consequence equals GrossMisdemeanor
+```
+

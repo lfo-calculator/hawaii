@@ -1,0 +1,35 @@
+## RCW 46.68.010 Refunds, overpayments, and underpayments�Penalty for false statements.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.68.010 Refunds, overpayments, and underpayments�Penalty for false statements.]
+
+(1) A person who has paid all or part of a vehicle license fee under this title is entitled to a refund if the amount was paid in error or if the vehicle:
+    (a) Was destroyed before the new registration period began;
+    (b) Was permanently removed from Washington state before the new registration period began;
+    (c) Registration was purchased after the owner sold the vehicle;
+    (d) Was registered in another jurisdiction after the Washington state registration had been purchased. Any full months of Washington vehicle license fees remaining after application for out-of-state registration was made are refundable; or
+    (e) Registration was purchased before the vehicle was sold and before the new registration period began. The person who paid the fees must return the unused, never-affixed license tabs to the department before the new registration period begins.
+(2) The department shall refund overpayments of vehicle license fees and motor vehicle excise taxes under Title 82 RCW that are ten dollars or more. A request for a refund is not required.
+(3) The department shall certify refunds to the state treasurer as correct and being claimed in the time required by law. The state treasurer shall mail or deliver the amount of each refund to the person who is entitled to the refund. The department shall not authorize refunds of fees paid in error unless the request is made within three years after the fees were paid.
+(4) If due to error the department, county auditor or other agent, or subagent appointed by the director has failed to collect the full amount of the vehicle license fee and excise tax due and the underpayment is in the amount of ten dollars or more, the department shall charge and collect the additional amount to constitute full payment of the tax and fees.
+(5) Any person who makes a false statement under which he or she obtains a refund that he or she is not entitled to under this section is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_68_010:
+  definition class
+  under condition charge = Section46_68_010_5_
+  consequence equals GrossMisdemeanor
+```
+

@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.672 Signal preemption device—Use, sale, purchase—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.672 Signal preemption device—Use, sale, purchase—Penalty.]
+
+(1) It is unlawful to:
+    (a) Use a signal preemption device except as authorized in RCW 46.37.670;
+    (b) Sell a signal preemption device to a person other than a person described in RCW 46.37.670; or
+    (c) Purchase a signal preemption device for use other than a duty as described in RCW 46.37.670.
+(2) A person who violates this section is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_37_672:
+  definition class
+  under condition charge = Section46_37_672_2_
+  consequence equals GrossMisdemeanor
+```
+

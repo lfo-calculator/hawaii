@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.80.170 Violations—Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.80.170 Violations—Penalties.]
+
+Unless otherwise provided by law, it is a misdemeanor for any person to violate any of the provisions of this chapter or the rules adopted under this chapter.
+
+```catala
+scope RCW_46_80_170:
+  definition class
+  under condition charge = Section46_80_170__
+  consequence equals SimpleMisdemeanor
+```
+

@@ -1,0 +1,49 @@
+## RCW 46.61.502 Driving under the influence.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.502 Driving under the influence.]
+
+(1) A person is guilty of driving while under the influence of intoxicating liquor, marijuana, or any drug if the person drives a vehicle within this state:
+    (a) And the person has, within two hours after driving, an alcohol concentration of 0.08 or higher as shown by analysis of the person's breath or blood made under RCW 46.61.506; or
+    (b) The person has, within two hours after driving, a THC concentration of 5.00 or higher as shown by analysis of the person's blood made under RCW 46.61.506; or
+    (c) While the person is under the influence of or affected by intoxicating liquor, marijuana, or any drug; or
+    (d) While the person is under the combined influence of or affected by intoxicating liquor, marijuana, and any drug.
+(2) The fact that a person charged with a violation of this section is or has been entitled to use a drug under the laws of this state shall not constitute a defense against a charge of violating this section.
+(3)
+    (a) It is an affirmative defense to a violation of subsection (1)(a) of this section, which the defendant must prove by a preponderance of the evidence, that the defendant consumed a sufficient quantity of alcohol after the time of driving and before the administration of an analysis of the person's breath or blood to cause the defendant's alcohol concentration to be 0.08 or more within two hours after driving. The court shall not admit evidence of this defense unless the defendant notifies the prosecution prior to the omnibus or pretrial hearing in the case of the defendant's intent to assert the affirmative defense.
+    (b) It is an affirmative defense to a violation of subsection (1)(b) of this section, which the defendant must prove by a preponderance of the evidence, that the defendant consumed a sufficient quantity of marijuana after the time of driving and before the administration of an analysis of the person's blood to cause the defendant's THC concentration to be 5.00 or more within two hours after driving. The court shall not admit evidence of this defense unless the defendant notifies the prosecution prior to the omnibus or pretrial hearing in the case of the defendant's intent to assert the affirmative defense.
+(4)
+    (a) Analyses of blood or breath samples obtained more than two hours after the alleged driving may be used as evidence that within two hours of the alleged driving, a person had an alcohol concentration of 0.08 or more in violation of subsection (1)(a) of this section, and in any case in which the analysis shows an alcohol concentration above 0.00 may be used as evidence that a person was under the influence of or affected by intoxicating liquor or any drug in violation of subsection (1)(c) or (d) of this section.
+    (b) Analyses of blood samples obtained more than two hours after the alleged driving may be used as evidence that within two hours of the alleged driving, a person had a THC concentration of 5.00 or more in violation of subsection (1)(b) of this section, and in any case in which the analysis shows a THC concentration above 0.00 may be used as evidence that a person was under the influence of or affected by marijuana in violation of subsection (1)(c) or (d) of this section.
+(5) Except as provided in subsection (6) of this section, a violation of this section is a gross misdemeanor.
+(6) It is a class B felony punishable under chapter 9.94A RCW, or chapter 13.40 RCW if the person is a juvenile, if:
+    (a) The person has three or more prior offenses within ten years as defined in RCW 46.61.5055; or
+    (b) The person has ever previously been convicted of:
+        (i) Vehicular homicide while under the influence of intoxicating liquor or any drug, RCW 46.61.520(1)(a);
+        (ii) Vehicular assault while under the influence of intoxicating liquor or any drug, RCW 46.61.522(1)(b);
+        (iii) An out-of-state offense comparable to the offense specified in (b)(i) or (ii) of this subsection; or
+        (iv) A violation of this subsection (6) or RCW 46.61.504(6).
+
+```catala
+scope RCW_46_61_502:
+  definition class
+  under condition charge = Section46_61_502_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_61_502_6_
+  consequence equals FelonyB
+```
+

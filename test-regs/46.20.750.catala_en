@@ -1,0 +1,53 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.750 Circumventing ignition interlock—Penalty. (Effective until January 1, 2022.)
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.750 Circumventing ignition interlock—Penalty. (Effective until January 1, 2022.)]
+
+(1) A person who is restricted to the use of a vehicle equipped with an ignition interlock device is guilty of a gross misdemeanor if the restricted driver:
+    (a) Tampers with the device by modifying, detaching, disconnecting, or otherwise disabling it to allow the restricted driver to operate the vehicle;
+    (b) Uses or requests another person to use a filter or other device to circumvent the ignition interlock or to start or operate the vehicle to allow the restricted driver to operate the vehicle;
+    (c) Has, directs, authorizes, or requests another person to tamper with the device by modifying, detaching, disconnecting, or otherwise disabling it to allow the restricted driver to operate the vehicle; or
+    (d) Has, allows, directs, authorizes, or requests another person to blow or otherwise exhale into the device in order to circumvent the device to allow the restricted driver to operate the vehicle.
+(2) A person who knowingly assists another person who is restricted to the use of a vehicle equipped with an ignition interlock device to circumvent the device or to start and operate that vehicle is guilty of a gross misdemeanor. The provisions of this subsection do not apply if the starting of a motor vehicle, or the request to start a motor vehicle, equipped with an ignition interlock device is done for the purpose of safety or mechanical repair of the device or the vehicle and the person subject to the court order does not operate the vehicle.
+(3) Any sentence imposed for a violation of subsection (1) of this section shall be served consecutively with any sentence imposed under RCW 46.20.740, 46.61.502, 46.61.504, 46.61.5055, 46.61.520(1)(a), or 46.61.522(1)(b).
+(1) A person who is restricted to the use of a vehicle equipped with an ignition interlock device is guilty of a gross misdemeanor if the restricted driver:
+    (a) Tampers with the device or any components of the device, or otherwise interferes with the proper functionality of the device, by modifying, detaching, disconnecting, or otherwise disabling it to allow the restricted driver to operate the vehicle;
+    (b) Uses or requests another person to use a filter or other device to circumvent the ignition interlock or to start or operate the vehicle to allow the restricted driver to operate the vehicle;
+    (c) Has, directs, authorizes, or requests another person to tamper with the device or any components of the device, or otherwise interfere with the proper functionality of the device, by modifying, detaching, disconnecting, or otherwise disabling it to allow the restricted driver to operate the vehicle; or
+    (d) Has, allows, directs, authorizes, or requests another person to blow or otherwise exhale into the device in order to circumvent the device to allow the restricted driver to operate the vehicle.
+(2) A person who knowingly assists another person who is restricted to the use of a vehicle equipped with an ignition interlock device to circumvent the device or any components of the device, or otherwise interfere with the proper functionality of the device, or to start and operate that vehicle is guilty of a gross misdemeanor. The provisions of this subsection do not apply if the starting of a motor vehicle, or the request to start a motor vehicle, equipped with an ignition interlock device is done for the purpose of safety or mechanical repair of the device or the vehicle and the person subject to the court order does not operate the vehicle.
+(3) Any sentence imposed for a violation of subsection (1) of this section shall be served consecutively with any sentence imposed under RCW 46.20.740, 46.61.502, 46.61.504, 46.61.5055, 46.61.520(1)(a), or 46.61.522(1)(b).
+(4) Any time a person is convicted under subsection (1) of this section, the court shall immediately notify the department for purposes of RCW 46.20.720(3)(e).
+
+```catala
+scope RCW_46_20_750:
+  definition class
+  under condition charge = Section46_20_750_1_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_750_2_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_750_1_
+  consequence equals GrossMisdemeanor
+
+  definition class
+  under condition charge = Section46_20_750_2_
+  consequence equals GrossMisdemeanor
+```
+

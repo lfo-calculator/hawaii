@@ -1,0 +1,37 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.35.030 Confidential information—Exceptions—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.35.030 Confidential information—Exceptions—Penalty.]
+
+(1) Information recorded or transmitted by a recording device may not be retrieved, downloaded, scanned, read, or otherwise accessed by a person other than the owner of the motor vehicle in which the recording device is installed except:
+    (a) Upon a court order or pursuant to discovery. Any information recorded or transmitted by a recording device and obtained by a court order or pursuant to discovery is private and confidential and is not subject to public disclosure;
+    (b) With the consent of the owner, given for a specific instance of access, for any purpose;
+    (c) For improving motor vehicle safety, including medical research on the human body's reaction to motor vehicle collisions, if the identity of the motor vehicle or the owner or driver of the motor vehicle is not disclosed in connection with the retrieved information;
+    (d) For determining the need for or facilitating emergency medical response if a motor vehicle collision occurs, provided that the information retrieved is used solely for medical purposes; or
+    (e) For subscription services pursuant to an agreement in which disclosure required under RCW 46.35.020 has been made, provided that the information retrieved is used solely for the purposes of fulfilling the subscription service.
+(2) For the purposes of subsection (1)(c) of this section:
+    (a) The disclosure of a motor vehicle's vehicle identification number with the last six digits deleted or redacted is not a disclosure of the identity of the owner or driver; and
+    (b) Retrieved information may only be disclosed to a data processor.
+(3) Information that can be associated with an individual and that is recorded or transmitted by a recording device may not be sold to a third party unless the owner of the information explicitly grants permission for the sale.
+(4) Any person who violates this section is guilty of a misdemeanor.
+
+```catala
+scope RCW_46_35_030:
+  definition class
+  under condition charge = Section46_35_030_4_
+  consequence equals SimpleMisdemeanor
+```
+

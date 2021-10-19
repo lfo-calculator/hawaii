@@ -1,0 +1,32 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.64.010 Traffic citations—Record of—Cancellation prohibited—Penalty—Citation audit.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.64.010 Traffic citations—Record of—Cancellation prohibited—Penalty—Citation audit.]
+
+(1) Every traffic enforcement agency in this state shall provide in appropriate form traffic citations containing notices to appear which shall be issued in books with citations in quadruplicate and meeting the requirements of this section, or issued by an electronic device capable of producing a printed copy and electronic copies of the citations. The chief administrative officer of every such traffic enforcement agency shall be responsible for the issuance of such books or electronic devices and shall maintain a record of every such book and each citation contained therein and every such electronic device issued to individual members of the traffic enforcement agency and shall require and retain a receipt for every book and electronic device so issued.
+(2) Every traffic enforcement officer upon issuing a traffic citation to an alleged violator of any provision of the motor vehicle laws of this state or of any traffic ordinance of any city or town shall deposit the original or a printed or electronic copy of such traffic citation with a court having competent jurisdiction over the alleged offense or with its traffic violations bureau. Upon the deposit of the original or a copy of such traffic citation with a court having competent jurisdiction over the alleged offense or with its traffic violations bureau as aforesaid, the original or copy of such traffic citation may be disposed of only by trial in the court or other official action by a judge of the court, including forfeiture of the bail or by the deposit of sufficient bail with or payment of a fine to the traffic violations bureau by the person to whom such traffic citation has been issued by the traffic enforcement officer.
+(3) It shall be unlawful and official misconduct for any traffic enforcement officer or other officer or public employee to dispose of a traffic citation or copies thereof or of the record of the issuance of the same in a manner other than as required in this section.
+(4) The chief administrative officer of every traffic enforcement agency shall require the return to him or her of a printed or electronic copy of every traffic citation issued by an officer under his or her supervision to an alleged violator of any traffic law or ordinance and of all copies of every traffic citation which has been spoiled or upon which any entry has been made and not issued to an alleged violator. Such chief administrative officer shall also maintain or cause to be maintained in connection with every traffic citation issued by an officer under his or her supervision a record of the disposition of the charge by the court or its traffic violations bureau in which the original or copy of the traffic citation was deposited.
+(5) Any person who cancels or solicits the cancellation of any traffic citation, in any manner other than as provided in this section, is guilty of a misdemeanor.
+(6) Every record of traffic citations required in this section shall be audited monthly by the appropriate fiscal officer of the government agency to which the traffic enforcement agency is responsible.
+
+```catala
+scope RCW_46_64_010:
+  definition class
+  under condition charge = Section46_64_010_5_
+  consequence equals SimpleMisdemeanor
+```
+

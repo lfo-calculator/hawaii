@@ -1,0 +1,31 @@
+## RCW 46.12.640 Disclosure violations, penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.12.640 Disclosure violations, penalties.]
+
+(1) The department may review the activities of a person or entity that receives personal or identity information to ensure compliance with the limitations imposed on the use of the information. The department may suspend or revoke for up to five years the privilege of obtaining personal or identity information of a person found to be in violation of this chapter or a disclosure agreement executed with the department.
+(2) In addition to the penalty in subsection (1) of this section:
+    (a) The unauthorized disclosure of personal or identity information; or
+    (b) The use of a false representation to obtain personal or identity information from the department; or
+    (c) The use of personal or identity information obtained from the department for a purpose other than what is stated in the request for information or in the disclosure agreement executed with the department; or
+    (d) The sale or other distribution of any personal or identity information to another person not disclosed in the request or disclosure agreement is a gross misdemeanor punishable by a fine not to exceed ten thousand dollars, or by imprisonment in a county jail for up to three hundred sixty-four days, or by both such fine and imprisonment for each violation.
+
+```catala
+scope RCW_46_12_640:
+  definition class
+  under condition charge = Section46_12_640_2_
+  consequence equals GrossMisdemeanor
+```
+

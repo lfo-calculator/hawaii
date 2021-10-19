@@ -1,0 +1,34 @@
+## RCW 46.61.503 Driver under twenty-one consuming alcohol or marijuana�Penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.503 Driver under twenty-one consuming alcohol or marijuana�Penalties.]
+
+(1) Notwithstanding any other provision of this title, a person is guilty of driving or being in physical control of a motor vehicle after consuming alcohol or marijuana if the person operates or is in physical control of a motor vehicle within this state and the person:
+    (a) Is under the age of twenty-one; and
+    (b) Has, within two hours after operating or being in physical control of the motor vehicle, either:
+        (i) An alcohol concentration of at least 0.02 but less than the concentration specified in RCW 46.61.502, as shown by analysis of the person's breath or blood made under RCW 46.61.506; or
+        (ii) A THC concentration above 0.00 but less than the concentration specified in RCW 46.61.502, as shown by analysis of the person's blood made under RCW 46.61.506.
+(2) It is an affirmative defense to a violation of subsection (1) of this section, which the defendant must prove by a preponderance of the evidence, that the defendant consumed a sufficient quantity of alcohol or marijuana after the time of driving or being in physical control and before the administration of an analysis of the person's breath or blood to cause the defendant's alcohol or THC concentration to be in violation of subsection (1) of this section within two hours after driving or being in physical control. The court shall not admit evidence of this defense unless the defendant notifies the prosecution prior to the earlier of: (a) Seven days prior to trial; or (b) the omnibus or pretrial hearing in the case of the defendant's intent to assert the affirmative defense.
+(3) No person may be convicted under this section for being in physical control of a motor vehicle and it is an affirmative defense to any action pursuant to RCW 46.20.308 to suspend, revoke, or deny the privilege to drive, if, prior to being pursued by a law enforcement officer, the person has moved the vehicle safely off the roadway.
+(4) Analyses of blood or breath samples obtained more than two hours after the alleged driving or being in physical control may be used as evidence that within two hours of the alleged driving or being in physical control, a person had an alcohol or THC concentration in violation of subsection (1) of this section.
+(5) A violation of this section is a misdemeanor.
+
+```catala
+scope RCW_46_61_503:
+  definition class
+  under condition charge = Section46_61_503_
+  consequence equals SimpleMisdemeanor
+```
+

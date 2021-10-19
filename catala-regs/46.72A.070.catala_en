@@ -1,0 +1,34 @@
+## RCW 46.72A.070 Vehicle certificates�Issuance of new or duplicate certificate�Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.72A.070 Vehicle certificates�Issuance of new or duplicate certificate�Penalty.]
+
+(1) If the limousine carrier substitutes a liability and property damage insurance policy after a vehicle certificate has been issued, a new vehicle certificate is required. The limousine carrier shall submit the substituted policy to the department for approval, together with a fee. If the department approves the substituted policy, the department shall issue a new vehicle certificate.
+(2) If a vehicle certificate has been lost, destroyed, or stolen, a duplicate vehicle certificate may be obtained by filing an affidavit of loss and paying a fee.
+(3)
+    (a) Except as provided in (b) of this subsection, a limousine carrier who operates a vehicle without first having received a vehicle certificate as required by this chapter is guilty of a misdemeanor.
+    (b) A second or subsequent offense is a gross misdemeanor.
+
+```catala
+scope RCW_46_72A_070:
+  definition class
+  under condition charge = Section46_72A_070_3_a_
+  consequence equals SimpleMisdemeanor
+
+  definition class
+  under condition charge = Section46_72A_070_3_b_
+  consequence equals GrossMisdemeanor
+```
+

@@ -1,0 +1,43 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.18.235 Disabled American veteran or former prisoner of war license plates.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.18.235 Disabled American veteran or former prisoner of war license plates.]
+
+(1) A registered owner who is a veteran, as defined in RCW 41.04.007, may apply to the department for disabled American veteran or former prisoner of war license plates, for use on one personal use motor vehicle required to display one or two license plates, excluding vehicles registered under chapter 46.87 RCW, upon terms and conditions established by the department. The veteran must be recorded as the registered owner of the motor vehicle on which the disabled American veteran or former prisoner of war license plate or plates will be displayed and:
+    (a) Provide certification from the veterans administration or the military service from which the veteran was discharged that the veteran has a service-connected disability rating;
+    (b) Have lost the use of both hands or one foot;
+    (c) Have been captured and incarcerated by an enemy of the United States during a period of war with the United States and have received a prisoner of war medal;
+    (d) Have become blind in both eyes as the result of military service; or
+    (e) Be rated by the veterans administration or the military service from which the veteran was discharged and be receiving service-connected compensation at the one hundred percent rate that is expected to exist for more than one year.
+(2) The special license plates under this section must:
+    (a) Display distinguishing marks, letters, or numerals indicating that the registered owner is a disabled American veteran or former prisoner of war; and
+    (b) Be issued for one personal use vehicle without the payment of any vehicle license fees, license plate fees, or excise taxes.
+(3) A registered owner who is a veteran, as defined in RCW 41.04.007, may, in lieu of applying for the special license plates under this section, apply for regular issue or any qualifying special license plate and receive the full benefit of the vehicle license fee and excise tax exemption provided in subsection (2)(b) of this section.
+(4) The department may periodically verify the one hundred percent rate as described in subsection (1)(e) of this section.
+(5) A veteran who has been issued disabled American veteran or former prisoner of war license plates under this section before July 1, 1983, continues to be eligible for the vehicle license fee and excise tax exemption described in subsection (2)(b) of this section.
+(6) A disabled American veteran and former prisoner of war license plate or plates may be transferred from one motor vehicle to another motor vehicle owned by the veteran upon application to the department, county auditor or other agent, or subagent appointed by the director.
+(7) For the purposes of this section:
+    (a) "Blind" means the definition of "blind" used by the state of Washington in determining eligibility for financial assistance to the blind under Title 74 RCW; and
+    (b) "Special license plates" does not include any plate from the armed forces license plate collection established in *RCW 46.18.200(3).
+(8) Any unauthorized use of a special license plate under this section is a gross misdemeanor.
+
+```catala
+scope RCW_46_18_235:
+  definition class
+  under condition charge = Section46_18_235_8_
+  consequence equals GrossMisdemeanor
+```
+

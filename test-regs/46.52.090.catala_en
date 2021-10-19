@@ -1,0 +1,31 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.52.090 Reports of major repairs, etc.—Violations, penalties—Rules—Exceptions for older vehicles.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.52.090 Reports of major repairs, etc.—Violations, penalties—Rules—Exceptions for older vehicles.]
+
+(1) Any person, firm, corporation, or association engaged in the business of repairs of any kind to vehicles or any person, firm, corporation, or association which may at any time engage in any kind of major repair, restoration, or substantial alteration to a vehicle required to be licensed or registered under this title shall maintain verifiable records regarding the source of used major component parts used in such repairs, restoration, or alteration. Satisfactory records include but are not limited to personal identification of the seller if such parts were acquired from other than a vehicle wrecker licensed under chapter 46.80 RCW, signed work orders, and bills of sale signed by the seller whose identity and address has been verified describing parts acquired, and the make, model, and vehicle identification number of a vehicle from which the following parts are removed: (a) Engines and short blocks, (b) frames, (c) transmissions and transfer cases, (d) cabs, (e) doors, (f) front or rear differentials, (g) front or rear clips, (h) quarter panels or fenders, (i) bumpers, (j) truck beds or boxes, (k) seats, and (l) hoods.
+(2) The records required under subsection (1) of this section shall be kept for a period of four years and shall be made available for inspection by a law enforcement officer during ordinary business hours.
+(3) It is a gross misdemeanor to: (a) Acquire a part without a substantiating bill of sale or invoice from the parts supplier or fail to comply with any rules adopted under this section; (b) fail to obtain the vehicle identification number for those parts requiring that it be obtained; or (c) fail to keep records for four years or to make such records available during normal business hours to a law enforcement officer.
+(4) The chief of the Washington state patrol shall adopt rules for the purpose of regulating recordkeeping and parts acquisition by vehicle repairers, restorers, rebuilders, or those who perform substantial vehicle alterations.
+(5) The provisions of this section do not apply to major repair, restoration, or alteration of a vehicle thirty years of age or older.
+
+```catala
+scope RCW_46_52_090:
+  definition class
+  under condition charge = Section46_52_090_3_
+  consequence equals GrossMisdemeanor
+```
+

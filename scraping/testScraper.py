@@ -8,13 +8,6 @@ import os
 import re
 import csv
 
-websiteBase = 'https://app.leg.wa.gov/RCW/default.aspx?cite='
-websiteHomePage = 'https://app.leg.wa.gov/RCW/default.aspx?cite=77.15.410'
-sub_alpha = '^\([a-z]+\)'
-sub_numeric = '^\([0-9]+\)'
-sub_roman = '^\([ivx]+\)'
-current_subsection = '1'
-all_the_charges = []
 
 def simple_get(url):
     try:
@@ -128,7 +121,7 @@ with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
             # First div has RCW and section number
             rcw_number = divs[0].find('a').get_text()
             file_name = rcw_number + '.catala_en'
-            if os.path.isfile('catala-regs/' + file_name):
+            if os.path.isfile('../catala-regs/' + file_name):
                 print('file ' + file_name + ' already exists.')
                 continue            
     
@@ -166,8 +159,10 @@ with open('statutesInCSV.csv', encoding='utf-8-sig') as csvfile:
                         formatted_line = format_the_line(the_line, rcw_number)
                         all_the_text = all_the_text + formatted_line
 
+            all_the_text = all_the_text + format_catala(rcw_number)
+
             #print(all_the_text)
             #print(content.prettify())
-            with open('test_regs/' + file_name, 'a') as f:
+            with open('../test_regs/' + file_name, 'a') as f:
                 f.write(all_the_text)
     

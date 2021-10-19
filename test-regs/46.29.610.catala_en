@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.29.610 Surrender of license—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.29.610 Surrender of license—Penalty.]
+
+(1) Any person whose license shall have been suspended under any provision of this chapter, or whose policy of insurance or bond, when required under this chapter, shall have been canceled or terminated, shall immediately return the license to the department.
+(2) Any person willfully failing to return a license as required in subsection (1) of this section is guilty of a misdemeanor.
+
+```catala
+scope RCW_46_29_610:
+  definition class
+  under condition charge = Section46_29_610_2_
+  consequence equals SimpleMisdemeanor
+```
+

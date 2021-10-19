@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.61.015 Obedience to police officers, flaggers, or firefighters—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.015 Obedience to police officers, flaggers, or firefighters—Penalty.]
+
+(1) No person shall willfully fail or refuse to comply with any lawful order or direction of any duly authorized flagger or any police officer or firefighter invested by law with authority to direct, control, or regulate traffic.
+(2) A violation of this section is a misdemeanor.
+
+```catala
+scope RCW_46_61_015:
+  definition class
+  under condition charge = Section46_61_015_2_
+  consequence equals SimpleMisdemeanor
+```
+

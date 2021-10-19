@@ -1,0 +1,39 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.091 Application—Penalty for false statement—Driving records from and to other jurisdictions.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.091 Application—Penalty for false statement—Driving records from and to other jurisdictions.]
+
+(1) Application. In order to apply for a driver's license or instruction permit the applicant must provide the applicant's:
+    (a) Name of record, as established by documentation required under RCW 46.20.035;
+    (b) Date of birth, as established by satisfactory evidence of age;
+    (c) Sex;
+    (d) Washington residence address;
+    (e) Description;
+    (f) Driving licensing history, including:
+        (i) Whether the applicant has ever been licensed as a driver or chauffeur and, if so, (A) when and by what state or country; (B) whether the license has ever been suspended or revoked; and (C) the date of and reason for the suspension or revocation; or
+        (ii) Whether the applicant's application to another state or country for a driver's license has ever been refused and, if so, the date of and reason for the refusal; and
+    (g) Any additional information required by the department.
+(2) Sworn statement. An application for an instruction permit or for an original driver's license must be made upon a form provided by the department. The form must include a section for the applicant to indicate whether the applicant has received driver training and, if so, where. The identifying documentation verifying the name of record must be accompanied by the applicant's sworn statement that it is valid. For an original driver's license, the information provided on the form must be sworn to and signed by the applicant before a person authorized to administer oaths. An applicant who makes a false statement on an application for a driver's license or instruction permit is guilty of false swearing, a gross misdemeanor, under RCW 9A.72.040.
+(3) Driving records from other jurisdictions. If a person previously licensed in another jurisdiction applies for a Washington driver's license, the department shall request a copy of the applicant's driver's record from the other jurisdiction. The driving record from the other jurisdiction becomes a part of the driver's record in this state.
+(4) Driving records to other jurisdictions. If another jurisdiction requests a copy of a person's Washington driver's record, the department shall provide a copy of the record. The department shall forward the record without charge if the other jurisdiction extends the same privilege to the state of Washington. Otherwise the department shall charge a reasonable fee for transmittal of the record.
+
+```catala
+scope RCW_46_20_091:
+  definition class
+  under condition charge = Section46_20_091_2_
+  consequence equals GrossMisdemeanor
+```
+

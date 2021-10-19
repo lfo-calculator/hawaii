@@ -1,0 +1,29 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.55.300 Vehicle immobilization.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.55.300 Vehicle immobilization.]
+
+(1) A property owner shall not immobilize any vehicle owned by a person other than the property owner.
+(2) This section does not apply to property owned by the state or any unit of local government.
+(3) A violation of this section is a gross misdemeanor.
+
+```catala
+scope RCW_46_55_300:
+  definition class
+  under condition charge = Section46_55_300_3_
+  consequence equals GrossMisdemeanor
+```
+

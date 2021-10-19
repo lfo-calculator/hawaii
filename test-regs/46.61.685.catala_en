@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.61.685 Leaving children unattended in standing vehicle with motor running—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.685 Leaving children unattended in standing vehicle with motor running—Penalty.]
+
+(1) It is unlawful for any person, while operating or in charge of a vehicle, to park or willfully allow such vehicle to stand upon a public highway or in a public place with its motor running, leaving a minor child or children under the age of sixteen years unattended in the vehicle.
+(2) Any person violating this section is guilty of a misdemeanor. Upon a second or subsequent conviction for a violation of this section, the department shall revoke the operator's license of such person.
+
+```catala
+scope RCW_46_61_685:
+  definition class
+  under condition charge = Section46_61_685_2_
+  consequence equals SimpleMisdemeanor
+```
+

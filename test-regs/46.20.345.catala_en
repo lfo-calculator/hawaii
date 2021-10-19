@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.20.345 Operation under other license or permit while license suspended or revoked—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.20.345 Operation under other license or permit while license suspended or revoked—Penalty.]
+
+Any resident or nonresident whose driver's license or right or privilege to operate a motor vehicle in this state has been suspended or revoked as provided in this title shall not operate a motor vehicle in this state under a license, permit, or registration certificate issued by any other jurisdiction or otherwise during such suspension or after such revocation until a new license is obtained when and as permitted under this chapter. A person who violates the provisions of this section is guilty of a gross misdemeanor.
+
+```catala
+scope RCW_46_20_345:
+  definition class
+  under condition charge = Section46_20_345__
+  consequence equals GrossMisdemeanor
+```
+

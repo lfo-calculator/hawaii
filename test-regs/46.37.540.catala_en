@@ -1,0 +1,28 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.37.540 Odometers—Disconnecting, resetting, or turning back prohibited.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.37.540 Odometers—Disconnecting, resetting, or turning back prohibited.]
+
+(1) The legislature intends to make it illegal for persons to turn forward the odometer on a new car to avoid compliance with the emissions standards required by chapter 295, Laws of 2005.
+(2) It shall be unlawful for any person to disconnect, turn back, turn forward, or reset the odometer of any motor vehicle with the intent to change the number of miles indicated on the odometer gauge. A violation of this subsection is a gross misdemeanor.
+
+```catala
+scope RCW_46_37_540:
+  definition class
+  under condition charge = Section46_37_540_2_
+  consequence equals GrossMisdemeanor
+```
+

@@ -1,0 +1,28 @@
+## RCW 46.87.290 Refusal, cancellation of credentials�Procedures, penalties.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.87.290 Refusal, cancellation of credentials�Procedures, penalties.]
+
+(1) If the department determines at any time that an applicant for proportional registration of a vehicle or vehicles is not entitled to credentials, the department may refuse to issue credentials for the vehicle or vehicles and, after notice, cancel any existing credentials. The department must send the notice of cancellation by first-class mail, addressed to the owner of the vehicle or vehicles at the owner's address as it appears in the proportional registration records of the department. It is unlawful for any person to drive or operate the vehicle(s) until proper credentials have been issued.
+(2) Any person driving or operating the vehicle(s) after the refusal of the department to issue credentials or the suspension, revocation, or cancellation of the credentials is guilty of a gross misdemeanor.
+(3) A vehicle that has been driven or operated in violation of this section may be impounded by the Washington state patrol, county sheriff, or city police in a manner directed for such cases by the chief of the Washington state patrol until proper credentials have been issued.
+
+```catala
+scope RCW_46_87_290:
+  definition class
+  under condition charge = Section46_87_290_
+  consequence equals GrossMisdemeanor
+```
+

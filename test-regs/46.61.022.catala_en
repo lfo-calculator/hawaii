@@ -1,0 +1,27 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.61.022 Failure to obey officer—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.61.022 Failure to obey officer—Penalty.]
+
+Any person who wilfully fails to stop when requested or signaled to do so by a person reasonably identifiable as a law enforcement officer or to comply with RCW 46.61.021(3), is guilty of a misdemeanor.
+
+```catala
+scope RCW_46_61_022:
+  definition class
+  under condition charge = Section46_61_022__
+  consequence equals SimpleMisdemeanor
+```
+

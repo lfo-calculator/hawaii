@@ -1,0 +1,29 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.52.010 Duty on striking unattended car or other property—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.52.010 Duty on striking unattended car or other property—Penalty.]
+
+(1) The operator of any vehicle which collided with any other vehicle which is unattended shall immediately stop and shall then and there either locate and notify the operator or owner of such vehicle of the name and address of the operator and owner of the vehicle striking the unattended vehicle or shall leave in a conspicuous place in the vehicle struck a written notice, giving the name and address of the operator and of the owner of the vehicle striking such other vehicle.
+(2) The driver of any vehicle involved in an accident resulting only in damage to property fixed or placed upon or adjacent to any public highway shall take reasonable steps to locate and notify the owner or person in charge of such property of such fact and of the name and address of the operator and owner of the vehicle striking such property, or shall leave in a conspicuous place upon the property struck a written notice, giving the name and address of the operator and of the owner of the vehicle so striking the property, and such person shall further make report of such accident as in the case of other accidents upon the public highways of this state.
+(3) Any person violating this section is guilty of a misdemeanor.
+
+```catala
+scope RCW_46_52_010:
+  definition class
+  under condition charge = Section46_52_010_3_
+  consequence equals SimpleMisdemeanor
+```
+

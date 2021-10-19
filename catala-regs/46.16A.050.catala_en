@@ -1,0 +1,33 @@
+## RCW 46.16A.050 Registration�Requirements before issuance�Penalty�Rules.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.16A.050 Registration�Requirements before issuance�Penalty�Rules.]
+
+(1) The department, county auditor or other agent, or subagent appointed by the director shall not issue an initial registration certificate for a motor vehicle to a natural person under this chapter unless the natural person at time of application:
+    (a) Presents an unexpired Washington state driver's license; or
+    (b) Certifies that he or she is:
+        (i) A Washington state resident who does not operate a motor vehicle on public roads; or
+        (ii) Exempt from the requirement to obtain a Washington state driver's license under RCW 46.20.025.
+(2) The department must set up procedures to verify that all owners meet the requirements of this section.
+(3) A person falsifying residency is guilty of a gross misdemeanor punishable only by a fine of five hundred twenty-nine dollars.
+(4) The department may adopt rules necessary to implement this section, including rules under which a natural person applying for registration may be exempt from the requirements of this section if the person provides evidence satisfactory to the department that he or she has a valid and compelling reason for not being able to meet the requirements of this section.
+
+```catala
+scope RCW_46_16A_050:
+  definition class
+  under condition charge = Section46_16A_050_3_
+  consequence equals GrossMisdemeanor
+```
+

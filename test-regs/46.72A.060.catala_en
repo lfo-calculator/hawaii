@@ -1,0 +1,29 @@
+auto-generated file: remove this line once reviewed by peoples
+## RCW 46.72A.060 Insurance—Amount—Penalty.
+
+> Begin metadata
+
+```catala
+
+  # Inputs:
+  context charge content Charge
+
+  # Output
+  context class content Class
+```
+
+> End metadata
+
+## [RCW 46.72A.060 Insurance—Amount—Penalty.]
+
+(1) The department shall require limousine carriers to obtain and continue in effect, liability and property damage insurance from a company licensed to sell liability insurance in this state for each limousine used to transport persons for compensation.
+(2) The department shall fix by rule coverages and limits, and prohibit provisions that limit coverage, for the insurance policy or policies, giving consideration to the character and amount of traffic, the number of persons affected, and the degree of danger that the proposed operation involves. The limousine carrier must maintain the liability and property damage insurance in force on each limousine while licensed by the department.
+(3) Failure to file and maintain in effect the insurance required under this section is a gross misdemeanor and the limousine vehicle certificate must be summarily suspended. It is a class 1 civil infraction, with monetary penalties against the carrier as specified in RCW 7.80.120, for each day that a carrier operates a limousine with a summarily suspended limousine vehicle certificate.
+
+```catala
+scope RCW_46_72A_060:
+  definition class
+  under condition charge = Section46_72A_060_3_
+  consequence equals GrossMisdemeanor
+```
+
