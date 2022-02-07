@@ -6,8 +6,8 @@ This section of the repo contains an example front-end for the Catala LFO Compil
 
 ## Project setup
 
-This assumes you followed instructions in the [parent README](../README.md) to
-get the backend built.
+You do not need to get the backend built if you only want to work on the
+frontend.
 
 ### Vue project setup
 
@@ -21,6 +21,12 @@ Navigate the directory you just cloned and run the following command. If you don
 
 ``` cli
 yarn install
+```
+
+#### Run every time after a `git pull`
+
+```cli
+yarn upgrade
 ```
 
 #### Compiles and hot-reloads for development

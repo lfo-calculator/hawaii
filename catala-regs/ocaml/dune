@@ -5,7 +5,10 @@
  (public_name hawaii_lfo_web)
  (preprocess
   (pps js_of_ocaml-ppx))
- (libraries str catala.runtime yojson js_of_ocaml))
+ (libraries str catala.runtime yojson js_of_ocaml)
+ (js_of_ocaml
+   ;(flags "--disable" "genprim" "--opt" "3" "--set" "tc_depth=0")
+   (flags "--disable" "genprim" "--pretty" "--disable" "excwrap")))
 
 
 (env
