@@ -1,10 +1,7 @@
 ## RCW 46.64.055 Additional monetary penalty.
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration scope RCW_46_64_055:
-
   # Inputs:
   context is_indigent content boolean
 
@@ -12,7 +9,6 @@ declaration scope RCW_46_64_055:
   context penalties content collection Penalty
 ```
 
-> End metadata
 
 ## [RCW 46.64.055 Additional monetary penalty.]
 

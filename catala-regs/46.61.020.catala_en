@@ -1,9 +1,7 @@
 ## RCW 46.61.020 Refusal to give information to or cooperate with officer�Penalty.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_61_020:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.61.020 Refusal to give information to or cooperate with officer�Penalty.]
 

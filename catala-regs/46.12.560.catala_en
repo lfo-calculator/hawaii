@@ -1,9 +1,7 @@
 ## RCW 46.12.560 Inspection by state patrol or other authorized inspector.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_560:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.12.560 Inspection by state patrol or other authorized inspector.]
 
@@ -21,7 +18,13 @@
         (ii) Has been rebuilt after the certificate of title was returned to the department under RCW 46.12.600 and the vehicle was not kept by the registered owner at the time of the vehicle's destruction or declaration as a total loss; or
         (iii) Is presented with documents from another state showing that the vehicle was a total loss or salvage vehicle and has not been reissued a valid registration certificate from that state after the declaration of total loss or salvage.
     (b) A vehicle presented for inspection must have all damaged major component parts replaced or repaired to meet all requirements in law and rule before the Washington state patrol will inspect the vehicle. The inspection must verify that the vehicle identification number is genuine and agrees with the number shown on the certificate of title and registration certificate.
-    (c) A Washington state patrol vehicle identification number specialist must ensure that all major component parts used for the reconstruction of a salvage or rebuilt vehicle were obtained legally, and must securely attach a marking at the driver's door latch pillar indicating the vehicle was previously destroyed or declared a total loss. It is a class C felony for a person to remove the marking indicating that the vehicle was previously destroyed or declared a total loss.
+    (c) A Washington state patrol vehicle identification number specialist must
+      ensure that all major component parts used for the reconstruction of a
+      salvage or rebuilt vehicle were obtained legally, and must securely attach a
+      marking at the driver's door latch pillar indicating the vehicle was
+      previously destroyed or declared a total loss. It is a class C felony for a
+      person to remove the marking indicating that the vehicle was previously
+      destroyed or declared a total loss.
 (2) A person presenting a vehicle for inspection under subsection (1) of this section must provide original invoices for new and used parts from:
     (a) A vendor that is registered with the department of revenue or a comparable agency in the jurisdiction where the major component parts were purchased for the collection of retail sales or use taxes. The invoices must include:
         (i) The name and address of the business;

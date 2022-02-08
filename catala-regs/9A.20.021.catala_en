@@ -1,10 +1,7 @@
 ## RCW 9A.20.021 Maximum sentences for crimes committed July 1, 1984, and after.
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration scope RCW_9A_20_021:
-
   # Inputs:
   context class content Class
 
@@ -12,7 +9,6 @@ declaration scope RCW_9A_20_021:
   context penalties content collection Penalty
 ```
 
-> End metadata
 
 ## [RCW 9A.20.021]
 

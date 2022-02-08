@@ -1,10 +1,7 @@
 ## RCW 77.15.420 Illegally taken or possessed wildlife—Criminal wildlife penalty assessed.
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration scope RCW_77_15_420:
-
   # Inputs:
   context wildlife_penalty content money
   context wildlife_penalty_doubled content boolean
@@ -13,7 +10,6 @@ declaration scope RCW_77_15_420:
   context penalties content collection Penalty
 ```
 
-> End metadata
 
 ## [RCW 77.15.420 Illegally taken or possessed wildlife—Criminal wildlife penalty assessed.]
 

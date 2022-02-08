@@ -1,10 +1,7 @@
 ## RCW 43.43.7541 DNA identification system—Collection of biological samples—Fee.
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration scope RCW_43_43_7541:
-
   # Inputs:
   context must_collect_dna content boolean
 
@@ -12,7 +9,6 @@ declaration scope RCW_43_43_7541:
   context penalties content collection Penalty
 ```
 
-> End metadata
 
 ## [RCW 43.43.7541 DNA identification system—Collection of biological samples—Fee.]
 

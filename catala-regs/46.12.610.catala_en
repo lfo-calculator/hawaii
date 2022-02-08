@@ -1,9 +1,7 @@
 ## RCW 46.12.610 Contaminated vehicles.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_610:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.12.610 Contaminated vehicles.]
 
@@ -27,7 +24,7 @@
 ```catala
 scope RCW_46_12_610:
   definition class
-  under condition charge = Section46_12_610_3_
+  under condition charge = Section46_12_610
   consequence equals GrossMisdemeanor
 ```
 

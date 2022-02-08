@@ -1,9 +1,7 @@
 ## RCW 46.68.010 Refunds, overpayments, and underpayments�Penalty for false statements.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_68_010:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.68.010 Refunds, overpayments, and underpayments�Penalty for false statements.]
 

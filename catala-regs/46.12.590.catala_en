@@ -1,9 +1,7 @@
-## RCW 46.12.590 Procedure on installation of new or different motor�Penalty.
+## RCW 46.12.590 Procedure on installation of new or different motor – Penalty.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_590:
   # Inputs:
   context charge content Charge
 
@@ -11,9 +9,8 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.12.590 Procedure on installation of new or different motor�Penalty.]
+## [RCW 46.12.590 Procedure on installation of new or different motor – Penalty.]
 
 (1) A person shall apply for a new certificate of title for any motor vehicle registered by its motor number when:
     (a) A new or different motor has been installed; and
@@ -24,7 +21,10 @@
     (c) Require the most recent certificate of title to be returned to the department;
     (d) Include a statement of the disposition of the former motor; and
     (e) Include the fee required under RCW 46.17.100 in addition to any other fee or tax required by law.
-(3) A person who possesses a certificate of title that shows the previous motor number for a motor vehicle in which a new or different motor has been installed, after five days following the installation of the new motor, is in violation of this chapter. A violation of this section constitutes a misdemeanor.
+(3) A person who possesses a certificate of title that shows the previous motor
+  number for a motor vehicle in which a new or different motor has been installed,
+  after five days following the installation of the new motor, is in violation of
+  this chapter. A violation of this section constitutes a misdemeanor.
 
 ```catala
 scope RCW_46_12_590:

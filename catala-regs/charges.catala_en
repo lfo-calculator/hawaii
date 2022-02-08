@@ -1,10 +1,7 @@
 ## List of known statutes, auto-generated from ../../data/hawaii-regulations.json
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration enumeration Charge:
   -- Section77_15_410_1_	# Unlawful hunting of big game (First Degree)
   -- Section77_15_410_2_	# Unlawful hunting of big game (Second Degree)
 ```
-> End metadata

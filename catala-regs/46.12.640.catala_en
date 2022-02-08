@@ -1,9 +1,7 @@
 ## RCW 46.12.640 Disclosure violations, penalties.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_640:
   # Inputs:
   context charge content Charge
 
@@ -11,11 +9,15 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.12.640 Disclosure violations, penalties.]
 
-(1) The department may review the activities of a person or entity that receives personal or identity information to ensure compliance with the limitations imposed on the use of the information. The department may suspend or revoke for up to five years the privilege of obtaining personal or identity information of a person found to be in violation of this chapter or a disclosure agreement executed with the department.
+(1) The department may review the activities of a person or entity that receives
+  personal or identity information to ensure compliance with the limitations
+  imposed on the use of the information. The department may suspend or revoke for
+  up to five years the privilege of obtaining personal or identity information of
+  a person found to be in violation of this chapter or a disclosure agreement
+  executed with the department.
 (2) In addition to the penalty in subsection (1) of this section:
     (a) The unauthorized disclosure of personal or identity information; or
     (b) The use of a false representation to obtain personal or identity information from the department; or

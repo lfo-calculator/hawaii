@@ -1,9 +1,7 @@
 ## RCW 46.55.230 Junk vehicles�Removal, disposal, sale�Penalties�Cleanup restitution payment.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_55_230:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.55.230 Junk vehicles�Removal, disposal, sale�Penalties�Cleanup restitution payment.]
 

@@ -1,9 +1,7 @@
-## RCW 46.09.470 Operating violations�Exceptions.
+## RCW 46.09.470 Operating violations – Exceptions.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_09_470:
   # Inputs:
   context charge content Charge
 
@@ -11,9 +9,8 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.09.470 Operating violations�Exceptions.]
+## [RCW 46.09.470 Operating violations – Exceptions.]
 
 (1) Except as provided in subsection (4) of this section, it is a traffic infraction for any person to operate any nonhighway vehicle:
     (a) In such a manner as to endanger the property of another;
@@ -42,4 +39,3 @@ scope RCW_46_09_470:
   under condition charge = Section46_09_470_2_
   consequence equals SimpleMisdemeanor
 ```
-

@@ -1,9 +1,7 @@
-## RCW 46.10.495 Additional violations�Penalty.
+## RCW 46.10.495 Additional violations – Penalty.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_10_495:
   # Inputs:
   context charge content Charge
 
@@ -11,9 +9,8 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.10.495 Additional violations�Penalty.]
+## [RCW 46.10.495 Additional violations – Penalty.]
 
 (1) No person shall operate a snowmobile in such a way as to endanger human life.
 (2) No person shall operate a snowmobile in such a way as to run down or harass deer, elk, or any wildlife, or any domestic animal, nor shall any person carry any loaded weapon upon, nor hunt from, any snowmobile except by permit issued by the director of fish and wildlife under RCW 77.32.237.

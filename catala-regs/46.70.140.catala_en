@@ -1,9 +1,7 @@
 ## RCW 46.70.140 Handling "hot" vehicles�Unreported motor "switches"�Unauthorized use of dealer plates�Penalty.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_70_140:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.70.140 Handling "hot" vehicles�Unreported motor "switches"�Unauthorized use of dealer plates�Penalty.]
 

@@ -1,10 +1,7 @@
 ## RCW 77.15.410 Unlawful hunting of big game—Penalty.
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration scope RCW_77_15_410:
-
   # Inputs:
   context charge content Charge
 
@@ -12,7 +9,6 @@ declaration scope RCW_77_15_410:
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 77.15.410]
 

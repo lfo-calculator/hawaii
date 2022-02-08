@@ -1,9 +1,7 @@
-## RCW 46.12.720 Buying, selling, etc. with numbers removed, altered, etc.�Penalty.
+## RCW 46.12.720 Buying, selling, etc. with numbers removed, altered, etc. – Penalty.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_720:
   # Inputs:
   context charge content Charge
 
@@ -11,11 +9,16 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.12.720 Buying, selling, etc. with numbers removed, altered, etc.�Penalty.]
+## [RCW 46.12.720 Buying, selling, etc. with numbers removed, altered, etc. – Penalty.]
 
-Whoever knowingly buys, sells, receives, disposes of, conceals, or has knowingly in his or her possession any vehicle, watercraft, camper, or component part thereof, from which the manufacturer's serial number or any other distinguishing number or identification mark has been removed, defaced, covered, altered, or destroyed for the purpose of concealment or misrepresenting the identity of the said vehicle, watercraft, camper, or component part thereof shall be guilty of a gross misdemeanor.
+Whoever knowingly buys, sells, receives, disposes of, conceals, or has knowingly
+in his or her possession any vehicle, watercraft, camper, or component part
+thereof, from which the manufacturer's serial number or any other distinguishing
+number or identification mark has been removed, defaced, covered, altered, or
+destroyed for the purpose of concealment or misrepresenting the identity of the
+said vehicle, watercraft, camper, or component part thereof shall be guilty of a
+gross misdemeanor.
 
 ```catala
 scope RCW_46_12_720:

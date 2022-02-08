@@ -1,9 +1,7 @@
-## RCW 46.12.650 Releasing interest�Reports of sale�Transfer of ownership�Requirements�Penalty, exceptions.
+## RCW 46.12.650 Releasing interest – Reports of sale – Transfer of ownership – Requirements – Penalty, exceptions.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_650:
   # Inputs:
   context charge content Charge
 
@@ -11,9 +9,8 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.12.650 Releasing interest�Reports of sale�Transfer of ownership�Requirements�Penalty, exceptions.]
+## [RCW 46.12.650 Releasing interest – Reports of sale – Transfer of ownership – Requirements – Penalty, exceptions.]
 
 (1) Releasing interest. An owner releasing interest in a vehicle shall:
     (a) Sign the release of interest section provided on the certificate of title or on a release of interest document or form approved by the department;
@@ -47,7 +44,15 @@
         (ii) Provide all required documents to the owner, as long as the transfer was not a breach of its security agreement, to allow the owner to apply for a new certificate of title.
     (b) Compliance with this subsection does not affect the rights of the secured party.
 (6) Certificate of title delivered to secured party. The certificate of title must be kept by or delivered to the person who becomes the secured party when a security interest is reserved or created at the time of the transfer of ownership. The parties must comply with RCW 46.12.675.
-(7) Penalty for late transfer. A person who has recently acquired a motor vehicle by purchase, exchange, gift, lease, inheritance, or legal action who does not apply for a new certificate of title within fifteen calendar days of delivery of the vehicle is charged a penalty, as described in RCW 46.17.140, when applying for a new certificate of title. It is a misdemeanor to fail or neglect to apply for a transfer of ownership within forty-five days after delivery of the vehicle. The misdemeanor is a single continuing offense for each day that passes regardless of the number of days that have elapsed following the forty-five day time period.
+(7) Penalty for late transfer. A person who has recently acquired a motor
+  vehicle by purchase, exchange, gift, lease, inheritance, or legal action who
+  does not apply for a new certificate of title within fifteen calendar days of
+  delivery of the vehicle is charged a penalty, as described in RCW 46.17.140,
+  when applying for a new certificate of title. It is a misdemeanor to fail or
+  neglect to apply for a transfer of ownership within forty-five days after
+  delivery of the vehicle. The misdemeanor is a single continuing offense for each
+  day that passes regardless of the number of days that have elapsed following the
+  forty-five day time period.
 (8) Penalty for late transfer - exceptions. The penalty is not charged if the delay in application is due to at least one of the following:
     (a) The department requests additional supporting documents;
     (b) The department, county auditor or other agent, or subagent fails to perform or is neglectful;

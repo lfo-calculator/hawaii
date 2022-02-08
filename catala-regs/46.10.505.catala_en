@@ -1,19 +1,18 @@
-## RCW 46.10.505 Failure to register a snowmobile�Penalty, circumstances when. (Effective until October 1, 2021.)
+## RCW 46.10.505 Failure to register a snowmobile – Penalty, circumstances when. (Effective until October 1, 2021.)
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_10_505:
   # Inputs:
   context charge content Charge
+  context avoided content money
 
   # Output
   context class content Class
+  context penalties content collection Penalty
 ```
 
-> End metadata
 
-## [RCW 46.10.505 Failure to register a snowmobile�Penalty, circumstances when. (Effective October 1, 2021.)]
+## [RCW 46.10.505 Failure to register a snowmobile – Penalty, circumstances when. (Effective October 1, 2021.)]
 
 (1) It is a gross misdemeanor, punishable as provided under chapter 9A.20 RCW, for a resident, as identified in RCW 46.16A.140, to:
     (a) Knowingly fail to register a snowmobile within fifteen days of receiving or refusing a notice issued by the department under RCW 46.93.210; or
@@ -26,5 +25,12 @@ scope RCW_46_10_505:
   definition class
   under condition charge = Section46_10_505_1_
   consequence equals GrossMisdemeanor
+
+  definition penalties
+  consequence equals [ One content (
+    Fine content (Fine {
+      -- min_fine: avoided *$ 4.0
+      -- max_fine: avoided *$ 4.0
+    }))]
 ```
 

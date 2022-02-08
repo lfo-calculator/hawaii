@@ -1,9 +1,7 @@
-## RCW 46.12.550 Refusal or cancellation of certificate�Notice�Penalty for subsequent operation�Appeals.
+## RCW 46.12.550 Refusal or cancellation of certificate – Notice – Penalty for subsequent operation – Appeals.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_550:
   # Inputs:
   context charge content Charge
 
@@ -11,15 +9,38 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.12.550 Refusal or cancellation of certificate�Notice�Penalty for subsequent operation�Appeals.]
+## [RCW 46.12.550 Refusal or cancellation of certificate – Notice – Penalty for subsequent operation – Appeals.]
 
-(1) The department may refuse to issue or may cancel a certificate of title at any time if the department determines that an applicant for a certificate of title is not entitled to a certificate of title. Notice of cancellation may be accomplished by sending a notice by first-class mail using the last known address in department records for the registered or legal owner or owners, and completing an affidavit of first-class mail. It is unlawful for any person to remove, drive, or operate the vehicle until a proper certificate of title has been issued. Any person removing, driving, or operating a vehicle after the refusal to issue or cancellation of the certificate of title is guilty of a gross misdemeanor.
+(1) The department may refuse to issue or may cancel a certificate of title at
+  any time if the department determines that an applicant for a certificate of
+  title is not entitled to a certificate of title. Notice of cancellation may be
+  accomplished by sending a notice by first-class mail using the last known
+  address in department records for the registered or legal owner or owners, and
+  completing an affidavit of first-class mail. It is unlawful for any person to
+  remove, drive, or operate the vehicle until a proper certificate of title has
+  been issued. Any person removing, driving, or operating a vehicle after the
+  refusal to issue or cancellation of the certificate of title is guilty of a
+  gross misdemeanor.
 (2)
-    (a) The suspension of, revocation of, cancellation of, or refusal to issue a certificate of title or vehicle registration provided for in chapters 46.12 and 46.16A RCW by the director is conclusive unless the person whose registration or certificate is suspended, revoked, canceled, or refused appeals to the superior court of Thurston county or the person's county of residence.
-    (b) Notice of appeal must be filed within ten days after receipt of the notice of suspension, revocation, cancellation, or refusal. Upon the filing of the notice of appeal, the court shall issue an order to the director to show cause why the registration should not be granted or reinstated and return the order not less than ten days after the date of service of the notice to the director. Service must be in the manner as prescribed for the service of a summons and complaint in other civil actions.
-    (c) Upon the hearing on the order to show cause, the court shall hear evidence concerning matters with reference to the suspension, revocation, cancellation, or refusal of the registration or certificate and enter judgment either affirming or setting aside the suspension, revocation, cancellation, or refusal.
+    (a) The suspension of, revocation of, cancellation of, or refusal to issue a
+      certificate of title or vehicle registration provided for in chapters 46.12
+      and 46.16A RCW by the director is conclusive unless the person whose
+      registration or certificate is suspended, revoked, canceled, or refused
+      appeals to the superior court of Thurston county or the person's county of
+      residence.
+    (b) Notice of appeal must be filed within ten days after receipt of the
+      notice of suspension, revocation, cancellation, or refusal. Upon the filing
+      of the notice of appeal, the court shall issue an order to the director to
+      show cause why the registration should not be granted or reinstated and
+      return the order not less than ten days after the date of service of the
+      notice to the director. Service must be in the manner as prescribed for the
+      service of a summons and complaint in other civil actions.
+    (c) Upon the hearing on the order to show cause, the court shall hear
+      evidence concerning matters with reference to the suspension, revocation,
+      cancellation, or refusal of the registration or certificate and enter
+      judgment either affirming or setting aside the suspension, revocation,
+      cancellation, or refusal.
 
 ```catala
 scope RCW_46_12_550:

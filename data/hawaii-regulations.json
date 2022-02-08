@@ -1,12 +1,5 @@
 { "regulations": [
   {
-    "regulation": "Additional monetary penalty.",
-    "section": "46.64.055",
-    "applies": "46.*",
-    "charge": false,
-    "needs": [ "is_indigent" ]
-  },
-  {
     "regulation": "Maximum sentences for crimes committed July 1, 1984, and after.",
     "section": "9A.20.021",
     "applies": "*",
@@ -26,6 +19,153 @@
     "applies": "*",
     "charge": false,
     "needs": [ "charge", "class" ]
+  },
+  {
+    "regulation": "Operating violations – Exceptions",
+    "section": "46.09.470",
+    "applies": "46.09.470(2)",
+    "charge": false
+  },
+  {
+    "regulation": "Operating violations – Exceptions (2)",
+    "section": "46.09.470(2)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Additional violations – Penalty",
+    "section": "46.09.480",
+    "applies": "self",
+    "charge": true
+  },
+  {
+    "regulation": "Operating violations",
+    "section": "46.10.490",
+    "applies": "46.10.490(2)",
+    "charge": false
+  },
+  {
+    "regulation": "Operating violations – Exceptions (2)",
+    "section": "46.10.490(2)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Additional violations",
+    "section": "46.10.495",
+    "applies": "self",
+    "charge": true
+  },
+  {
+    "regulation": "Failure to register a snowmobile",
+    "section": "46.10.505",
+    "applies": "self",
+    "charge": true,
+    "needs": [ "avoided" ]
+  },
+  {
+    "regulation": "Refusal or cancellation of certificate",
+    "section": "46.12.550",
+    "applies": "46.12.550(1)",
+    "charge": false
+  },
+  {
+    "regulation": "Refusal or cancellation of certificate (1)",
+    "section": "46.12.550(1)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Inspection by state patrol or other authorized inspector",
+    "section": "46.12.560",
+    "applies": "46.12.560(1)(c)",
+    "charge": false
+  },
+  {
+    "regulation": "Inspection by state patrol or other authorized inspector (1)(c)",
+    "section": "46.12.560(1)(c)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Procedure on installation of new or different motor",
+    "section": "46.12.590",
+    "applies": "self",
+    "charge": true
+  },
+  {
+    "regulation": "Destruction of vehicle – Surrender of certificate, penalty",
+    "section": "46.12.600",
+    "applies": "46.12.600(1)(b)",
+    "charge": false
+  },
+  {
+    "regulation": "Destruction of vehicle – Surrender of certificate, penalty (1)(b)",
+    "section": "46.12.600(1)(b)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Contaminated vehicles",
+    "section": "46.12.610",
+    "applies": "self",
+    "charge": true
+  },
+  {
+    "regulation": "Disclosure violations, penalties",
+    "section": "46.12.640",
+    "applies": "46.12.640(2)",
+    "charge": false
+  },
+  {
+    "regulation": "Disclosure violations, penalties (2)",
+    "section": "46.12.640(2)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Releasing interest – Reports of sale – Transfer of ownership – Requirements",
+    "section": "46.12.650",
+    "applies": "46.12.650(7)",
+    "charge": false
+  },
+  {
+    "regulation": "Releasing interest – Reports of sale – Transfer of ownership – Requirements (7)",
+    "section": "46.12.650(7)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Releasing interest – Reports of sale – Transfer of ownership – Requirements",
+    "section": "46.12.720",
+    "applies": "self",
+    "charge": true
+  },
+  {
+    "regulation": "Penalty for false statements, illegal transfers, alterations, or forgeries",
+    "section": "46.12.750",
+    "applies": "46.12.750(*)",
+    "charge": false
+  },
+  {
+    "regulation": "Penalty for false statements, illegal transfers, alterations, or forgeries (1)",
+    "section": "46.12.750(1)",
+    "applies": "0",
+    "charge": true
+  },
+  {
+    "regulation": "Penalty for false statements, illegal transfers, alterations, or forgeries (3)",
+    "section": "46.12.750(3)",
+    "applies": "0",
+    "charge": true
+  },
+
+  {
+    "regulation": "Additional monetary penalty.",
+    "section": "46.64.055",
+    "applies": "46.*",
+    "charge": false,
+    "needs": [ "is_indigent" ]
   },
   {
     "regulation": "Unlawful hunting of big game—Penalty.",

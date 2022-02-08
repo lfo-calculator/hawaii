@@ -1,9 +1,7 @@
-## RCW 46.12.600 Destruction of vehicle�Surrender of certificate, penalty�Report of settlement by insurance company�Market value threshold.
+## RCW 46.12.600 Destruction of vehicle – Surrender of certificate, penalty – Report of settlement by insurance company – Market value threshold.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_12_600:
   # Inputs:
   context charge content Charge
 
@@ -11,9 +9,8 @@
   context class content Class
 ```
 
-> End metadata
 
-## [RCW 46.12.600 Destruction of vehicle�Surrender of certificate, penalty�Report of settlement by insurance company�Market value threshold.]
+## [RCW 46.12.600 Destruction of vehicle – Surrender of certificate, penalty – Report of settlement by insurance company – Market value threshold.]
 
 (1)
     (a) The registered owner or legal owner shall:

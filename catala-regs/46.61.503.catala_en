@@ -1,9 +1,7 @@
 ## RCW 46.61.503 Driver under twenty-one consuming alcohol or marijuana�Penalties.
 
-> Begin metadata
-
-```catala
-
+```catala-metadata
+declaration scope RCW_46_61_503:
   # Inputs:
   context charge content Charge
 
@@ -11,7 +9,6 @@
   context class content Class
 ```
 
-> End metadata
 
 ## [RCW 46.61.503 Driver under twenty-one consuming alcohol or marijuana�Penalties.]
 

@@ -1,8 +1,6 @@
 ## Definitions shared across all statutes
 
-> Begin metadata
-
-```catala
+```catala-metadata
 declaration structure Defendant:
   data age content integer
 
@@ -52,4 +50,3 @@ declaration enumeration Class:
   -- SimpleMisdemeanor # same thing as "misdemeanor", just better to be explicit
 ```
 
-> End metadata
